@@ -15,5 +15,5 @@ https://git-scm.com
 `git checkout -b "[plaats hier je nieuwe branchnaam en haal die lelijke blokhaken weg]"`
 4. We werken nu met deze nieuwe fantastische branch. Stel je voor dat er twee mensen in deze branch werken, dan willen deze twee mensen wel aan dezelfde code werken. Dus het werk moet opgeslagen worden. Het werk opslaan doen we met het volgende commando:
 `git commit -am "Message die ik meegeef aan de commit"` en daarna `git push`
-<h4>TIP: Sla je werk regelmatig op. Als er iets fout gaat in je code en je weet niet waarom, dan kan je één of meerdere commits terug gaan. Ik ben niet Joke van Astro TV maar waarschijnlijk gaan we dit zeer vaak gebruiken</h4>
 5. Als ik de nieuwste versie van de branch wil hebben doe ik `git pull`
+<h4>TIP: Sla je werk regelmatig op. Als er iets fout gaat in je code en je weet niet waarom, dan kan je één of meerdere commits terug gaan. Ik ben niet Joke van Astro TV maar waarschijnlijk gaan we dit zeer vaak gebruiken</h4>
