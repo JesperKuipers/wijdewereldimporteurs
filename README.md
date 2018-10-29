@@ -17,4 +17,4 @@ https://git-scm.com
 <br/>
 TIP: Sla je werk regelmatig op. Als er iets fout gaat in je code en je weet niet waarom, dan kan je één of meerdere commits terug gaan. Ik ben niet Joke van Astro TV maar waarschijnlijk gaan we dit zeer vaak gebruiken
 <br/>
-5. 
+5. Als ik de nieuwste versie van de branch wil hebben doe ik `git pull`
