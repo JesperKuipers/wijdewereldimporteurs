@@ -1,10 +1,10 @@
-# weidewereldimporteurs
+# wijdewereldimporteurs
 
 ## Stappen de git repository op je pc te krijgen
 1. Installeer git op je pc
 https://git-scm.com
 2. Clone de git repository naar een map op je pc door in de command line van windows het volgende uit te voeren:
-`git clone https://github.com/xanderb98/weidewereldimporteurs.git`
+`git clone https://github.com/xanderb98/wijdewereldimporteurs.git`
 
 ## Hoe te werken met git
 
