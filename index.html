@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <!--Import main.css-->
+    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<body>
 
-    <style>
-        body {
-            background-color: rgb(173, 222, 248);
-        }
-    </style>
+</ul>
 
-    <body>
+<!--|-----------BEGINNING---------------------------|
+    |--------navigation---bar-----------------------|
+    |-----------------------------------------------|-->
 
-    </ul>
-
-    <!--|-----------BEGINNING---------------------------|
-        |--------navigation---bar-----------------------|
-        |-----------------------------------------------|-->
-
-    <nav>
-        <div class="nav-wrapper blue-grey darken-3">
-            <a href="#!" class="brand-logo center"><i ><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
-                <li><a href="mobile.html"><i class="material-icons">shopping_basket</i></a></li>
-            </ul>
+<nav>
+    <div class="nav-wrapper blue-grey darken-3">
+        <a href="#!" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
+            <li><a href="mobile.html"><i class="material-icons">shopping_basket</i></a></li>
+        </ul>
 
 
-        </div>
-    </nav>
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
-        <li><a href="mobile.html"><i class="material-icons">shopping_basket</i></a></li>
-    </ul>
+    </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
+    <li><a href="mobile.html"><i class="material-icons">shopping_basket</i></a></li>
+</ul>
 
-    <!--|--------------END------------------------------|
-        |--------navigation---bar-----------------------|
-        |-----------------------------------------------|-->
+<!--|--------------END------------------------------|
+    |--------navigation---bar-----------------------|
+    |-----------------------------------------------|-->
 
-    <!--|-----------BEGINNING---------------------------|
-        |----------Catergories--------------------------|
-        |-----------------------------------------------|-->
+<!--|-----------BEGINNING---------------------------|
+    |----------Catergories--------------------------|
+    |-----------------------------------------------|-->
 
-
+<div class="container">
     <div class="row">
-        <div class="col s12 m7">
+        <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img src="images/chocolate.jpg" width="237" height="213">
+                    <img class="materialboxed" src="images/chocolate.jpg" height="213">
                 </div>
                 <div class="card-content card-action center">
                     <a href="#">Chocolate</a>
@@ -62,13 +57,71 @@
 
             </div>
         </div>
+
+
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img class="materialboxed" src="images/customs.jpg" width="140" height="213">
+                </div>
+                <div class="card-content card-action center">
+                    <a href="#">Clothes</a>
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
 
-    <!--|--------------END------------------------------|
-        |-----------Catergories-------------------------|
-        |-----------------------------------------------|-->
+<!--|--------------END------------------------------|
+    |-----------Catergories-------------------------|
+    |-----------------------------------------------|-->
 
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+<!--|-----------BEGINNING---------------------------|
+    |------------Footer-----------------------------|
+    |-----------------------------------------------|-->
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Company Bio</h5>
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+    </div>
+</footer>
+
+<!--|--------------END------------------------------|
+    |-------------Footer----------------------------|
+    |-----------------------------------------------|-->
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
