@@ -1,6 +1,5 @@
 body {
     background-color: rgb(173, 222, 248);
-    min-height: 100%;
 }
 
 .spatie {
@@ -29,4 +28,12 @@ body {
     #spatieSearchBar {
         margin-left: 5em;
     }
+}
+
+.sticky-footer {
+    position: fixed;
+    left: 0px;
+    bottom: 00px;
+    height: 118px;
+    width: 100%;
 }
