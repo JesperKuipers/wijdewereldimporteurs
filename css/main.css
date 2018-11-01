@@ -1,5 +1,6 @@
 body {
     background-color: rgb(173, 222, 248);
+    min-height: 100%;
 }
 
 .spatie {
@@ -11,11 +12,11 @@ body {
 }
 
 .blue_color {
-    color: #ACDEF5;
+    color: #ACDEF5 !important;
 }
 
 .light_grey_color {
-    color: #797979;
+    color: #797979 !important;
 }
 .input-field{
      width: 500px;
@@ -23,4 +24,9 @@ body {
 
 .input-field:hover{
     background-color: black;
+}
+@media screen and (max-width: 992px) {
+    #spatieSearchBar {
+        margin-left: 5em;
+    }
 }
