@@ -6,10 +6,21 @@ body {
     margin-left: 5em;
 }
 
+.dubbele_spatie {
+    margin-left: 10em;
+}
+
 .blue_color {
     color: #ACDEF5;
 }
 
 .light_grey_color {
     color: #797979;
+}
+.input-field{
+     width: 500px;
+ }
+
+.input-field:hover{
+    background-color: black;
 }
