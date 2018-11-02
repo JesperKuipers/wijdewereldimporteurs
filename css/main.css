@@ -1,3 +1,45 @@
+
+
 body {
     background-color: rgb(173, 222, 248);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.spatie {
+    margin-left: 5em;
+}
+
+.dubbele_spatie {
+    margin-left: 10em;
+}
+
+.blue_color {
+    color: #ACDEF5 !important;
+}
+
+.light_grey_color {
+    color: #797979 !important;
+}
+.input-field{
+     width: 500px;
+ }
+
+.input-field:hover{
+    background-color: black;
+}
+@media screen and (max-width: 992px) {
+    #spatieSearchBar {
+        margin-left: 5em;
+    }
+}
+
+.content {
+    flex: 1 0 auto;
+    padding: 20px;
+
+.sticky-footer {
+    flex-shrink: 0;
+    padding: 20px;
 }
