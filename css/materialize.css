@@ -2949,6 +2949,7 @@ ul.staggered-list li {
     padding-top: 20px;
     color: #fff;
     background-color: #ee6e73;
+
 }
 
 .page-footer .footer-copyright {
@@ -5976,7 +5977,7 @@ body.keyboard-focused .dropdown-content li:focus {
 
 .modal.modal-fixed-footer {
     padding: 0;
-    height: 70%;
+    height: 100%;
 }
 
 .modal.modal-fixed-footer .modal-content {
@@ -5989,7 +5990,7 @@ body.keyboard-focused .dropdown-content li:focus {
 
 .modal.modal-fixed-footer .modal-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    position: absolute;
+    position: sticky;
     bottom: 0;
 }
 
