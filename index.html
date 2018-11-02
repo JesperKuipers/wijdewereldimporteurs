@@ -17,29 +17,32 @@
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
 
+<!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
         <a href="#!" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
-            <li><a href="mobile.html"><i class="material-icons">shopping_basket</i></a></li>
+            <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+            <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
-                <form>
-                    <div class="input-field">
-                        <input id="search" type="search" placeholder="Search for products" class="searchbar" required >
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                    </div>
-                </form>
+<!--|---------------Search-bar----------------------|-->
+        <form id="spatieSearchBar">
+            <div class="input-field center">
+                <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
+                <label class="label-icon material-icons" for="search"><i>search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
 
-
+<!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
-    <li><a href="mobile.html"><i class="material-icons">shopping_basket</i></a></li>
+    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+    <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+    <!--todo: search balk hierin -->
 </ul>
 
 <!--|--------------END------------------------------|
@@ -50,15 +53,15 @@
     |----------Catergories--------------------------|
     |-----------------------------------------------|-->
 
-<div class="container">
+<div class="container content">
     <div class="row">
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/chocolate.jpg" height="213">
+                    <img class="materialboxed" src="images/chog-frog.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
-                    <a class="light_grey_color" href="#">Chocolate</a>
+                    <a class="light_grey_color" href="#">Novelty Items</a>
                 </div>
 
             </div>
@@ -67,14 +70,52 @@
         <div class="col s10 m3 light_grey_color">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/customs.jpg" width="140" height="213">
+                    <img class="materialboxed" src="images/alien-officer.png" width="140" height="213">
                 </div>
                 <div class="card-content card-action center">
-                    <a href="#">Clothes</a>
+                    <a href="#" class="light_grey_color">Clothes</a>
                 </div>
 
             </div>
         </div>
+
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img class="materialboxed" src="images/bubblewarp.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="#">Packaging Materials</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img class="materialboxed" src="images/mokk.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="#">Mugs</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img class="materialboxed" src="images/The-gu.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="#">T-shirts</a>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -87,7 +128,7 @@
     |-----------------------------------------------|-->
 
 
-<footer class="page-footer blue-grey darken-3">
+<footer class="page-footer blue-grey darken-3 sticky-footer">
     <div class="container">
         <div class="row center">
 
