@@ -81,10 +81,13 @@ WHERE StockItemId = :StockItemId;');
                     <th>Productnaam</th>
                     <td><?= $result['StockItemName'] ?></td>
                 </tr>
-                <tr>
-                    <th>Grootte</th>
-                    <td><?= $result['Size'] ?></td>
-                </tr>
+                <?php if ($result['Size']) {
+                    ?>
+                    <tr>
+                        <th>Grootte</th>
+                        <td><?= $result['Size'] ?></td>
+                    </tr>
+                <?php } ?>
                 <tr>
                     <th>Gemaakt in</th>
                     <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
