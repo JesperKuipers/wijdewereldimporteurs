@@ -24,7 +24,7 @@
 
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="#!" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="#!" class="brand-logo center"><i><img src="../images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="collapsible.html"><i class="material-icons">person</i></a></li>
@@ -44,11 +44,11 @@
     |-----------------------------------------------|-->
 <div class="container content">
     <?php
-    include 'Database_Connectie.php';
+    include '../Database_Connectie.php';
 
     $db = db_connect();
     $stmt = $db->prepare
-    ('SELECT StockItemName, StockGroupName
+    ('SELECT i.StockItemID, StockItemName, StockGroupName
 FROM stockitems i
 JOIN stockitemstockgroups ig
 ON i.Stockitemid = ig.StockitemID
@@ -78,12 +78,14 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
 
         <div class="col s10 m3">
             <div class="card">
-                <div class="card-image">
-                    <img src="images/no-image.jpg"/>
-                </div>
-                <div class="card-content card-action center">
-                    <?= $item['StockItemName'] ?>
-                </div>
+                <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
+                    <div class="card-image">
+                        <img src="../images/no-image.jpg"/>
+                    </div>
+                    <div class="card-content card-action center">
+                        <?= $item['StockItemName'] ?>
+                    </div>
+                </a>
             </div>
         </div>
         <?php } ?>
@@ -91,5 +93,6 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-            integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script></body>
+            integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
+</body>
 </html>
