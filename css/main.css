@@ -20,11 +20,11 @@ body {
 .light_grey_color {
     color: #797979 !important;
 }
-.input-field{
+.searchDiv{
      width: 500px;
  }
 
-.input-field:hover{
+.searchDiv:hover{
     background-color: black;
 }
 @media screen and (max-width: 992px) {
@@ -36,6 +36,7 @@ body {
 .content {
     flex: 1 0 auto;
     padding: 20px;
+}
 
 .sticky-footer {
     flex-shrink: 0;
