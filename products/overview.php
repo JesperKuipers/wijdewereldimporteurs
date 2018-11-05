@@ -21,6 +21,7 @@
 
     </style>
 
+    <!-- pagination wordt hieronder geconfigureerd -->
     <script>
         $(document).ready(function () {
             $('select').formSelect();
@@ -98,7 +99,6 @@
 <!--|-----------BEGINNING---------------------------|
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
-
 
 
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
