@@ -43,5 +43,5 @@ body {
 }
 
 .text {
-    transform: unset !important;
+    text-transform: unset !important;
 }
