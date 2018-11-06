@@ -21,28 +21,28 @@
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="#!" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="/index.html" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
-            <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+            <li><a href="/inlog.html"><i class="material-icons">person</i></a></li>
+            <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
-        <!--|---------------Search-bar----------------------|-->
+<!--|---------------Search-bar----------------------|-->
         <form id="spatieSearchBar">
-            <div class="input-field center">
+            <div class="input-field center searchDiv">
                 <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>
         </form>
 
-        <!--|--------------Mobile-menu----------------------|-->
+<!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
-    <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+    <li><a href="/inlog.html"><i class="material-icons">person</i></a></li>
+    <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
     <!--todo: search balk hierin -->
 </ul>
 
@@ -110,12 +110,8 @@ WHERE StockItemId = :StockItemId;');
     <div class="container">
         <div class="row center">
 
-            <a class="blue_color" href="#!">insert here</a>
-            <a class="blue_color dubbele_spatie" href="#!">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="#!">insert here</a>
-            <a class="blue_color dubbele_spatie" href="#!">insert here</a>
-            <a class="blue_color dubbele_spatie" href="#!">insert here</a>
-
+            <a class="blue_color" href="/Over WWI.html">Over WWI</a>
+            <a class="blue_color dubbele_spatie" href="/index.html">Home page</a>
 
         </div>
     </div>

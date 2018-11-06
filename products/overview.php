@@ -51,7 +51,7 @@
             navigation_html += '<li class="waves-effect" onclick="next()"><a href="#!"><i class="material-icons">chevron_right</i></a></li>';
 
             $('.pagination').html(navigation_html);
-            $('.pagination .page:first').addClass('active');
+            $('.pagination .page:first').addClass('active blue darken-1');
 
             $('.products').css('display', 'none');
             $('.products').slice(0, show_per_page / 4).css('display', 'block');
@@ -66,7 +66,7 @@
 
             $('.products').css('display', 'none').slice(start_from, end_on).css('display', 'block');
 
-            $('.page[longdesc=' + page_num + ']').addClass('active').siblings('.active').removeClass('active');
+            $('.page[longdesc=' + page_num + ']').addClass('active blue darken-1').siblings('.active').removeClass('active blue darken-1');
 
             $('#current_page').val(page_num);
         }
