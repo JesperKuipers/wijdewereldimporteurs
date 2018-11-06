@@ -21,7 +21,7 @@ body {
     color: #797979 !important;
 }
 .searchDiv{
-     width: 500px;
+    width: 400px;
  }
 
 .searchDiv:hover{
@@ -43,7 +43,3 @@ body {
     padding: 20px;
 }
 
-.dropdown-trigger{
-    width: 200px;
-    margin-left: 50px;
-}
