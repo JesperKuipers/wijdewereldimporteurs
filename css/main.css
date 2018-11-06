@@ -42,3 +42,6 @@ body {
     padding: 20px;
 }
 
+.text {
+    transform: unset !important;
+}
