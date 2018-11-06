@@ -4,7 +4,8 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+          integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
     <!--Import main.css-->
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
@@ -17,20 +18,29 @@
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
 
+
+
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="#!" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="index.html" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
+
+        <!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
         <ul class="right hide-on-med-and-down">
             <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
             <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
 <!--|---------------Search-bar----------------------|-->
+<<<<<<< HEAD
         <form id="spatieSearchBar" method="POST" action="Zoekbalk.php">
             <div class="input-field center">
                 <input id="search" name="zoekbalk" type="search" placeholder="Search for products" class="searchbar" required>
+=======
+        <form id="spatieSearchBar">
+            <div class="input-field center searchDiv">
+                <input id="search" type="search" placeholder="Search..." class="searchbar" required>
+>>>>>>> 0cfbddd76dd54df576a03355f2e527e3ab7d7e57
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>
@@ -42,7 +52,6 @@
 <ul class="sidenav" id="mobile-demo">
     <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-    <!--todo: search balk hierin -->
 </ul>
 
 <!--|--------------END------------------------------|
@@ -58,10 +67,10 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/chog-frog.png" height="213">
+                    <img href="/products/overview.php?category=Novelty" src="images/chog-frog.png" height="213">
                 </div>
-                <div class="card-content card-action center ">
-                    <a class="light_grey_color" href="#">Novelty Items</a>
+                <div class="card-content card-action center">
+                    <a class="light_grey_color" href="/products/overview.php?category=Novelty">Novelty Items</a>
                 </div>
 
             </div>
@@ -70,10 +79,10 @@
         <div class="col s10 m3 light_grey_color">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/alien-officer.png" width="140" height="213">
+                    <img href="/products/overview.php?category=Clothing" src="images/alien-officer.png" width="140" height="213">
                 </div>
                 <div class="card-content card-action center">
-                    <a href="#" class="light_grey_color">Clothes</a>
+                    <a class="light_grey_color" href="/products/overview.php?category=Clothing">Clothes</a>
                 </div>
 
             </div>
@@ -82,10 +91,10 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/bubblewarp.png" height="213">
+                    <img href="/products/overview.php?category=Packaging Materials" src="images/bubblewarp.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
-                    <a class="light_grey_color" href="#">Packaging Materials</a>
+                    <a class="light_grey_color" href="/products/overview.php?category=Packaging Materials">Packaging Materials</a>
                 </div>
 
             </div>
@@ -94,10 +103,10 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/mokk.png" height="213">
+                    <img href="/products/overview.php?category=Mugs" src="images/mokk.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
-                    <a class="light_grey_color" href="#">Mugs</a>
+                    <a class="light_grey_color" href="/products/overview.php?category=Mugs">Mugs</a>
                 </div>
 
             </div>
@@ -107,10 +116,62 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/The-gu.png" height="213">
+                    <img href="/products/overview.php?category=T-Shirts" src="images/The-gu.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
-                    <a class="light_grey_color" href="#">T-shirts</a>
+                    <a class="light_grey_color" href="/products/overview.php?category=T-Shirts">T-shirts</a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img href="#" src="images/haaislippers.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="/products/overview.php?category=Furry Footwear">Furry Footwear</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img href="#" src="images/sushi.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="/products/overview.php?category=USB Novelties">USB Novelties</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img href="#" src="images/periscope-office-nov.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="/products/overview.php?category=Computing Novelties">Computing Novelties</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col s10 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img href="#" src="images/toys-cat.png" height="213">
+                </div>
+                <div class="card-content card-action center ">
+                    <a class="light_grey_color" href="/products/overview.php?category=Toys">Toys</a>
                 </div>
 
             </div>
@@ -132,19 +193,15 @@
     <div class="container">
         <div class="row center">
 
-            <a class="blue_color" href="#!">insert here</a>
-            <a class="blue_color dubbele_spatie" href="#!">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="#!">insert here</a>
-            <a class="blue_color dubbele_spatie" href="#!">insert here</a>
-            <a class="blue_color dubbele_spatie" href="#!">insert here</a>
-
+            <a class="blue_color" href="Over WWI.html">Over WWI</a>
+            <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
 
         </div>
     </div>
-    </div>
     <div class="footer-copyright">
         <div class="container center">
-            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep 3</p></a>
+            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
+                3</p></a>
         </div>
     </div>
 </footer>
@@ -154,6 +211,7 @@
     |-----------------------------------------------|-->
 
 <!--JavaScript at end of body for optimized loading-->
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+        integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
 </body>
 </html>
