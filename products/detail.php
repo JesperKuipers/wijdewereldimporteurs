@@ -56,7 +56,7 @@
 
 <div class="container content">
     <?php
-    include '../Database_Connectie.php';
+    include '../database_connectie.php';
 
     $db = db_connect();
     $stmt = $db->prepare

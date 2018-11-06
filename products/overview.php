@@ -151,7 +151,7 @@
         </div>
     </div>
     <?php
-    include '../Database_Connectie.php';
+    include '../database_connectie.php';
 
     $db = db_connect();
     $stmt = $db->prepare
