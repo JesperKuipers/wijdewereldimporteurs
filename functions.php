@@ -1,19 +1,5 @@
 <?php
-<script>
-function dropdownfuntion(){
-    document.getElementById("dropdownlist").classList.toggle("show");
-}
 
-window.onclick = function(event){
-    if (!event.target.matches('.button')){
-        var dropdown = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdown.length; i++){
-            var openDropDown = DropDowns[i];
-            if (OpenDropdown.classList.contains('show')){
-                openDrowdown.classlist.remove('show');
-            }
-        }
-    }
-}
-</script>
+$username=filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+$password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
