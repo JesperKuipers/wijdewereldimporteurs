@@ -110,6 +110,7 @@ $result = $stmt->fetchAll();
                 url = url.substring(0, url.indexOf("&tags[]"));
             }
             var tags = $("#selectFilter").val();
+            url = url.replace('#!', '');
             $(tags).each(function (val, key) {
                 url += "&tags[]=" + key;
             });
@@ -126,7 +127,7 @@ if (isset($_GET['tags'])) {
     foreach ($result as $key => $value) {
         foreach ($_GET['tags'] as $urlTags) {
             if (in_array($urlTags, json_decode($value['tags']))) {
-                $resultWithTags[$key] = $value;
+                $resultWithTags[] = $value;
             }
         }
 
@@ -195,7 +196,7 @@ if (isset($_GET['tags'])) {
                     foreach (json_decode($value['tags']) as $tags) {
                         if (!in_array($tags, $list)) {
                             ?>
-                            <option <?= in_array($tags, $_GET['tags']) ? 'selected' : '' ?>><?= $tags ?></option>
+                            <option <?= isset($_GET['tags']) && in_array($tags, $_GET['tags']) ? 'selected' : '' ?>><?= $tags ?></option>
                             <?php
                         }
                         array_push($list, $tags);
