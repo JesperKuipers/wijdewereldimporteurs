@@ -1,3 +1,19 @@
+<?php
+include '../Database_Connectie.php';
+
+$db = db_connect();
+$stmt = $db->prepare
+('SELECT i.StockItemID, StockItemName, StockGroupName, tags
+FROM stockitems i
+JOIN stockitemstockgroups ig
+ON i.Stockitemid = ig.StockitemID
+JOIN stockgroups g
+ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
+$category = '%' . $_GET['category'] . '%';
+$stmt->bindParam('StockGroupName', $category);
+$stmt->execute();
+$result = $stmt->fetchAll();
+?>
 <html>
 <head>
     <!--Import Google Icon Font-->
@@ -27,10 +43,6 @@
             $('select').formSelect();
             init();
         });
-
-        function setInit() {
-            init();
-        }
 
         function init() {
             $('.pagination').remove();
@@ -90,12 +102,37 @@
             }
 
         }
+
+        function setFilter() {
+            var url = window.location.toString();
+            if (url.indexOf("&tags[]") > 0) {
+                console.log('klopt');
+                url = url.substring(0, url.indexOf("&tags[]"));
+            }
+            var tags = $("#selectFilter").val();
+            $(tags).each(function (val, key) {
+                url += "&tags[]=" + key;
+            });
+            document.location = url;
+        }
     </script>
 </head>
-
-
 <body>
+<?php
 
+
+if (isset($_GET['tags'])) {
+    $resultWithTags = [];
+    foreach ($result as $key => $value) {
+        foreach ($_GET['tags'] as $urlTags) {
+            if (in_array($urlTags, json_decode($value['tags']))) {
+                $resultWithTags[$key] = $value;
+            }
+        }
+
+    }
+}
+?>
 <!--|-----------BEGINNING---------------------------|
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
@@ -111,7 +148,7 @@
             <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
-<!--|---------------Search-bar----------------------|-->
+        <!--|---------------Search-bar----------------------|-->
         <form id="spatieSearchBar">
             <div class="input-field center searchDiv">
                 <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
@@ -120,7 +157,7 @@
             </div>
         </form>
 
-<!--|--------------Mobile-menu----------------------|-->
+        <!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
@@ -141,7 +178,7 @@
     <br/>
     <div class="row">
         <div class="input-field col s3">
-            <select onchange="setInit()" id="productsPerPage">
+            <select onchange="init()" id="productsPerPage">
                 <option value="8">8</option>
                 <option value="16" selected>16</option>
                 <option value="32">32</option>
@@ -149,24 +186,33 @@
             </select>
             <label>Aantal producten weergeven</label>
         </div>
+        <div class="input-field col s5 offset-s4">
+            <select id="selectFilter" multiple>
+                <?php
+                $list = array();
+                foreach ($result as $value) {
+
+                    foreach (json_decode($value['tags']) as $tags) {
+                        if (!in_array($tags, $list)) {
+                            ?>
+                            <option <?= in_array($tags, $_GET['tags']) ? 'selected' : '' ?>><?= $tags ?></option>
+                            <?php
+                        }
+                        array_push($list, $tags);
+                    }
+
+                } ?>
+            </select>
+            <label>Producten filteren</label>
+            <a class="waves-effect waves-light btn-small blue darken-1" onclick="setFilter()">Filteren</a>
+        </div>
     </div>
     <?php
-    include '../Database_Connectie.php';
 
-    $db = db_connect();
-    $stmt = $db->prepare
-    ('SELECT i.StockItemID, StockItemName, StockGroupName
-FROM stockitems i
-JOIN stockitemstockgroups ig
-ON i.Stockitemid = ig.StockitemID
-JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
-    $category = '%' . $_GET['category'] . '%';
-    $stmt->bindParam('StockGroupName', $category);
-    $stmt->execute();
     $i = 0;
 
-    foreach ($stmt->fetchAll() as $item) {
+    $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
+    foreach ($result as $item) {
     if ($i == 0) {
     ?>
     <div class="row products">
@@ -229,8 +275,8 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
     |-------------Footer----------------------------|
     |-----------------------------------------------|-->
 
-    <!--JavaScript at end of body for optimized loading-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-            integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+        integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
 </body>
 </html>
