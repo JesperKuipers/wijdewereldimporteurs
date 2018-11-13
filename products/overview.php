@@ -8,7 +8,8 @@ FROM stockitems i
 JOIN stockitemstockgroups ig
 ON i.Stockitemid = ig.StockitemID
 JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
+ON ig.stockgroupid = g.stockgroupid 
+WHERE StockGroupName LIKE StockGroupName');
 $category = '%' . $_GET['category'] . '%';
 $stmt->bindParam('StockGroupName', $category);
 $stmt->execute();
