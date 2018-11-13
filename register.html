@@ -10,6 +10,7 @@
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -51,9 +52,25 @@
     |-----------------------------------------------|-->
 
 <!-- class="content" is nodig voor sticky footer -->
-<div class="center content">
-    <p><b>insert here pls</b></p>
-    test
+<div class="container-register center content">
+    <p><b>Create your WWI account</b></p>
+    <form method="post" class="registerinput">
+        <b>First name: </b><input type="text" name="fname" id="fname" class="rinputs" style="margin-right: 65px;">
+        <b>Last name: </b><input type="text" name="lname" id="lname" class="rinputs"><br>
+        <b>E-Mail: </b><input type="text" name="email" id="email" class="e-mail" required style="margin-left: 25px"><br>
+        <b>Password: </b><input type="password" name="password" id="password" class="rinputs" required style="margin-left: 6px;margin-right: 16px">
+        <b>Confirm password: </b><input type="password" name="cpassword" id="cpassword" class="rinputs" required><br>
+        <b>Address: </b><input type="text" name="address" id="address" class="rinputs" required style="margin-left: 15px; margin-right: 56px">
+        <b>Postal Code: </b><input type="text" name="postalcode" id="postalcode" class="rinputs" required><br><br>
+        <div class="g-recaptcha" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5" style="margin-left: 180px"></div>
+        <button type="submit" name="registerbutton" class="btnregister s12 btn btn-large waves-effect">Register</button>
+    </form>
+    <div>
+        <label class="alreadyaccount">
+            <br> Already have an account? <br>
+            <a class="loginhere" href="inlog.html"><b><u>Log in here</u></b></a>
+        </label>
+    </div>
 </div>
 
 
