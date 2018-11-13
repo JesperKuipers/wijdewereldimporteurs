@@ -20,6 +20,11 @@ body {
 .light_grey_color {
     color: #797979 !important;
 }
+
+.dark_grey_color {
+    color: #37474f !important;
+}
+
 .input-field{
      width: 500px;
  }
@@ -36,6 +41,7 @@ body {
 .content {
     flex: 1 0 auto;
     padding: 20px;
+}
 
 .sticky-footer {
     flex-shrink: 0;
@@ -44,4 +50,13 @@ body {
 
 .text {
     text-transform: unset !important;
+}
+
+.card_tekst {
+    padding: 5px 24px !important;
+}
+
+.card_line_remover {
+    padding: 1px 24px !important;
+    border-top: none !important;
 }
