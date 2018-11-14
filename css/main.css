@@ -13,8 +13,20 @@ body {
     margin-left: 10em;
 }
 
-.blue_color {
+.light_blue_color {
     color: #ACDEF5 !important;
+}
+
+.dark_blue_color {
+    color: #1e88e5 !important;
+}
+
+.dark_blue_color_backround {
+    background-color: #1e88e5 !important;
+}
+
+.outline_color_dark_blue {
+    border-color: #1e88e5 !important;
 }
 
 .light_grey_color {
@@ -64,3 +76,9 @@ body {
     padding: 1px 24px !important;
     border-top: none !important;
 }
+
+.expandable_textbox {
+    resize: vertical;
+    height: auto;
+}
+

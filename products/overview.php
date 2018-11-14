@@ -64,7 +64,7 @@ $result = $stmt->fetchAll();
             navigation_html += '<li class="waves-effect" onclick="next()"><a href="#!"><i class="material-icons">chevron_right</i></a></li>';
 
             $('.pagination').html(navigation_html);
-            $('.pagination .page:first').addClass('active blue darken-1');
+            $('.pagination .page:first').addClass('active dark_blue_color');
 
             $('.products').css('display', 'none');
             $('.products').slice(0, show_per_page / 4).css('display', 'block');
@@ -79,7 +79,7 @@ $result = $stmt->fetchAll();
 
             $('.products').css('display', 'none').slice(start_from, end_on).css('display', 'block');
 
-            $('.page[longdesc=' + page_num + ']').addClass('active blue darken-1').siblings('.active').removeClass('active blue darken-1');
+            $('.page[longdesc=' + page_num + ']').addClass('active dark_blue_color').siblings('.active').removeClass('active dark_blue_color');
 
             $('#current_page').val(page_num);
         }
@@ -227,14 +227,14 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
     <div class="container">
         <div class="row center">
 
-            <a class="blue_color" href="Over WWI.html">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
+            <a class="light_blue_color" href="Over WWI.html">Over WWI</a>
+            <a class="light_blue_color dubbele_spatie" href="index.html">Home page</a>
 
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container center">
-            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
+            <a class="light_blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
                 3</p></a>
         </div>
     </div>

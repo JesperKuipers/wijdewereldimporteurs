@@ -134,15 +134,15 @@ WHERE s.StockItemId = :StockItemId;');
     <div class="container">
         <div class="row center">
 
-            <a class="blue_color" href="/Over WWI.html">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="/index.html">Home page</a>
+            <a class="light_blue_color" href="/Over WWI.html">Over WWI</a>
+            <a class="light_blue_color dubbele_spatie" href="/index.html">Home page</a>
 
         </div>
     </div>
 
     <div class="footer-copyright">
         <div class="container center">
-            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
+            <a class="light_blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
                 3</p></a>
         </div>
     </div>
