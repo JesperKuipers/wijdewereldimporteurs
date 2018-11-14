@@ -60,9 +60,13 @@
 
     $db = db_connect();
     $stmt = $db->prepare
-    ('SELECT StockItemName, Size, LeadTimeDays, QuantityPerOuter, TaxRate, UnitPrice, CustomFields
-FROM stockitems
-WHERE StockItemId = :StockItemId;');
+    ('SELECT s.*, h.*, c.*
+FROM stockitems AS s
+JOIN stockitemholdings AS h
+ON s.StockItemID = h.StockItemID
+JOIN colors AS c
+ON s.ColorID = c.ColorID
+WHERE s.StockItemId = :StockItemId;');
     $stmt->bindParam('StockItemId', $_GET['itemId']);
     $stmt->execute();
     $result = $stmt->fetch();
@@ -91,6 +95,26 @@ WHERE StockItemId = :StockItemId;');
                 <tr>
                     <th>Gemaakt in</th>
                     <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
+                </tr>
+                <?php if ($result['MarketingComments']) {
+                     ?>
+                <tr>
+                    <th>Extra Informatie</th>
+                    <td><?= $result['MarketingComments'] ?></td>
+                </tr>
+                <?php } ?>
+
+                <tr>
+                    <th>Prijs</th>
+                    <td> &euro; <?= $result['RecommendedRetailPrice'] ?></td>
+                </tr>
+                <tr>
+                    <th>Kleur</th>
+                    <td><?= $result['ColorName'] ?></td>
+                </tr>
+                <tr>
+                    <th>Voorraad</th>
+                    <td><?= $result['QuantityOnHand'] ?></td>
                 </tr>
             </table>
         </div>
