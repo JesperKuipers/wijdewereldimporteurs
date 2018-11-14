@@ -20,16 +20,20 @@ body {
 .light_grey_color {
     color: #797979 !important;
 }
+.input-field{
+     width: 500px;
+ }
 
 .dark_grey_color {
     color: #37474f !important;
 }
 
-.input-field{
-     width: 500px;
- }
+.searchDiv{
+    width: 500px;
+}
 
-.input-field:hover{
+
+.searchDiv:hover{
     background-color: black;
 }
 @media screen and (max-width: 992px) {
