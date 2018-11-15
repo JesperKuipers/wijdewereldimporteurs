@@ -28,7 +28,7 @@
             <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
-<!--|---------------Search-bar----------------------|-->
+        <!--|---------------Search-bar----------------------|-->
         <form id="spatieSearchBar">
             <div class="input-field center searchDiv">
                 <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
@@ -37,7 +37,7 @@
             </div>
         </form>
 
-<!--|--------------Mobile-menu----------------------|-->
+        <!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
@@ -60,7 +60,7 @@
 
     $db = db_connect();
     $stmt = $db->prepare
-    ('SELECT StockItemName, Size, LeadTimeDays, QuantityPerOuter, TaxRate, UnitPrice, CustomFields
+    ('SELECT StockItemId, StockItemName, Size, LeadTimeDays, QuantityPerOuter, TaxRate, UnitPrice, CustomFields
 FROM stockitems
 WHERE StockItemId = :StockItemId;');
     $stmt->bindParam('StockItemId', $_GET['itemId']);
@@ -75,24 +75,30 @@ WHERE StockItemId = :StockItemId;');
             <img src="/images/no-image.jpg" width="500"/>
         </div>
         <div class="col s14 m6">
-            <h4>Productinformatie</h4>
-            <table class="responsive-table">
-                <tr>
-                    <th>Productnaam</th>
-                    <td><?= $result['StockItemName'] ?></td>
-                </tr>
-                <?php if ($result['Size']) {
-                    ?>
+            <form method="POST" action="addToShoppingBasket.php">
+                <input type="hidden" name="id" value="<?= $result['StockItemId'] ?>">
+                <h4>Productinformatie</h4>
+                <table class="responsive-table">
                     <tr>
-                        <th>Grootte</th>
-                        <td><?= $result['Size'] ?></td>
+                        <th>Productnaam</th>
+                        <td><?= $result['StockItemName'] ?></td>
                     </tr>
-                <?php } ?>
-                <tr>
-                    <th>Gemaakt in</th>
-                    <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
-                </tr>
-            </table>
+                    <?php if ($result['Size']) {
+                        ?>
+                        <tr>
+                            <th>Grootte</th>
+                            <td><?= $result['Size'] ?></td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <th>Gemaakt in</th>
+                        <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
+                    </tr>
+                </table>
+                <br/>
+                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">In
+                    winkelmandje plaatsen
+                </button>
         </div>
     </div>
 </div>

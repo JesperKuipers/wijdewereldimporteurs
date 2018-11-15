@@ -1,18 +1,7 @@
 <?php
-include '../Database_Connectie.php';
+include '../Query.php';
 
-$db = db_connect();
-$stmt = $db->prepare
-('SELECT i.StockItemID, StockItemName, StockGroupName, tags
-FROM stockitems i
-JOIN stockitemstockgroups ig
-ON i.Stockitemid = ig.StockitemID
-JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
-$category = '%' . $_GET['category'] . '%';
-$stmt->bindParam('StockGroupName', $category);
-$stmt->execute();
-$result = $stmt->fetchAll();
+$result = getByCategoryName($_GET['category']);
 ?>
 <html>
 <head>
@@ -192,7 +181,6 @@ if (isset($_GET['tags'])) {
                 <?php
                 $list = array();
                 foreach ($result as $value) {
-
                     foreach (json_decode($value['tags']) as $tags) {
                         if (!in_array($tags, $list)) {
                             ?>
@@ -213,7 +201,9 @@ if (isset($_GET['tags'])) {
     $i = 0;
 
     $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
-    foreach ($result as $item) {
+    foreach ($result
+
+    as $item) {
     if ($i == 0) {
     ?>
     <div class="row products">
