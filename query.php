@@ -1,7 +1,7 @@
 <?php
 
 
-include 'Database_Connectie.php';
+include 'database_connectie.php';
 
 function get(string $table, array $fields = [], string $where = null): array
 {

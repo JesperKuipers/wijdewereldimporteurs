@@ -1,4 +1,4 @@
-# wijdewereldimporteurs
+# wijdewereldimporteurs NIET weidewerldimporteurs
 
 ## Stappen om de git repository op je pc te krijgen
 1. Installeer git op je pc
