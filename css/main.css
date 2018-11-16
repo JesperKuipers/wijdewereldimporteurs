@@ -1,5 +1,3 @@
-
-
 body {
     background-color: rgb(173, 222, 248);
     display: flex;
@@ -15,16 +13,36 @@ body {
     margin-left: 10em;
 }
 
-.blue_color {
+.light_blue_color {
     color: #ACDEF5 !important;
+}
+
+.dark_blue_color {
+    color: #1e88e5 !important;
+}
+
+.dark_blue_color_backround {
+    background-color: #1e88e5 !important;
+}
+
+.outline_color_dark_blue {
+    border-color: #1e88e5 !important;
 }
 
 .light_grey_color {
     color: #797979 !important;
 }
-.searchDiv{
+.input-field{
      width: 500px;
  }
+
+.dark_grey_color {
+    color: #37474f !important;
+}
+
+.searchDiv{
+    width: 500px;
+}
 
 .searchDiv:hover{
     background-color: black;
@@ -43,4 +61,91 @@ body {
 .sticky-footer {
     flex-shrink: 0;
     padding: 20px;
+}
+
+.text {
+    text-transform: unset !important;
+}
+
+.card_tekst {
+    padding: 5px 24px !important;
+}
+
+.card_line_remover {
+    padding: 1px 24px !important;
+    border-top: none !important;
+}
+
+.expandable_textbox {
+    resize: vertical;
+    height: auto;
+}
+
+#recaptcha {
+    width: 304px;
+    margin: 0 auto;
+}
+
+.container-login {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 600px;
+}
+
+.logininput{
+    text-align: center;
+    background-color: lightblue !important;
+    width: 230px !important;
+}
+
+::placeholder{
+    color: black;
+    font-size: 10pt;
+}
+
+.btnlogin{
+    background-color: dodgerblue;
+    width: 200px;
+}
+
+.btnlogin:hover{
+    background-color: blue;
+}
+
+.container-register {
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.rinputs{
+    width: 230px !important;
+    background-color: lightblue !important;
+    text-align: center;
+
+}
+
+.registerinput{
+    font-size: 10pt;
+}
+
+.btnregister{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btnregister:hover{
+    background-color: blue;
+}
+
+.e-mail{
+    width: 600px !important;
+    background-color: lightblue !important;
+    text-align: center;
+}
+
+.alreadyaccount{
+    font-size: 12pt;
+    float: bottom;
 }

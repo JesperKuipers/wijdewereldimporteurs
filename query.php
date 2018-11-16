@@ -1,7 +1,7 @@
 <?php
 
 
-include 'Database_Connectie.php';
+include 'database_connectie.php';
 try {
     $db = db_connect();
     $stmt = $db->query
