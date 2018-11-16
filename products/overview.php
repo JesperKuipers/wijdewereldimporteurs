@@ -152,13 +152,13 @@ if (isset($_GET['tags'])) {
 
 <<<<<<< HEAD
 <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar" method="POST" action="/Zoekbalk.php">
+
 =======
         <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
+        <form id="spatieSearchBar" method="POST" action="Zoekbalk.php">
 >>>>>>> 4295b5eb487d3546e6bf270886a760c6558bb4ee
             <div class="input-field center searchDiv">
-                <input id="search" name="zoekbalk" type="search" placeholder="Search..." class="searchbar" required>
+                <input id="search" name="search" type="search" placeholder="Search..." class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>

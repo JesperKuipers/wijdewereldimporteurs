@@ -30,9 +30,9 @@
         </ul>
 
         <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
+        <form id="spatieSearchBar" method="post" action="zoekbalk.php">
             <div class="input-field center searchDiv">
-                <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
+                <input id="search" name="search" type="search" placeholder="Search for products" class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>
@@ -59,11 +59,11 @@
     try {
     $db = db_connect();
 
-    $productname = filter_input(INPUT_POST, "zoekbalk", FILTER_SANITIZE_STRING);
-    $sort = filter_input(INPUT_POST, "zoekbalk", FILTER_SANITIZE_STRING);
-    $tags = filter_input(INPUT_POST, "zoekbalk", FILTER_SANITIZE_STRING);
+    $productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+    $sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+    $tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
 
-    $searchbar = "%" . $_POST["zoekbalk"] . "%";
+    $searchbar = "%" . $_POST['search'] . "%";
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
     $stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
 FROM stockitems i
@@ -71,8 +71,8 @@ JOIN stockitemstockgroups ig
 ON i.Stockitemid = ig.StockitemID
 JOIN stockgroups g
 ON ig.stockgroupid = g.stockgroupid
-WHERE i.StockItemName LIKE :zoekbalk OR g.StockGroupName LIKE :zoekbalk OR i.tags LIKE :zoekbalk");
-    $stmt->bindParam('zoekbalk', $searchbar);
+WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LIKE :search");
+    $stmt->bindParam('search', $searchbar);
     $stmt->execute();
     $result = $stmt->fetchAll();
 
@@ -115,7 +115,6 @@ WHERE i.StockItemName LIKE :zoekbalk OR g.StockGroupName LIKE :zoekbalk OR i.tag
 } catch (PDOException $e) {
     echo 'Connection Failed ' . $e->getMessage();
 }
-
 ?>
 
 
