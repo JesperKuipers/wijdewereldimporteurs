@@ -24,13 +24,6 @@ $result = $stmt->fetchAll();
     <!--Import basic imports-->
     <?php imports() ?>
 
-    <style>
-        body {
-            background-color: rgb(173, 222, 248);
-        }
-
-    </style>
-
     <!-- pagination wordt hieronder geconfigureerd -->
     <script>
         $(document).ready(function () {
@@ -57,7 +50,7 @@ $result = $stmt->fetchAll();
             navigation_html += '<li class="waves-effect" onclick="next()"><a href="#!"><i class="material-icons">chevron_right</i></a></li>';
 
             $('.pagination').html(navigation_html);
-            $('.pagination .page:first').addClass('active dark_blue_color');
+            $('.pagination .page:first').addClass('active blue darken-1');
 
             $('.products').css('display', 'none');
             $('.products').slice(0, show_per_page / 4).css('display', 'block');
@@ -72,7 +65,7 @@ $result = $stmt->fetchAll();
 
             $('.products').css('display', 'none').slice(start_from, end_on).css('display', 'block');
 
-            $('.page[longdesc=' + page_num + ']').addClass('active dark_blue_color').siblings('.active').removeClass('active dark_blue_color');
+            $('.page[longdesc=' + page_num + ']').addClass('active blue darken-1').siblings('.active').removeClass('active blue darken-1');
 
             $('#current_page').val(page_num);
         }
@@ -112,8 +105,22 @@ $result = $stmt->fetchAll();
         }
     </script>
 </head>
-
 <body>
+<?php
+
+
+if (isset($_GET['tags'])) {
+    $resultWithTags = [];
+    foreach ($result as $key => $value) {
+        foreach ($_GET['tags'] as $urlTags) {
+            if (in_array($urlTags, json_decode($value['tags']))) {
+                $resultWithTags[] = $value;
+            }
+        }
+
+    }
+}
+?>
 
     <!--Import navbar-->
     <?php navbar() ?>
@@ -123,40 +130,61 @@ $result = $stmt->fetchAll();
     |-----------------------------------------------|-->
 
 <div class="container content">
-    <?php
-    include '../Database_Connectie.php';
+    <br/>
+    <div class="row">
+        <div class="input-field col s3">
+            <select onchange="init()" id="productsPerPage">
+                <option value="8">8</option>
+                <option value="16" selected>16</option>
+                <option value="32">32</option>
+                <option value="64">64</option>
+            </select>
+            <label>Aantal producten weergeven</label>
+        </div>
+        <div class="input-field col s5 offset-s4">
+            <select id="selectFilter" multiple>
+                <?php
+                $list = array();
+                foreach ($result as $value) {
 
-    $db = db_connect();
-    $stmt = $db->prepare
-    ('SELECT i.StockItemID, StockItemName, StockGroupName
-FROM stockitems i
-JOIN stockitemstockgroups ig
-ON i.Stockitemid = ig.StockitemID
-JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
-    $category = '%' . $_GET['category'] . '%';
-    $stmt->bindParam('StockGroupName', $category);
-    $stmt->execute();
+                    foreach (json_decode($value['tags']) as $tags) {
+                        if (!in_array($tags, $list)) {
+                            ?>
+                            <option <?= isset($_GET['tags']) && in_array($tags, $_GET['tags']) ? 'selected' : '' ?>><?= $tags ?></option>
+                            <?php
+                        }
+                        array_push($list, $tags);
+                    }
+
+                } ?>
+            </select>
+            <label>Producten filteren</label>
+            <a class="waves-effect waves-light btn-small blue darken-1" onclick="setFilter()">Filteren</a>
+        </div>
+    </div>
+    <?php
+
     $i = 0;
 
-    foreach ($stmt->fetchAll() as $item) {
+    $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
+    foreach ($result as $item) {
     if ($i == 0) {
     ?>
-    <div class="row">
+    <div class="row products">
         <?php
         }
         if ($i == 4) {
         $i = 0;
         ?>
     </div>
-    <div class="row">
+    <div class="row products">
         <?php
         }
         $i++;
         ?>
 
 
-        <div class="col s10 m3">
+        <div class="col s10 m3 product">
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                     <div class="card-image">
