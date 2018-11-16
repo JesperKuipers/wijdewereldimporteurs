@@ -25,8 +25,8 @@ if (in_array($_POST["id"], $item_id_list)) {
 
 
 $item_data = json_encode($cart_data);
-setcookie('shopping_cart', $item_data, time() + 86400, "/");
+setcookie('shopping_cart', $item_data, time() + (86400 * 7), "/");
 
 
-header('Location: shoppingBasketOrFurther.php');
+header('Location: /products/detail.php?itemId=' . $_POST['id'] . '&cookie=set');
 

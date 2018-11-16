@@ -10,6 +10,22 @@
     <link type="text/css" rel="stylesheet" href="/css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <?php if (isset($_GET['cookie']) && $_GET['cookie'] == 'set') { ?>
+        <script>
+            $(function () {
+                //initialize all modals
+                $('.modal').modal();
+
+                //now you can open modal from code
+                $('#modal1').modal('open');
+            })
+        </script>
+    <?php } ?>
 </head>
 
 <body>
@@ -56,20 +72,15 @@
 
 <div class="container content">
     <?php
-    include '../Database_Connectie.php';
+    include '../Query.php';
 
-    $db = db_connect();
-    $stmt = $db->prepare
-    ('SELECT s.*, h.*, c.*
-FROM stockitems AS s
-JOIN stockitemholdings AS h
-ON s.StockItemID = h.StockItemID
-LEFT JOIN colors AS c
-ON s.ColorID = c.ColorID
-WHERE s.StockItemId = :StockItemId;');
-    $stmt->bindParam('StockItemId', $_GET['itemId']);
-    $stmt->execute();
-    $result = $stmt->fetch();
+    $result = getByItemId($_GET['itemId']);
+    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+    $cart_data = json_decode($cookie_data, true);
+    $cookieResults = array();
+    foreach ($cart_data as $value) {
+        array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+    }
 
     if (isset($result['CustomFields'])) {
         $customFields = explode(':', $result['CustomFields'])[1];
@@ -97,10 +108,10 @@ WHERE s.StockItemId = :StockItemId;');
                         </tr>
                     <?php } ?>
                     <?php if (isset($CountryOfManufacture)) { ?>
-                    <tr>
-                        <th>Gemaakt in</th>
-                        <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
-                    </tr>
+                        <tr>
+                            <th>Gemaakt in</th>
+                            <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
+                        </tr>
                     <?php } ?>
                     <?php if ($result['MarketingComments']) {
                         ?>
@@ -113,11 +124,11 @@ WHERE s.StockItemId = :StockItemId;');
                         <th>Prijs</th>
                         <td> &euro; <?= $result['RecommendedRetailPrice'] ?></td>
                     </tr>
-                    <?php if ($result['ColorName']){?>
-                    <tr>
-                        <th>Kleur</th>
-                        <td><?= $result['ColorName'] ?></td>
-                    </tr>
+                    <?php if ($result['ColorName']) { ?>
+                        <tr>
+                            <th>Kleur</th>
+                            <td><?= $result['ColorName'] ?></td>
+                        </tr>
                     <?php } ?>
                     <tr>
                         <th>Voorraad</th>
@@ -128,6 +139,44 @@ WHERE s.StockItemId = :StockItemId;');
                 <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">In
                     winkelmandje plaatsen
                 </button>
+                <div id="modal1" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                        <h4>Winkelwagentje</h4>
+                        <ul class="collection">
+                            <?php
+                            $totalprice = 1;
+                            $totalquantity = 1;
+                            foreach ($cookieResults as $values) {
+                                foreach ($values as $value) {
+                                    if ($value['StockItemName']) {
+                                        $totalprice = $totalprice + ($value['RecommendedRetailPrice'] * $values['item_quantity']);
+                                        ?>
+                                        <li class="collection-item avatar">
+                                            <img src="/images/no-image.jpg" alt="" class="circle">
+                                            <span class="title"><?= $value['StockItemName'] ?></span>
+                                            <p>Stock: <?= $value['QuantityOnHand'] ?></p>
+                                            <p class="secondary-content">
+                                                Price: &euro; <?= $value['RecommendedRetailPrice'] ?><br/>
+                                                Quantity: <?= $values['item_quantity'] ?>
+                                            </p>
+
+                                        </li>
+                                    <?php }
+                                }
+                            } ?>
+                            <li class="collection-item">
+                                <span class="title">Subtotal</span>
+                                <div class="secondary-content">
+                                    &euro; <?= $totalprice ?>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
