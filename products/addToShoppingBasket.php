@@ -1,30 +1,32 @@
 <?php
 
-$cookie = $_COOKIE['itemCookie'] ?? "";
-$cookie = stripslashes($cookie);
-$savedCartItems = json_decode($cookie, true);
-
-if (empty($savedCartItems)) {
-    $savedCartItems = array();
+if (isset($_COOKIE["shopping_cart"])) {
+    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+    $cart_data = json_decode($cookie_data, true);
+} else {
+    $cart_data = array();
 }
 
-if (!empty($savedCartItems) > 0 && array_key_exists($_POST['id'], $savedCartItems)) {
-    foreach ($savedCartItems as $key => $value) {
-        $cartItems[$_POST['id']] = ['count' => $value['count'] + 1];
-    }
-} elseif (!empty($savedCartItems) > 0 && !array_key_exists($_POST['id'], $savedCartItems)) {
-    foreach ($savedCartItems as $key => $value) {
-        $cartItems[$_POST['id']][] = ['count' => 1];
+$item_id_list = array_column($cart_data, 'item_id');
+
+if (in_array($_POST["id"], $item_id_list)) {
+    foreach ($cart_data as $keys => $values) {
+        if ($cart_data[$keys]["item_id"] == $_POST["id"]) {
+            $cart_data[$keys]["item_quantity"] = $cart_data[$keys]["item_quantity"] + 1;
+        }
     }
 } else {
-    $cartItems[$_POST['id']] = array(
-        'count' => 1
+    $item_array = array(
+        'item_id' => $_POST["id"],
+        'item_quantity' => 1
     );
+    $cart_data[] = $item_array;
 }
 
-var_dump($cartItems);
-$json = json_encode($cartItems, true);
-setcookie("itemCookie", $json, time() + 86400, "/");
 
-//header('Location: shoppingBasketOrFurther.php');
+$item_data = json_encode($cart_data);
+setcookie('shopping_cart', $item_data, time() + 86400, "/");
+
+
+header('Location: shoppingBasketOrFurther.php');
 

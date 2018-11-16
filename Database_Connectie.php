@@ -63,7 +63,8 @@ function db_connect()
       }
     */
     $localAddresses = ['127.0.0.1', 'localhost'];
-    if(in_array($_SERVER['SERVER_NAME'], $localAddresses)) {
+
+    if(in_array($_SERVER['HTTP_HOST'], $localAddresses)) {
         $db = new PDO('mysql:host=localhost;dbname=wideworldimporters;charset=utf8', 'root', '', $options);
     } else {
         $db = new PDO('mysql:host=5.189.176.248;dbname=jesper_wwi;charset=utf8', 'jesper_website', 'r6KnZEQrWA', $options);

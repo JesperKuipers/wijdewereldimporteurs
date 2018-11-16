@@ -201,9 +201,7 @@ if (isset($_GET['tags'])) {
     $i = 0;
 
     $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
-    foreach ($result
-
-    as $item) {
+    foreach ($result as $item) {
     if ($i == 0) {
     ?>
     <div class="row products">

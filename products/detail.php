@@ -60,15 +60,21 @@
 
     $db = db_connect();
     $stmt = $db->prepare
-    ('SELECT StockItemId, StockItemName, Size, LeadTimeDays, QuantityPerOuter, TaxRate, UnitPrice, CustomFields
-FROM stockitems
-WHERE StockItemId = :StockItemId;');
+    ('SELECT s.*, h.*, c.*
+FROM stockitems AS s
+JOIN stockitemholdings AS h
+ON s.StockItemID = h.StockItemID
+LEFT JOIN colors AS c
+ON s.ColorID = c.ColorID
+WHERE s.StockItemId = :StockItemId;');
     $stmt->bindParam('StockItemId', $_GET['itemId']);
     $stmt->execute();
     $result = $stmt->fetch();
 
-    $customFields = explode(':', $result['CustomFields'])[1];
-    $CountryOfManufacture = explode(',', $customFields)[0];
+    if (isset($result['CustomFields'])) {
+        $customFields = explode(':', $result['CustomFields'])[1];
+        $CountryOfManufacture = explode(',', $customFields)[0];
+    }
     ?>
     <div class="row">
         <div class="col s14 m6">
@@ -76,7 +82,7 @@ WHERE StockItemId = :StockItemId;');
         </div>
         <div class="col s14 m6">
             <form method="POST" action="addToShoppingBasket.php">
-                <input type="hidden" name="id" value="<?= $result['StockItemId'] ?>">
+                <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
                 <h4>Productinformatie</h4>
                 <table class="responsive-table">
                     <tr>
@@ -90,9 +96,32 @@ WHERE StockItemId = :StockItemId;');
                             <td><?= $result['Size'] ?></td>
                         </tr>
                     <?php } ?>
+                    <?php if (isset($CountryOfManufacture)) { ?>
                     <tr>
                         <th>Gemaakt in</th>
                         <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
+                    </tr>
+                    <?php } ?>
+                    <?php if ($result['MarketingComments']) {
+                        ?>
+                        <tr>
+                            <th>Extra Informatie</th>
+                            <td><?= $result['MarketingComments'] ?></td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <th>Prijs</th>
+                        <td> &euro; <?= $result['RecommendedRetailPrice'] ?></td>
+                    </tr>
+                    <?php if ($result['ColorName']){?>
+                    <tr>
+                        <th>Kleur</th>
+                        <td><?= $result['ColorName'] ?></td>
+                    </tr>
+                    <?php } ?>
+                    <tr>
+                        <th>Voorraad</th>
+                        <td><?= $result['QuantityOnHand'] ?></td>
                     </tr>
                 </table>
                 <br/>
