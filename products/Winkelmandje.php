@@ -1,3 +1,7 @@
+<?php
+include "../Database_Connectie.php"
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,20 +19,24 @@
 <body>
 
 <!--|-----------BEGINNING---------------------------|
+
+
+
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
 
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="/index.html" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="/index.html" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%"
+                                                               alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/inlog.html"><i class="material-icons">person</i></a></li>
             <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
-<!--|---------------Search-bar----------------------|-->
+        <!--|---------------Search-bar----------------------|-->
         <form id="spatieSearchBar">
             <div class="input-field center searchDiv">
                 <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
@@ -37,12 +45,12 @@
             </div>
         </form>
 
-<!--|--------------Mobile-menu----------------------|-->
+        <!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="/inlog.html"><i class="material-icons">person</i></a></li>
-    <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+    <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
     <!--todo: search balk hierin -->
 </ul>
 
@@ -50,81 +58,34 @@
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
 
-<!--|-----------BEGINNING---------------------------|
-    |----------Catergories--------------------------|
-    |-----------------------------------------------|-->
-
-<div class="container content">
+<!-- class="content" is nodig voor sticky footer -->
+<div class="center content">
     <?php
-    include '../Database_Connectie.php';
-
     $db = db_connect();
-    $stmt = $db->prepare
-    ('SELECT s.*, h.*, c.*
-FROM stockitems AS s
-JOIN stockitemholdings AS h
-ON s.StockItemID = h.StockItemID
-LEFT JOIN colors AS c
-ON s.ColorID = c.ColorID
-WHERE s.StockItemId = :StockItemId;');
-    $stmt->bindParam('StockItemId', $_GET['itemId']);
-    $stmt->execute();
-    $result = $stmt->fetch();
+    $product_array = $db->query("SELECT * FROM stockitems ORDER BY stockitemid ASC");
+    $result = $product_array->fetchAll();
 
-    $customFields = explode(':', $result['CustomFields'])[1];
-    $CountryOfManufacture = explode(',', $customFields)[0];
+    if (!empty($result)) {
+        foreach ($result as $value) {
+            ?>
+            <div class="product-item">
+                <form method="post"
+                      action="index.php?action=add&code=<?php echo $value["StockItemID"]; ?>">
+                    <div class="product-image"><img src="<?php echo $value["Photo"]; ?>"></div>
+                    <div class="product-tile-footer">
+                        <div> <?php echo $value["StockItemName"]; ?></div>
+                        <div> <?php echo "$" . $value["RecommendedRetailPrice"]; ?></div>
+                        <div><input type="text" class="product-quantity" name="quantity" value="1" size="2"/><input
+
+                    </div>
+                </form>
+            </div>
+            <?php
+        }
+    }
     ?>
-    <div class="row">
-        <div class="col s14 m6">
-            <img src="/images/no-image.jpg" width="500"/>
-        </div>
-        <div class="col s14 m6">
-            <h4>Product information</h4>
-            <table class="responsive-table">
-                <tr>
-                    <th>Product name</th>
-                    <td><?= $result['StockItemName'] ?></td>
-                </tr>
-                <?php if ($result['Size']) {
-                    ?>
-                    <tr>
-                        <th>Size</th>
-                        <td><?= $result['Size'] ?></td>
-                    </tr>
-                <?php } ?>
-                <tr>
-                    <th>Made In</th>
-                    <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
-                </tr>
-                <?php if ($result['MarketingComments']) {
-                     ?>
-                <tr>
-                    <th>Extra Information</th>
-                    <td><?= $result['MarketingComments'] ?></td>
-                </tr>
-                <?php } ?>
-
-                <tr>
-                    <th>Price</th>
-                    <td> &euro; <?= $result['RecommendedRetailPrice'] ?></td>
-                </tr>
-                <tr>
-                    <th>Colour</th>
-                    <td><?= $result['ColorName'] ?></td>
-                </tr>
-                <tr>
-                    <th>Stock</th>
-                    <td><?= $result['QuantityOnHand'] ?></td>
-                </tr>
-                <button type="button">Add to shopping cart</button>
-            </table>
-        </div>
-    </div>
 </div>
 
-<!--|--------------END------------------------------|
-    |-----------Catergories-------------------------|
-    |-----------------------------------------------|-->
 
 <!--|-----------BEGINNING---------------------------|
     |------------Footer-----------------------------|
@@ -140,7 +101,6 @@ WHERE s.StockItemId = :StockItemId;');
 
         </div>
     </div>
-
     <div class="footer-copyright">
         <div class="container center">
             <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
