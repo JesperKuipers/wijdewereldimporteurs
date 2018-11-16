@@ -44,7 +44,6 @@ body {
     width: 500px;
 }
 
-
 .searchDiv:hover{
     background-color: black;
 }
@@ -85,4 +84,68 @@ body {
 #recaptcha {
     width: 304px;
     margin: 0 auto;
+}
+
+.container-login {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 600px;
+}
+
+.logininput{
+    text-align: center;
+    background-color: lightblue !important;
+    width: 230px !important;
+}
+
+::placeholder{
+    color: black;
+    font-size: 10pt;
+}
+
+.btnlogin{
+    background-color: dodgerblue;
+    width: 200px;
+}
+
+.btnlogin:hover{
+    background-color: blue;
+}
+
+.container-register {
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.rinputs{
+    width: 230px !important;
+    background-color: lightblue !important;
+    text-align: center;
+
+}
+
+.registerinput{
+    font-size: 10pt;
+}
+
+.btnregister{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btnregister:hover{
+    background-color: blue;
+}
+
+.e-mail{
+    width: 600px !important;
+    background-color: lightblue !important;
+    text-align: center;
+}
+
+.alreadyaccount{
+    font-size: 12pt;
+    float: bottom;
 }
