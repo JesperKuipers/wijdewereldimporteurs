@@ -53,46 +53,47 @@
         <div class="col s14 m6">
             <form method="POST" action="addToShoppingBasket.php">
                 <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
-                <h4>Productinformatie</h4>
+                <h4>Product information</h4>
                 <table class="responsive-table">
                     <tr>
-                        <th>Productnaam</th>
+                        <th>Product name</th>
                         <td><?= $result['StockItemName'] ?></td>
                     </tr>
                     <?php if ($result['Size']) {
                         ?>
                         <tr>
-                            <th>Grootte</th>
+                            <th>Size</th>
                             <td><?= $result['Size'] ?></td>
                         </tr>
                     <?php } ?>
                     <?php if (isset($CountryOfManufacture)) { ?>
                         <tr>
-                            <th>Gemaakt in</th>
+                            <th>Made In</th>
                             <td><?= str_replace('"', '', $CountryOfManufacture) ?></td>
                         </tr>
                     <?php } ?>
                     <?php if ($result['MarketingComments']) {
                         ?>
                         <tr>
-                            <th>Extra Informatie</th>
+                            <th>Extra Information</th>
                             <td><?= $result['MarketingComments'] ?></td>
                         </tr>
                     <?php } ?>
                     <tr>
-                        <th>Prijs</th>
+                        <th>Price</th>
                         <td> &euro; <?= $result['RecommendedRetailPrice'] ?></td>
                     </tr>
                     <?php if ($result['ColorName']) { ?>
                         <tr>
-                            <th>Kleur</th>
+                            <th>Colour</th>
                             <td><?= $result['ColorName'] ?></td>
                         </tr>
                     <?php } ?>
                     <tr>
-                        <th>Voorraad</th>
+                        <th>Stock</th>
                         <td><?= $result['QuantityOnHand'] ?></td>
                     </tr>
+                <button type="button">Add to shopping cart</button>
                 </table>
                 <br/>
                 <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">In
