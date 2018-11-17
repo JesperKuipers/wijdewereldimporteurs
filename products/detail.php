@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include "functions.php" ?>
+    <?php include "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -14,7 +14,7 @@
                 $('.modal').modal();
 
                 //now you can open modal from code
-                $('#modal1').modal('open');
+                $('.modal').modal('open');
             })
         </script>
     <?php } ?>
@@ -93,19 +93,17 @@
                         <th>Stock</th>
                         <td><?= $result['QuantityOnHand'] ?></td>
                     </tr>
-                <button type="button">Add to shopping cart</button>
                 </table>
                 <br/>
                 <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">In
                     winkelmandje plaatsen
                 </button>
-                <div id="modal1" class="modal modal-fixed-footer">
+                <div class="modal modal-fixed-footer">
                     <div class="modal-content">
                         <h4>Winkelwagentje</h4>
                         <ul class="collection">
                             <?php
                             $totalprice = 1;
-                            $totalquantity = 1;
                             foreach ($cookieResults as $values) {
                                 foreach ($values as $value) {
                                     if ($value['StockItemName']) {
@@ -134,7 +132,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
+                        <a href="/products/winkelmandje.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
                     </div>
                 </div>
         </div>
