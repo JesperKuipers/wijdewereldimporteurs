@@ -1,5 +1,4 @@
 <?php
-var_dump($_SERVER);exit;
 include '../Query.php';
 
 $result = getByCategoryName($_GET['category']);
