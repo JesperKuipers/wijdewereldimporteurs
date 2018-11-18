@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include "../functions.php" ?>
+    <?php require "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -31,7 +31,7 @@
 
 <div class="container content">
     <?php
-    include '../Query.php';
+    require '../query.php';
 
     $result = getByItemId($_GET['itemId']);
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);

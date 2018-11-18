@@ -1,6 +1,6 @@
 <?php
 
-include 'database_connectie.php';
+require 'database_connectie.php';
 
 function get(string $table, array $fields = [], string $where = null): array
 {
@@ -10,7 +10,6 @@ function get(string $table, array $fields = [], string $where = null): array
     if ($data = $stmt->fetchAll()) {
         return $data;
     }
-
 }
 
 function getByCategoryName(string $category)

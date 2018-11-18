@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include "../functions.php" ?>
+    <?php require "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -29,7 +29,7 @@
 <!-- class="content" is nodig voor sticky footer -->
 <div class="center content">
     <?php
-    include '../Query.php';
+    require '../query.php';
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
     $cart_data = json_decode($cookie_data, true);
     $cookieResults = array();

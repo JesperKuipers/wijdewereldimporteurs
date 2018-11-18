@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include "functions.php" ?>
+    <?php require "functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>

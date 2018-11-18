@@ -1,5 +1,5 @@
 <?php
-include '../Query.php';
+require '../query.php';
 
 $result = getByCategoryName($_GET['category']);
 ?>
@@ -7,7 +7,7 @@ $result = getByCategoryName($_GET['category']);
 <head>
 
     <!--Include functions.php for lay-out-->
-    <?php include "../functions.php" ?>
+    <?php require "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>

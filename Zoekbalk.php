@@ -54,7 +54,7 @@
 <!-- class="content" is nodig voor sticky footer -->
 <div class="center content">
     <?php
-    include 'Database_Connectie.php';
+    require 'Database_Connectie.php';
 
     try {
     $db = db_connect();
