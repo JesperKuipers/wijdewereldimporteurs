@@ -1,9 +1,9 @@
 <?php
 
-require 'database_connectie.php';
-
 function get(string $table, array $fields = [], string $where = null): array
 {
+    include 'database_connectie.php';
+
     $pdo = db_connect();
     $stmt = $pdo->query('SELECT `' . $table . '`.' . $fields . ' FROM `' . $table . '` ' . (!empty($where) ? 'WHERE ' . $where : null));
     $stmt->execute();
@@ -15,6 +15,8 @@ function get(string $table, array $fields = [], string $where = null): array
 
 function getByCategoryName(string $category)
 {
+    include 'database_connectie.php';
+
     $pdo = db_connect();
     $stmt = $pdo->prepare
     ('SELECT i.StockItemID, StockItemName, StockGroupName, tags
@@ -32,6 +34,8 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName = :StockGroupName');
 
 function getByItemId(int $id)
 {
+    include 'database_connectie.php';
+
     $db = db_connect();
     $query = 'SELECT s.*, h.*, c.*
 FROM stockitems AS s
