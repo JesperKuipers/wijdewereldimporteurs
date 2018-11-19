@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ?>
+    <?php include "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -31,7 +31,7 @@
 
 <div class="container content">
     <?php
-    require '../query.php';
+    include '../query.php';
 
     $result = getByItemId($_GET['itemId']);
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
@@ -51,7 +51,7 @@
             <img src="/images/no-image.jpg" width="500"/>
         </div>
         <div class="col s14 m6">
-            <form method="POST" action="addToShoppingBasket.php">
+            <form method="POST" action="add_to_shopping_basket.php">
                 <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
                 <h4>Product information</h4>
                 <table class="responsive-table">
