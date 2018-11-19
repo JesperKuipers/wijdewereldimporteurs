@@ -30,7 +30,7 @@
                     <img href="/products/overview.php?category=Novelty" src="images/chog-frog.png" height="213">
                 </div>
                 <div class="card-content card-action center">
-                    <a class="light_grey_color center" href="/products/overview.php?category=Novelty Items">Novelty Items</a>
+                    <a class="light_grey_color center" href="/products/overview.php?category=Novelty">Novelty Items</a>
                 </div>
 
             </div>
