@@ -7,6 +7,17 @@
     <!--Import basic imports-->
     <?php imports() ?>
 
+    <?php if (isset($_GET['cookie']) && $_GET['cookie'] == 'set') { ?>
+        <script>
+            $(function () {
+                //initialize all modals
+                $('.modal').modal();
+                //now you can open modal from code
+                $('.modal').modal('open');
+            })
+        </script>
+    <?php } ?>
+
 </head>
 
 <body>

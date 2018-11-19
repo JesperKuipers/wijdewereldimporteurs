@@ -138,6 +138,7 @@ if (isset($_GET['tags'])) {
                 <option value="16" selected>16</option>
                 <option value="32">32</option>
                 <option value="64">64</option>
+                <option value="128">128</option>
             </select>
             <label>Aantal producten weergeven</label>
         </div>
