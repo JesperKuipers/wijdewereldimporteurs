@@ -10,7 +10,6 @@
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -25,10 +24,10 @@
         <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+            <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
             <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
-
+        
         <!--|---------------Search-bar----------------------|-->
         <form id="spatieSearchBar">
             <div class="input-field center searchDiv">
@@ -37,14 +36,13 @@
                 <i class="material-icons">close</i>
             </div>
         </form>
-
+        
         <!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+    <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-    <!--todo: search balk hierin -->
 </ul>
 
 <!--|--------------END------------------------------|
@@ -52,25 +50,16 @@
     |-----------------------------------------------|-->
 
 <!-- class="content" is nodig voor sticky footer -->
-<div class="container-register center content">
-    <p><b>Create your WWI account</b></p>
-    <form method="post" class="registerinput">
-        <b>First name: </b><input type="text" name="fname" id="fname" class="rinputs" style="margin-right: 65px;">
-        <b>Last name: </b><input type="text" name="lname" id="lname" class="rinputs"><br>
-        <b>E-Mail: </b><input type="text" name="email" id="email" class="e-mail" required style="margin-left: 25px"><br>
-        <b>Password: </b><input type="password" name="password" id="password" class="rinputs" required style="margin-left: 6px;margin-right: 16px">
-        <b>Confirm password: </b><input type="password" name="cpassword" id="cpassword" class="rinputs" required><br>
-        <b>Address: </b><input type="text" name="address" id="address" class="rinputs" required style="margin-left: 15px; margin-right: 56px">
-        <b>Postal Code: </b><input type="text" name="postalcode" id="postalcode" class="rinputs" required><br><br>
-        <div class="g-recaptcha" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5" style="margin-left: 180px"></div>
-        <button type="submit" name="registerbutton" class="btnregister s12 btn btn-large waves-effect">Register</button>
+<div class="container-passwordforgot center content">
+    <h1><b class="resetpass">Reset Password</b></h1>
+    <form method="POST" class="passforgotinput" action="">
+        <b>E-Mail: </b><input type="text" name="email" id="email" class="rinputs" required style="margin-left: 50px"><br>
+        <b>Old Password: </b><input type="password" name="password" id="password" class="rinputs" required><br>
+        <button type="submit" name="passresetbutton" id="passResetBtn" class="btnpassreset s12 btn btn-large waves-effect">Send</button>
     </form>
-    <div>
-        <label class="alreadyaccount">
-            <br> Already have an account? <br>
-            <a class="loginhere" href="inlog.html"><b><u>Log in here</u></b></a>
-        </label>
-    </div>
+    <label style="font-size: 16px">
+        <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
+    </label>
 </div>
 
 
@@ -82,10 +71,10 @@
 <footer class="page-footer blue-grey darken-3 sticky-footer">
     <div class="container">
         <div class="row center">
-
+            
             <a class="blue_color" href="over%20wwi.html">Over WWI</a>
             <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
-
+        
         </div>
     </div>
     <div class="footer-copyright">

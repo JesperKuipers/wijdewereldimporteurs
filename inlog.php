@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php session_start();?>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -10,6 +11,8 @@
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <?php include 'database_connectie.php';
+    include 'functions.php';?>
 </head>
 
 <body>
@@ -21,10 +24,11 @@
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%"
+                                                               alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+            <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
             <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
 
@@ -41,7 +45,7 @@
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+    <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
     <!--todo: search balk hierin -->
 </ul>
@@ -53,21 +57,29 @@
 <!-- class="content" is nodig voor sticky footer -->
 <div class="container-login center content">
     <p><b>Please log into your account</b></p>
-    <form method="Post" action="https:www.wijdewereldimporteurs.nl">
-        <b>Username: </b><input type="text" name="username" class="logininput" placeholder="Enter your E-Mail" onfocus="this.placeholder=''" onblur="this.placeholder='Enter your E-Mail'" required><br>
-        <b>Password:</b> <input type="password" name="password" id="password" class="logininput" placeholder="Enter your password" onfocus="this.placeholder=''" onblur="this.placeholder='Enter your password'" required style="margin-left:4px;"><br>
+    <form method="POST" name="login" action="loginprocess.php">
+        <b>Username: </b><input type="email" name="email" class="logininput" placeholder="Enter your E-Mail"
+                                onfocus="this.placeholder=''" onblur="this.placeholder='Enter your E-Mail'"
+                                required><br>
+        <b>Password:</b> <input type="password" name="password" id="password" class="logininput"
+                                placeholder="Enter your password" onfocus="this.placeholder=''"
+                                onblur="this.placeholder='Enter your password'" required style="margin-left:4px;"><br>
         <label style="float: bottom;">
-            <a class="forgotpassword" href="#"><b><u>Forgot Password</u></b></a>
+            <a class="forgotpassword" href="passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
-        <br><button type="submit" name="loginbutton" class="btnlogin s12 btn btn-large waves-effect">Login</button>
+        <br>
+        <button type="submit" name="loginbutton" class="btnlogin s12 btn btn-large waves-effect">Login</button>
     </form>
     <form>
         <label style="float:bottom;font-size: 12pt;">
-            <br><br><a class="createaccount" href="register.html"><b><u>Create Account</u></b></a>
+            <br><br><a class="createaccount" href="register.php"><b><u>Create Account</u></b></a>
         </label>
     </form>
 </div>
 
+<?php
+
+?>
 
 <!--|-----------BEGINNING---------------------------|
     |------------Footer-----------------------------|
