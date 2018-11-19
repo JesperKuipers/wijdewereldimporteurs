@@ -54,7 +54,7 @@
 <!-- class="content" is nodig voor sticky footer -->
 <div class="center content">
     <?php
-    require 'Database_Connectie.php';
+    include 'Database_Connectie.php';
 
     try {
     $db = db_connect();
@@ -97,7 +97,7 @@ WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LI
 
         <div class="col s10 m3 product">
             <div class="card">
-                <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
+                <a href="products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                         <div class="card-image">
                         <img src="images/no-image.jpg"/>
                     </div>

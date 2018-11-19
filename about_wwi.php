@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST['submit'])) {
-    require 'functions.php';
+    include 'functions.php';
     $errMsg = '';
     $succMsg = '';
     if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "functions.php" ?>
+    <?php include "functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
