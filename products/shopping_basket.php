@@ -47,6 +47,7 @@
                     if (isset($item['StockItemName'])) {
                         $totalprice = $totalprice + ($item['RecommendedRetailPrice'] * $items['item_quantity']);
                         $totalquantity = $totalquantity + $items['item_quantity'];
+
                         ?>
                         <li class="collection-item avatar">
                             <img src="/images/no-image.jpg" alt="" class="circle">
@@ -65,7 +66,7 @@
             <li class="collection-item avatar" style="text-align: left;">
                 <p>Total quantity<br/>Subtotal</p>
                 <div class="secondary-content">
-                    <?= $totalquantity ?><br/>
+                    <?=$totalquantity ?><br/>
                     &euro; <?= $totalprice ?>
                 </div>
             </li>

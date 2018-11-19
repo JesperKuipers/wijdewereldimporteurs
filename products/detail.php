@@ -51,7 +51,7 @@
             <img src="/images/no-image.jpg" width="500"/>
         </div>
         <div class="col s14 m6">
-            <form method="POST" action="addToShoppingBasket.php">
+            <form method="POST" action="add_to_shopping_basket.php">
                 <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
                 <h4>Product information</h4>
                 <table class="responsive-table">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/winkelmandje.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
                     </div>
                 </div>
         </div>
