@@ -34,7 +34,7 @@ function imports () {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
           integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
     <!--Import main.css-->
-    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <?php
@@ -49,7 +49,7 @@ function navbar () {
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.php" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="/index.php" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
@@ -90,9 +90,9 @@ function footer () {
     <div class="container">
         <div class="row center">
 
-            <a class="light_blue_color" href="about_wwi.php">About WWI</a>
+            <a class="light_blue_color" href="/about_wwi.php">About WWI</a>
             <a class="light_blue_color dubbele_spatie" href="index.php">Home page</a>
-            <a class="light_blue_color dubbele_spatie smooth-goto" href="about_wwi.php#scroll">Contact WWI</a>
+            <a class="light_blue_color dubbele_spatie smooth-goto" href="/about_wwi.php#scroll">Contact WWI</a>
 
         </div>
     </div>
