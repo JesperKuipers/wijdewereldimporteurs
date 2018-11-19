@@ -74,7 +74,7 @@ function navbar () {
 </nav>
 <ul class="sidenav" id="mobile-demo">
     <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
-    <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+    <li><a href="shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
 </ul>
 
 <!--|--------------END------------------------------|
