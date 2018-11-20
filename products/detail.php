@@ -51,7 +51,7 @@
             <img src="/images/no-image.jpg" width="500"/>
         </div>
         <div class="col s14 m6">
-            <form method="POST" action="addToShoppingBasket.php">
+            <form method="POST" action="shoppingbasketcookie.php">
                 <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
                 <h4>Product information</h4>
                 <table class="responsive-table">
@@ -106,7 +106,7 @@
                             $totalprice = 1;
                             foreach ($cookieResults as $values) {
                                 foreach ($values as $value) {
-                                    if ($value['StockItemName']) {
+                                    if (isset($value['StockItemName'])) {
                                         $totalprice = $totalprice + ($value['RecommendedRetailPrice'] * $values['item_quantity']);
                                         ?>
                                         <li class="collection-item avatar">

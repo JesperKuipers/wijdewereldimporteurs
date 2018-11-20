@@ -1,24 +1,14 @@
 <?php
 function email($name,$subject,$mailfrom, $message ){
-
-
-
     $mailto = 'contact@wijdewereldimporteurs.nl';
     $headers = "From: " . $mailfrom;
     $txt = "You have received an e-mail from " . $name . ". \n\n" . $message;
 
     mail($mailto, $subject, $txt, $headers);
-
 }
 
 $username=filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-
-
-
-
-
-
 
 #<!--|-----------Lay-out--------------------------|
 #    |----------main-site-------------------------|
@@ -61,9 +51,9 @@ function navbar () {
         </ul>
 
 <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
+        <form id="spatieSearchBar" method="POST" action="/Zoekbalk.php">
             <div class="input-field center searchDiv">
-                <input id="search" type="search" placeholder="Search..." class="searchbar" required>
+                <input id="search" name="search" type="search" placeholder="Search..." class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>
