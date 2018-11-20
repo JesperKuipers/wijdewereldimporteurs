@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
           integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
     <!--Import main.css-->
-    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <?php include 'database_connectie.php';
@@ -24,7 +24,7 @@
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%"
+        <a href="index.html" class="brand-logo center"><i><img src="../images/wwi-logo.png" width="70%"
                                                                alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
