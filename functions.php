@@ -1,8 +1,5 @@
 <?php
 function email($name,$subject,$mailfrom, $message ){
-
-
-
     $mailto = 'contact@wijdewereldimporteurs.nl';
     $headers = "From: " . $mailfrom;
     $txt = "You have received an e-mail from " . $name . ". \n\n" . $message;
