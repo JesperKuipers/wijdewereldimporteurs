@@ -109,19 +109,23 @@ body {
 }
 
 .btnlogin:hover{
-    background-color: blue;
+     background-color: blue;
 }
 
 .container-register {
     margin: 0 auto;
     max-width: 1280px;
+    width: 800px;
+}
+
+.createwwi{
+    font-size: 16pt;
 }
 
 .rinputs{
-    width: 230px !important;
+    width: 350px !important;
     background-color: lightblue !important;
-    text-align: center;
-
+    text-align: center !important;
 }
 
 .registerinput{
@@ -131,21 +135,47 @@ body {
 .btnregister{
     background-color: dodgerblue;
     width: 200px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center !important;
 }
 
 .btnregister:hover{
     background-color: blue;
 }
 
-.e-mail{
-    width: 600px !important;
-    background-color: lightblue !important;
-    text-align: center;
-}
-
 .alreadyaccount{
     font-size: 12pt;
-    float: bottom;
+    margin-left: 50px !important;
+}
+
+.required{
+    color: red;
+}
+
+#recaptcha{
+    width: 304px;
+    margin: 0 auto;
+}
+
+.container-passwordforgot {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 800px;
+}
+
+.resetpass{
+    font-size: 30px;
+}
+
+.btnpassreset{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center !important;
+}
+
+.btnpassreset:hover{
+    background-color: blue;
 }
