@@ -1,5 +1,8 @@
 <?php
-// Kijken of de cookie al geset is, zo ja, vul dan de array hiermee, zo nee, maak een lege array
+
+require '../query.php';
+
+// Check if cookie allready exists, if true, fill array with cookie data, if false create a empty array
 if (isset($_COOKIE["shopping_cart"])) {
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
     $cart_data = json_decode($cookie_data, true);
@@ -7,12 +10,12 @@ if (isset($_COOKIE["shopping_cart"])) {
     $cart_data = array();
 }
 
-// Alle id's van de producten staan in deze variabele
+
+// All id's from products
 $item_id_list = array_column($cart_data, 'item_id');
 
 if (isset($_POST['id'])) {
-//Staat de id uit de post in deze array? Zo ja: zet dan de quantity 1tje hoger,
-// Zo nee, maak een nieuwe array aan met de nieuwe post waarden
+// if the cookie already has this id? If true set quantity + 1. if not, create a new array from the post values
     if (in_array($_POST["id"], $item_id_list)) {
         foreach ($cart_data as $keys => $values) {
             if ($cart_data[$keys]["item_id"] == $_POST["id"]) {
@@ -35,10 +38,25 @@ if (isset($_POST['id'])) {
 
 if (isset($_POST['changequantity']) && isset($_POST['changequantityid']) && in_array($_POST['changequantityid'], $item_id_list)) {
     foreach ($cart_data as $keys => $values) {
-        if ($cart_data[$keys]["item_id"] == $_POST['changequantityid']) {
+        if ($cart_data[$keys]["item_id"] == $_POST['changequantityid'] && getByItemId($_POST['changequantityid'])['QuantityOnHand'] >= $_POST['changequantity'] && intval($_POST['changequantity']) > 0) {
             $cart_data[$keys]["item_quantity"] = $_POST['changequantity'];
+        } else {
+            echo 'false';
         }
     }
     $item_data = json_encode($cart_data);
     setcookie('shopping_cart', $item_data, time() + (86400 * 7), "/");
+
+    echo 'true';
+}
+
+if (isset($_POST['removeproduct'])) {
+    foreach($cart_data as $keys => $values) {
+        if($cart_data[$keys]['item_id'] == $_POST['removeproduct']) {
+            unset($cart_data[$keys]);
+            $item_data = json_encode($cart_data);
+            setcookie('shopping_cart', $item_data, time() + (86400 * 7), "/");
+            echo "true";
+        }
+    }
 }

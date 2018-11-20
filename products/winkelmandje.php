@@ -8,10 +8,44 @@
     <?php imports() ?>
     <script>
         function changequantity(quantity, id) {
-            $.post("/products/addToShoppingBasket.php", {changequantity: quantity, changequantityid: id})
-                .success(setTimeout(function () {// wait for 5 secs(2)
-                    location.reload(); // then reload the page.(3)
-                }, 500));
+            $.ajax({
+                type: "POST",
+                url: "/products/shoppingbasketcookie.php",
+                data: {
+                    changequantity: quantity,
+                    changequantityid: id
+                },
+                success: function (response) {
+                    if (response == 'true') {
+                        setTimeout(function () {// wait for 5 secs(2)
+                            location.reload(); // then reload the page.(3)
+                        }, 500);
+                    } else {
+                        alert('We don\'t have that in stock or you entered a negative number');
+                    }
+
+                }
+            })
+        }
+
+        function removeproduct(id) {
+            $.ajax({
+                type: "POST",
+                url: "/products/shoppingbasketcookie.php",
+                data: {
+                    removeproduct: id
+                },
+                success: function (response) {
+                    if (response == 'true') {
+                        setTimeout(function () {// wait for 5 secs(2)
+                            location.reload(); // then reload the page.(3)
+                        }, 500);
+                    } else {
+                        alert('Removing the product is failed');
+                    }
+
+                }
+            })
         }
     </script>
 </head>
@@ -38,38 +72,45 @@
     }
     ?>
     <div class="container">
-        <ul class="collection">
-            <?php
-            $totalprice = 0;
-            $totalquantity = 0;
-            foreach ($cookieResults as $items) {
-                foreach ($items as $item) {
-                    if (isset($item['StockItemName'])) {
-                        $totalprice = $totalprice + ($item['RecommendedRetailPrice'] * $items['item_quantity']);
-                        $totalquantity = $totalquantity + $items['item_quantity'];
-                        ?>
-                        <li class="collection-item avatar">
-                            <img src="/images/no-image.jpg" alt="" class="circle">
-                            <span class="title"><?= $item['StockItemName'] ?></span>
-                            <p>Stock: <?= $item['QuantityOnHand'] ?></p>
-                            <p class="secondary-content">
-                                Price: &euro; <?= $item['RecommendedRetailPrice'] ?><br/>
-                                Quantity: <input class="browser-default"
-                                                 onchange="changequantity(this.value, <?= $item['StockItemID'] ?>)"
-                                                 type="number" value="<?= $items['item_quantity'] ?>"/>
-                            </p>
-                        </li>
-                    <?php }
-                }
-            } ?>
-            <li class="collection-item avatar" style="text-align: left;">
-                <p>Total quantity<br/>Subtotal</p>
-                <div class="secondary-content">
-                    <?= $totalquantity ?><br/>
-                    &euro; <?= $totalprice ?>
-                </div>
-            </li>
-        </ul>
+        <div class="row">
+            <ul class="collection">
+                <?php
+                $totalprice = 0;
+                $totalquantity = 0;
+                foreach ($cookieResults as $items) {
+                    foreach ($items as $item) {
+                        if (isset($item['StockItemName'])) {
+                            $totalprice = $totalprice + ($item['RecommendedRetailPrice'] * $items['item_quantity']);
+                            $totalquantity = $totalquantity + $items['item_quantity'];
+                            ?>
+                            <li class="collection-item avatar">
+                                <img src="/images/no-image.jpg" alt="" class="circle">
+                                <span class="title"><?= $item['StockItemName'] ?></span>
+                                <p>Stock: <?= $item['QuantityOnHand'] ?></p>
+                                <p class="secondary-content" style="text-align: left">
+                                    Price: &euro; <?= $item['RecommendedRetailPrice'] ?><br/>
+                                    Quantity: <input class="browser-default"
+                                                     onchange="changequantity(this.value, <?= $item['StockItemID'] ?>)"
+                                                     type="number" value="<?= $items['item_quantity'] ?>"/>
+                                    <i class="material-icons" style="cursor: pointer" onclick="removeproduct(<?= $item['StockItemID']?>)">remove_shopping_cart</i>
+                                </p>
+                            </li>
+                        <?php }
+                    }
+                } ?>
+                <li class="collection-item avatar" style="text-align: left;">
+                    <p>Total quantity<br/>Subtotal</p>
+                    <div class="secondary-content">
+                        <?= $totalquantity ?><br/>
+                        &euro; <?= $totalprice ?>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light blue darken-1" style="float: right;" type="submit">Bestellen
+            </button>
+        </div>
     </div>
 </div>
 
