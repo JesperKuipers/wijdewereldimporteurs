@@ -3,7 +3,7 @@
 <head>
     <?php session_start();?>
     <!--Include functions.php for lay-out-->
-    <?php include "../.php/functions.php" ?>
+    <?php include ".php/functions.php" ?>
     <!--Include database_connectie-->
     <?php include '.php/database_connectie.php'; ?>
     <!--Import basic imports-->

@@ -47,7 +47,7 @@ function navbar () {
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="../index.php" class="brand-logo center"><i><img src="/images%20(temp)/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="/index.php" class="brand-logo center"><i><img src="/images%20(temp)/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
@@ -55,9 +55,9 @@ function navbar () {
         </ul>
 
 <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
+        <form id="spatieSearchBar" method="POST" action="/searchbar.php">
             <div class="input-field center searchDiv">
-                <input id="search" type="search" placeholder="Search..." class="searchbar" required>
+                <input id="search" name="search" type="search" placeholder="Search..." class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>

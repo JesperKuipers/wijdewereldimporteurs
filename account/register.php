@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include "../.php/functions.php" ?>
+    <?php include ".php/functions.php" ?>
     <!--Import basic imports-->
     <?php imports() ?>
 </head>
