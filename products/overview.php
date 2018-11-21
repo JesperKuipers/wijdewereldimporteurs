@@ -1,25 +1,13 @@
 <?php
-include '../Database_Connectie.php';
+include '../.php/query.php';
 
-$db = db_connect();
-$stmt = $db->prepare
-('SELECT i.StockItemID, StockItemName, StockGroupName, tags
-FROM stockitems i
-JOIN stockitemstockgroups ig
-ON i.Stockitemid = ig.StockitemID
-JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid 
-WHERE StockGroupName LIKE StockGroupName');
-$category = '%' . $_GET['category'] . '%';
-$stmt->bindParam('StockGroupName', $category);
-$stmt->execute();
-$result = $stmt->fetchAll();
+$result = getByCategoryName($_GET['category']);
 ?>
 <html>
 <head>
 
     <!--Include functions.php for lay-out-->
-    <?php include "functions.php" ?>
+    <?php include "../.php/functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -147,7 +135,6 @@ if (isset($_GET['tags'])) {
                 <?php
                 $list = array();
                 foreach ($result as $value) {
-
                     foreach (json_decode($value['tags']) as $tags) {
                         if (!in_array($tags, $list)) {
                             ?>
@@ -189,7 +176,7 @@ if (isset($_GET['tags'])) {
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                     <div class="card-image">
-                        <img src="../images/no-image.jpg"/>
+                        <img src="../images%20(temp)/no-image.jpg"/>
                     </div>
                     <div class="card-content card-action center">
                         <?= $item['StockItemName'] ?>

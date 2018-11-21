@@ -1,15 +1,16 @@
 <?php
-function email($name,$subject,$mailfrom, $message ){
-    $mailto = 'contact@wijdewereldimporteurs.nl';
-    $headers = "From: " . $mailfrom;
-    $txt = "You have received an e-mail from " . $name . ". \n\n" . $message;
-
-    mail($mailto, $subject, $txt, $headers);
-
-}
-
-$username=filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+$fname=filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
+$lname=filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
+$email=filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
 $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+$address=filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
+$postalcode=filter_input(INPUT_POST, 'postalcode', FILTER_SANITIZE_STRING);
+
+function passwordcheck($password,$repassword){
+    if($password != $repassword){
+        Print("The password is not the same");
+    }
+}
 
 
 
@@ -31,7 +32,7 @@ function imports () {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
           integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
     <!--Import main.css-->
-    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/.css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <?php
@@ -46,7 +47,7 @@ function navbar () {
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.php" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
+        <a href="../index.php" class="brand-logo center"><i><img src="/images%20(temp)/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
@@ -67,7 +68,7 @@ function navbar () {
 </nav>
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
-    <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+    <li><a href="/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
 </ul>
 
 <!--|--------------END------------------------------|
@@ -107,5 +108,9 @@ function footer () {
 <!--JavaScript at end of body for optimized loading-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
         integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 <?php
 }

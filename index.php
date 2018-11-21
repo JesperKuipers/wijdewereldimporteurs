@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include "functions.php" ?>
+    <?php include ".php/functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -15,10 +15,6 @@
     <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
-    |--------insert-code-here-----------------------|
-    |-----------------------------------------------|-->
-
-<!--|-----------BEGINNING---------------------------|
     |----------Catergories--------------------------|
     |-----------------------------------------------|-->
 
@@ -27,7 +23,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Novelty" src="images/chog-frog.png" height="213">
+                    <img href="/products/overview.php?category=Novelty" src="images (temp)/chog-frog.png" height="213">
                 </div>
                 <div class="card-content card-action center">
                     <a class="light_grey_color center" href="/products/overview.php?category=Novelty">Novelty Items</a>
@@ -39,7 +35,7 @@
         <div class="col s10 m3 light_grey_color">
             <div class="card">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Clothing" src="images/alien-officer.png" width="140" height="213">
+                    <img href="/products/overview.php?category=Clothing" src="images (temp)/alien-officer.png" width="140" height="213">
                 </div>
                 <div class="card-content card-action center">
                     <a class="light_grey_color" href="/products/overview.php?category=Clothing">Clothes</a>
@@ -51,7 +47,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Packaging Materials" src="images/bubblewarp.png" height="213">
+                    <img href="/products/overview.php?category=Packaging Materials" src="images (temp)/bubblewarp.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=Packaging Materials">Packaging Materials</a>
@@ -63,7 +59,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Mugs" src="images/mokk.png" height="213">
+                    <img href="/products/overview.php?category=Mugs" src="images (temp)/mokk.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=Mugs">Mugs</a>
@@ -77,7 +73,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=T-Shirts" src="images/The-gu.png" height="213">
+                    <img href="/products/overview.php?category=T-Shirts" src="images (temp)/The-gu.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=T-Shirts">T-shirts</a>
@@ -90,7 +86,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="/images/haaislippers.png" height="213">
+                    <img href="#" src="/images%20(temp)/haaislippers.png" height="213">
                 </div>
                 <div class="card-content card-action center">
                     <a class="light_grey_color" href="/products/overview.php?category=Furry Footwear">Furry Footwear</a>
@@ -102,7 +98,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="/images/sushi.png" height="213">
+                    <img href="#" src="/images%20(temp)/sushi.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=USB Novelties">USB Novelties</a>
@@ -114,7 +110,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="/images/periscope-office-nov.png" height="213">
+                    <img href="#" src="/images%20(temp)/periscope-office-nov.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=Computing Novelties">Computing Novelties</a>
@@ -129,7 +125,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="/images/toys-cat.png" height="213">
+                    <img href="#" src="/images%20(temp)/toys-cat.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=Toys">Toys</a>
@@ -145,9 +141,6 @@
     |-----------Catergories-------------------------|
     |-----------------------------------------------|-->
 
-<!--|-----------BEGINNING---------------------------|
-    |------------Footer-----------------------------|
-    |-----------------------------------------------|-->
 
     <!--Import footer-->
     <?php footer() ?>
