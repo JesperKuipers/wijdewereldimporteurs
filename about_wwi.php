@@ -78,8 +78,7 @@ if (isset($_POST['submit'])) {
                     <a class="dark_grey_color center"><b> Contact WWI</b></a><br>
                 </div>
                 <div class="card-action center text card_tekst">
-                    <a class="light_grey_color text">If you would like to contact Wide World Importers, fill the form below in.<br></a>
-                    <a class="dark_grey_color text"><b>
+                    <p class="light_grey_color text">If you would like to contact Wide World Importers, fill the form below in.</p><br/>
 
                         <form method="post">
                             Name:
@@ -91,13 +90,11 @@ if (isset($_POST['submit'])) {
                             Message:
                             <textarea rows="8" type="text" name="message" required class="center expandable_textbox outline_color_dark_blue" placeholder="Your message..." size="50"></textarea><br><br>
                             <div id="recaptcha">
-                                <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
+                                <div class="g-recaptcha" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
                             </div><br>
                             <button class="btn disabled waves-effect waves-light dark_blue_color_backround btn" type="submit" id="submit_button" name="submit">Send</button>
                             <button class="btn waves-effect waves-light dark_blue_color_backround btn" type="reset">Reset</button>
                         </form>
-                        </b>
-                    </a>
                 </div>
             </div>
         </div>

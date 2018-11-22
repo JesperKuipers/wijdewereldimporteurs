@@ -1,82 +1,129 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-          integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
-    <!--Import main.css-->
-    <link type="text/css" rel="stylesheet" href="css/main.css"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
+<?php
+require 'database_connectie.php';
 
-<body>
+try {
+$db = db_connect();
 
-<!--|-----------BEGINNING---------------------------|
-    |--------navigation---bar-----------------------|
-    |-----------------------------------------------|-->
+$productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+$sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+$tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
 
-<!--|-------Nav-bar-en-rechter-icons----------------|-->
-<nav>
-    <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%"
-                                                               alt="Image"></i></a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
-            <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-        </ul>
-
-        <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar" method="post" action="zoekbalk.php">
-            <div class="input-field center searchDiv">
-                <input id="search" name="search" type="search" placeholder="Search for products" class="searchbar" required>
-                <label class="label-icon material-icons" for="search"><i>search</i></label>
-                <i class="material-icons">close</i>
-            </div>
-        </form>
-
-        <!--|--------------Mobile-menu----------------------|-->
-    </div>
-</nav>
-<ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
-    <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-    <!--todo: search balk hierin -->
-</ul>
-
-<!--|--------------END------------------------------|
-    |--------navigation---bar-----------------------|
-    |-----------------------------------------------|-->
-
-<!-- class="content" is nodig voor sticky footer -->
-<div class="center content">
-    <?php
-    require 'database_connectie.php';
-
-    try {
-    $db = db_connect();
-
-    $productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-    $sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-    $tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-
-    $searchbar = "%" . $_POST['search'] . "%";
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-    $stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
+$searchbar = "%" . $_POST['search'] . "%";
+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+$stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
 FROM stockitems i
 JOIN stockitemstockgroups ig
 ON i.Stockitemid = ig.StockitemID
 JOIN stockgroups g
 ON ig.stockgroupid = g.stockgroupid
 WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LIKE :search");
-    $stmt->bindParam('search', $searchbar);
-    $stmt->execute();
-    $result = $stmt->fetchAll();
+$stmt->bindParam('search', $searchbar);
+$stmt->execute();
+$result = $stmt->fetchAll();
 
-    ?>
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--Include functions.php for lay-out-->
+    <?php require "functions.php" ?>
+
+    <!--Import basic imports-->
+    <?php imports() ?>
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+            init();
+        });
+
+        function init() {
+            $('.pagination').remove();
+            var show_per_page = $('#productsPerPage').val();
+            var number_of_items = $('.products').children('.product').length;
+            var number_of_pages = Math.ceil(number_of_items / show_per_page);
+
+            $('.content').append('<ul class="pagination"></ul><input id=current_page type=hidden><input id=show_per_page type=hidden>');
+            $('#current_page').val(0);
+            $('#show_per_page').val(show_per_page);
+
+            var navigation_html = '<li class="waves-effect" onclick="previous()"><a href="#!"><i class="material-icons">chevron_left</i></a></li></li>';
+            var current_link = 0;
+            while (number_of_pages > current_link) {
+                navigation_html += '<li class="page" onclick="go_to_page(' + current_link + ')" longdesc="' + current_link + '"><a href="#!">' + (current_link + 1) + '</a></li>';
+                current_link++;
+            }
+            navigation_html += '<li class="waves-effect" onclick="next()"><a href="#!"><i class="material-icons">chevron_right</i></a></li>';
+
+            $('.pagination').html(navigation_html);
+            $('.pagination .page:first').addClass('active blue darken-1');
+
+            $('.products').css('display', 'none');
+            $('.products').slice(0, show_per_page / 4).css('display', 'block');
+        }
+
+        function go_to_page(page_num) {
+            var show_per_page = parseInt($('#show_per_page').val(), 0);
+
+            start_from = page_num * (show_per_page / 4);
+
+            end_on = start_from + (show_per_page / 4);
+
+            $('.products').css('display', 'none').slice(start_from, end_on).css('display', 'block');
+
+            $('.page[longdesc=' + page_num + ']').addClass('active blue darken-1').siblings('.active').removeClass('active blue darken-1');
+
+            $('#current_page').val(page_num);
+        }
+
+
+        function previous() {
+
+            new_page = parseInt($('#current_page').val(), 0) - 1;
+            //if there is an item before the current active link run the function
+            if ($('.active').prev('.page').length == true) {
+                go_to_page(new_page);
+            }
+
+        }
+
+        function next() {
+            new_page = parseInt($('#current_page').val(), 0) + 1;
+            //if there is an item after the current active link run the function
+            if ($('.active').next('.page').length == true) {
+                go_to_page(new_page);
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+<!--Import navbar-->
+<?php navbar() ?>
+
+<!--|--------------END------------------------------|
+    |--------navigation---bar-----------------------|
+    |-----------------------------------------------|-->
+
+<!-- class="content" is nodig voor sticky footer -->
+
+
+<div class="container content">
+    <br/>
+    <div class="row">
+        <div class="input-field col s3">
+            <select onchange="init()" id="productsPerPage">
+                <option value="8">8</option>
+                <option value="16" selected>16</option>
+                <option value="32">32</option>
+                <option value="64">64</option>
+            </select>
+            <label>Aantal producten weergeven</label>
+        </div>
+    </div>
     <?php
     $i = 0;
     foreach ($result as $item) {
@@ -120,33 +167,6 @@ WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LI
 
 
 
-<!--|-----------BEGINNING---------------------------|
-    |------------Footer-----------------------------|
-    |-----------------------------------------------|-->
-
-<footer class="page-footer blue-grey darken-3 sticky-footer">
-    <div class="container">
-        <div class="row center">
-
-            <a class="blue_color" href="Over WWI.html">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
-
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container center">
-            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
-                3</p></a>
-        </div>
-    </div>
-</footer>
-
-<!--|--------------END------------------------------|
-    |-------------Footer----------------------------|
-    |-----------------------------------------------|-->
-
-<!--JavaScript at end of body for optimized loading-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-        integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
+<?php footer() ?>
 </body>
 </html>

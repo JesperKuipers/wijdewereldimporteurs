@@ -61,7 +61,7 @@
 
 
 <!-- class="content" is nodig voor sticky footer -->
-<div class="center content">
+<form class="center content" method="POST" action="payment.php">
     <?php
     require '../query.php';
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
@@ -92,12 +92,14 @@
                                     Quantity: <input class="browser-default"
                                                      onchange="changequantity(this.value, <?= $item['StockItemID'] ?>)"
                                                      type="number" value="<?= $items['item_quantity'] ?>"/>
-                                    <i class="material-icons" style="cursor: pointer" onclick="removeproduct(<?= $item['StockItemID']?>)">remove_shopping_cart</i>
+                                    <i class="material-icons" style="cursor: pointer"
+                                       onclick="removeproduct(<?= $item['StockItemID'] ?>)">remove_shopping_cart</i>
                                 </p>
                             </li>
                         <?php }
                     }
-                } ?>
+                }
+                if (isset($totalquantity) && isset($totalprice) && $totalquantity != 0 && $totalprice != 0) { ?>
                 <li class="collection-item avatar" style="text-align: left;">
                     <p>Total quantity<br/>Subtotal</p>
                     <div class="secondary-content">
@@ -105,15 +107,20 @@
                         &euro; <?= $totalprice ?>
                     </div>
                 </li>
+                <?php } else {
+                    echo '<li class="collection-item"><h2>Shoppingbasket is empty</h2></li>';
+                }?>
             </ul>
         </div>
+        <?php if (isset($totalquantity) && isset($totalprice) && $totalquantity != 0 && $totalprice != 0) { ?>
         <div class="row">
             <button class="btn waves-effect waves-light blue darken-1" style="float: right;" type="submit">Bestellen
             </button>
         </div>
-    </div>
-</div>
+        <?php } ?>
 
+    </div>
+</form>
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|
     |-----------------------------------------------|-->
