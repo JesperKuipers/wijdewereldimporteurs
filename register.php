@@ -115,7 +115,7 @@ if(isset($_POST['registerbutton'])){
     //I'm just going to kill the script completely, as error handling is outside
     //the scope of this tutorial.
     if($row['cus'] > 0){
-        die('That username already exists!');
+        die("<script type='text/javascript'>alert('That username already exists')</script>");
     }
     
     //Hash the password as we do NOT want to store our passwords in plain text.

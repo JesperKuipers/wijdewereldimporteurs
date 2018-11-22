@@ -47,7 +47,6 @@
 <ul class="sidenav" id="mobile-demo">
     <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-    <!--todo: search balk hierin -->
 </ul>
 
 <!--|--------------END------------------------------|
@@ -57,7 +56,7 @@
 <!-- class="content" is nodig voor sticky footer -->
 <div class="container-login center content">
     <p><b>Please log into your account</b></p>
-    <form method="POST" name="login" action="loginprocess.php">
+    <form method="POST" name="login" id="login">
         <b>Username: </b><input type="email" name="email" class="logininput" placeholder="Enter your E-Mail"
                                 onfocus="this.placeholder=''" onblur="this.placeholder='Enter your E-Mail'"
                                 required><br>
@@ -67,6 +66,31 @@
         <label style="float: bottom;">
             <a class="forgotpassword" href="passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
+        <?php
+    
+        $db = db_connect();
+        $stmt = $db->prepare('SELECT * FROM registered_users WHERE email=:email');
+        $stmt->execute(array(":email" => $email));
+        $row=$stmt->fetch();
+        if(isset($_POST['loginbutton'])) {
+            if($stmt->rowCount() > 0) {
+                if(password_verify($password, $row['password'])) {
+                    session_regenerate_id();
+                    $_SESSION["authorised"] = TRUE;
+                    $_SESSION["email"] = $row['email'];
+                    $_SESSION["password"] = $row['password'];
+                    session_write_close();
+                }else{
+                    ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
+                    <?php
+                }
+            }else{
+                ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
+                <?php
+            }
+        }
+    
+        ?>
         <br>
         <button type="submit" name="loginbutton" class="btnlogin s12 btn btn-large waves-effect">Login</button>
     </form>
@@ -77,9 +101,7 @@
     </form>
 </div>
 
-<?php
 
-?>
 
 <!--|-----------BEGINNING---------------------------|
     |------------Footer-----------------------------|

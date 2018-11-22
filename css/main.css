@@ -140,3 +140,9 @@ body {
 .btnpassreset:hover{
     background-color: blue;
 }
+
+.loginerror{
+    font-size: 10pt;
+    text-align: center;
+    color: red;
+}
