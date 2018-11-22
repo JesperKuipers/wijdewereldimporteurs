@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php session_start();?>
+    <?php session_start(); ?>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -12,7 +12,7 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <?php include 'database_connectie.php';
-    include 'functions.php';?>
+    include 'functions.php'; ?>
 </head>
 
 <body>
@@ -28,8 +28,11 @@
                                                                alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
-            <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
+            <?php if(isset($_SESSION['authorised'])) { ?>
+                <li><a href="register.php"><i class="material-icons">person</i></a></li>
+            <?php } else { ?>
+                <li><a href="index.html"><i class="material-icons">person</i></a></li>
+            <?php } ?>
         </ul>
 
         <!--|---------------Search-bar----------------------|-->
@@ -45,7 +48,7 @@
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
+
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
 </ul>
 
@@ -67,11 +70,11 @@
             <a class="forgotpassword" href="passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
         <?php
-    
+        
         $db = db_connect();
         $stmt = $db->prepare('SELECT * FROM registered_users WHERE email=:email');
         $stmt->execute(array(":email" => $email));
-        $row=$stmt->fetch();
+        $row = $stmt->fetch();
         if(isset($_POST['loginbutton'])) {
             if($stmt->rowCount() > 0) {
                 if(password_verify($password, $row['password'])) {
@@ -80,16 +83,16 @@
                     $_SESSION["email"] = $row['email'];
                     $_SESSION["password"] = $row['password'];
                     session_write_close();
-                }else{
+                } else {
                     ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                     <?php
                 }
-            }else{
+            } else {
                 ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                 <?php
             }
         }
-    
+        
         ?>
         <br>
         <button type="submit" name="loginbutton" class="btnlogin s12 btn btn-large waves-effect">Login</button>
@@ -100,7 +103,6 @@
         </label>
     </form>
 </div>
-
 
 
 <!--|-----------BEGINNING---------------------------|
