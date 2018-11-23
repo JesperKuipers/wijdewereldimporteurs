@@ -13,16 +13,36 @@ body {
     margin-left: 10em;
 }
 
-.blue_color {
+.light_blue_color {
     color: #ACDEF5 !important;
+}
+
+.dark_blue_color {
+    color: #1e88e5 !important;
+}
+
+.dark_blue_color_backround {
+    background-color: #1e88e5 !important;
+}
+
+.outline_color_dark_blue {
+    border-color: #1e88e5 !important;
 }
 
 .light_grey_color {
     color: #797979 !important;
 }
-.searchDiv{
-    width: 400px;
+.input-field{
+     width: 500px;
  }
+
+.dark_grey_color {
+    color: #37474f !important;
+}
+
+.searchDiv{
+    width: 500px;
+}
 
 .searchDiv:hover{
     background-color: black;
@@ -44,7 +64,26 @@ body {
 }
 
 .text {
-    transform: unset !important;
+    text-transform: unset !important;
+}
+
+.card_tekst {
+    padding: 5px 24px !important;
+}
+
+.card_line_remover {
+    padding: 1px 24px !important;
+    border-top: none !important;
+}
+
+.expandable_textbox {
+    resize: vertical;
+    height: auto;
+}
+
+#recaptcha {
+    width: 304px;
+    margin: 0 auto;
 }
 
 .container-login {
@@ -146,3 +185,20 @@ body {
     text-align: center;
     color: red;
 }
+
+.container-account {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 800px;
+}
+
+.logoutbtn{
+    background-color: dodgerblue;
+    width: 200px;
+    text-align: center !important;
+}
+
+.logoutbtn:hover {
+    background-color: blue;
+}
+

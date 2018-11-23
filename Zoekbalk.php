@@ -1,18 +1,36 @@
 <?php
-require '../query.php';
+require 'database_connectie.php';
 
-$result = getByCategoryName($_GET['category']);
+try {
+$db = db_connect();
+
+$productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+$sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+$tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+
+$searchbar = "%" . $_POST['search'] . "%";
+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+$stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
+FROM stockitems i
+JOIN stockitemstockgroups ig
+ON i.Stockitemid = ig.StockitemID
+JOIN stockgroups g
+ON ig.stockgroupid = g.stockgroupid
+WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LIKE :search");
+$stmt->bindParam('search', $searchbar);
+$stmt->execute();
+$result = $stmt->fetchAll();
+
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ?>
+    <?php require "functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
-
-    <!-- pagination wordt hieronder geconfigureerd -->
     <script>
         $(document).ready(function () {
             $('select').formSelect();
@@ -78,44 +96,20 @@ $result = getByCategoryName($_GET['category']);
 
         }
 
-        function setFilter() {
-            var url = window.location.toString();
-            if (url.indexOf("&tags[]") > 0) {
-                console.log('klopt');
-                url = url.substring(0, url.indexOf("&tags[]"));
-            }
-            var tags = $("#selectFilter").val();
-            url = url.replace('#!', '');
-            $(tags).each(function (val, key) {
-                url += "&tags[]=" + key;
-            });
-            document.location = url;
-        }
     </script>
 </head>
+
 <body>
-<?php
 
+<!--Import navbar-->
+<?php navbar() ?>
 
-if (isset($_GET['tags'])) {
-    $resultWithTags = [];
-    foreach ($result as $key => $value) {
-        foreach ($_GET['tags'] as $urlTags) {
-            if (in_array($urlTags, json_decode($value['tags']))) {
-                $resultWithTags[] = $value;
-            }
-        }
-
-    }
-}
-?>
-
-    <!--Import navbar-->
-    <?php navbar() ?>
-
-<!--|-----------BEGINNING---------------------------|
-    |----------Producten--------------------------|
+<!--|--------------END------------------------------|
+    |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
+
+<!-- class="content" is nodig voor sticky footer -->
+
 
 <div class="container content">
     <br/>
@@ -129,31 +123,9 @@ if (isset($_GET['tags'])) {
             </select>
             <label>Aantal producten weergeven</label>
         </div>
-        <div class="input-field col s5 offset-s4">
-            <select id="selectFilter" multiple>
-                <?php
-                $list = array();
-                foreach ($result as $value) {
-                    foreach (json_decode($value['tags']) as $tags) {
-                        if (!in_array($tags, $list)) {
-                            ?>
-                            <option <?= isset($_GET['tags']) && in_array($tags, $_GET['tags']) ? 'selected' : '' ?>><?= $tags ?></option>
-                            <?php
-                        }
-                        array_push($list, $tags);
-                    }
-
-                } ?>
-            </select>
-            <label>Producten filteren</label>
-            <a class="waves-effect waves-light btn-small blue darken-1" onclick="setFilter()">Filteren</a>
-        </div>
     </div>
     <?php
-
     $i = 0;
-
-    $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
     foreach ($result as $item) {
     if ($i == 0) {
     ?>
@@ -170,12 +142,11 @@ if (isset($_GET['tags'])) {
         $i++;
         ?>
 
-
         <div class="col s10 m3 product">
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
-                    <div class="card-image">
-                        <img src="../images/no-image.jpg"/>
+                        <div class="card-image">
+                        <img src="images/no-image.jpg"/>
                     </div>
                     <div class="card-content card-action center">
                         <?= $item['StockItemName'] ?>
@@ -187,12 +158,15 @@ if (isset($_GET['tags'])) {
     </div>
 </div>
 
-<!--|--------------END------------------------------|
-    |-----------Producten-------------------------|
-    |-----------------------------------------------|-->
+<?php
+} catch (PDOException $e) {
+    echo 'Connection Failed ' . $e->getMessage();
+}
+?>
 
-    <!--Import footer-->
-    <?php footer() ?>
 
+
+
+<?php footer() ?>
 </body>
 </html>

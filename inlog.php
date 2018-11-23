@@ -1,59 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php session_start(); ?>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-          integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
-    <!--Import main.css-->
-    <link type="text/css" rel="stylesheet" href="css/main.css"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <?php include 'database_connectie.php';
-    include 'functions.php'; ?>
+    <?php require "functions.php";
+    include 'database_connectie.php';
+    ob_start();
+    imports() ?>
 </head>
 
 <body>
 
+<!--|-------Nav-bar----------------|-->
+<?php navbar() ?>
+
 <!--|-----------BEGINNING---------------------------|
-    |--------navigation---bar-----------------------|
-    |-----------------------------------------------|-->
-
-<!--|-------Nav-bar-en-rechter-icons----------------|-->
-<nav>
-    <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%"
-                                                               alt="Image"></i></a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <?php if(isset($_SESSION['authorised'])) { ?>
-                <li><a href="register.php"><i class="material-icons">person</i></a></li>
-            <?php } else { ?>
-                <li><a href="index.html"><i class="material-icons">person</i></a></li>
-            <?php } ?>
-        </ul>
-
-        <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
-            <div class="input-field center searchDiv">
-                <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
-                <label class="label-icon material-icons" for="search"><i>search</i></label>
-                <i class="material-icons">close</i>
-            </div>
-        </form>
-
-        <!--|--------------Mobile-menu----------------------|-->
-    </div>
-</nav>
-<ul class="sidenav" id="mobile-demo">
-
-    <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-</ul>
-
-<!--|--------------END------------------------------|
-    |--------navigation---bar-----------------------|
+    |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
 <!-- class="content" is nodig voor sticky footer -->
@@ -80,9 +40,13 @@
                 if(password_verify($password, $row['password'])) {
                     session_regenerate_id();
                     $_SESSION["authorised"] = TRUE;
+                    $_SESSION['loggedin'] = TRUE;
                     $_SESSION["email"] = $row['email'];
                     $_SESSION["password"] = $row['password'];
+                    $_SESSION["first_name"] = $row['first_name'];
+                    $_SESSION["last_name"] = $row['last_name'];
                     session_write_close();
+                    header('location: account.php');
                 } else {
                     ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                     <?php
@@ -92,7 +56,6 @@
                 <?php
             }
         }
-        
         ?>
         <br>
         <button type="submit" name="loginbutton" class="btnlogin s12 btn btn-large waves-effect">Login</button>
@@ -109,23 +72,8 @@
     |------------Footer-----------------------------|
     |-----------------------------------------------|-->
 
-
-<footer class="page-footer blue-grey darken-3 sticky-footer">
-    <div class="container">
-        <div class="row center">
-
-            <a class="blue_color" href="over%20wwi.html">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
-
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container center">
-            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
-                3</p></a>
-        </div>
-    </div>
-</footer>
+<!--Import footer-->
+<?php footer() ?>
 
 <!--|--------------END------------------------------|
     |-------------Footer----------------------------|
