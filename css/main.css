@@ -81,11 +81,6 @@ body {
     height: auto;
 }
 
-#recaptcha {
-    width: 304px;
-    margin: 0 auto;
-}
-
 .container-login {
     margin: 0 auto;
     max-width: 1280px;
@@ -149,13 +144,13 @@ body {
     margin-left: 50px !important;
 }
 
-.required{
+.required {
     color: red;
 }
 
-#recaptcha{
+#recaptcha {
     width: 304px;
-    margin: 0 auto;
+    margin: auto;
 }
 
 .container-passwordforgot {
