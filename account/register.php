@@ -43,13 +43,12 @@ if (isset($_POST['submit'])) {
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-    <div class="container content center">
-        <h1><b class="createwwi">Create your WWI account</b></h1>
+    <div class="container center content ">
         <div class="row" id="scroll">
             <div class="col s22 m5">
                 <div class="card">
                     <div class="card-action text center">
-                        <a class="dark_grey_color"><b>Continue without registration</b></a><br>
+                        <a class="dark_grey_color"><b>Create your WWI account</b></a><br>
                     </div>
                     <div class="card-action left text card_tekst">
                         <form method="POST" class="registerinput left">
@@ -65,40 +64,20 @@ if (isset($_POST['submit'])) {
                             <b>Postal Code: </b><input type="text" name="postalcode" id="postalcode" class="rinputs" required >
                             <span class="required"></span><br><br>
                             <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
-                            <button type="submit" name="registerbutton" id="submit_button" class="spatie btnregister s12 btn disabled btn-large waves-effect">Register</button>
+                            <button type="submit" name="registerbutton" id="submit_button" class="btnregister s12 btn disabled btn-large waves-effect">Register</button>
                         </form>
+                        <div>
+                            <label class="alreadyaccount" >
+                                <br>Already have an account?<br>
+                                <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <div class="container-register center content">
-    <h1><b class="createwwi">Create your WWI account</b></h1>
-    <p class="required">* Required Field</p>
-    <form method="POST" class="registerinput">
-        <div class="required"><br></div>
-        <b>First name: </b><input type="text" name="fname" id="fname" class="rinputs" style="margin-left: 41px"><br>
-        <b>Last name: </b><input type="text" name="lname" id="lname" class="rinputs" style="margin-left: 43px"><br>
-        <b>E-Mail: </b><input type="email" name="email" id="email" class="rinputs" required style="margin-left: 75px">
-            <span class="required">*</span><br>
-        <b>Password: </b><input type="password" name="password" id="password" class="rinputs" required style="margin-left: 55px">
-            <span class="required">*</span><br>
-        <b>Address: </b><input type="text" name="address" id="address" class="rinputs" required style="margin-left: 63px">
-            <span class="required">*</span><br>
-        <b>Postal Code: </b><input type="text" name="postalcode" id="postalcode" class="rinputs" required style="margin-left: 39px">
-            <span class="required">*</span><br><br>
-        <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
-        <button type="submit" name="registerbutton" id="submit_button" class="btnregister s12 btn disabled btn-large waves-effect">Register</button>
-    </form>
-    <div>
-        <label class="alreadyaccount" >
-            <br>Already have an account?<br>
-            <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
-        </label>
-    </div>
-</div>
 
 <?php
 
