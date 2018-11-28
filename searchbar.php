@@ -64,7 +64,7 @@ WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LI
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                         <div class="card-image">
-                        <img src="images/no-image.jpg"/>
+                        <img src="images (temp)/no-image.jpg"/>
                     </div>
                     <div class="card-content card-action center">
                         <?= $item['StockItemName'] ?>

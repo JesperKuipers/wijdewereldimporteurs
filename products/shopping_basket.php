@@ -84,7 +84,7 @@
                             $totalquantity = $totalquantity + $items['item_quantity'];
                             ?>
                             <li class="collection-item avatar">
-                                <img src="/images/no-image.jpg" alt="" class="circle">
+                                <img src="/images%20(temp)/no-image.jpg" alt="" class="circle">
                                 <span class="title"><?= $item['StockItemName'] ?></span>
                                 <p>Stock: <?= $item['QuantityOnHand'] ?></p>
                                 <p class="secondary-content" style="text-align: left">

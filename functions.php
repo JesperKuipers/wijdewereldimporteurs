@@ -47,7 +47,7 @@ function navbar()
     <!--|-------Nav-bar-en-rechter-icons----------------|-->
     <nav>
         <div class="nav-wrapper blue-grey darken-3">
-            <a href="/index.php" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%"
+            <a href="/index.php" class="brand-logo center"><i><img src="/images%20(temp)/wwi-logo.png" width="70%"
                                                                    alt="Image"></i></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">

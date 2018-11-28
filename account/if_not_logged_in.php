@@ -24,21 +24,21 @@
 
                 </div>
                 <div class="card-action text center">
-                    <a class="dark_grey_color"><b>Continue without registration</b></a><br>
+                    <a class="dark_grey_color">Continue without registration</a><br>
                 </div>
                 <div class="card-action left text card_tekst">
                     <div method="POST" class="registerinput left">
                     <form>
                         <div class="required"><br></div>
-                            <b>First name: </b><input type="text" name="fname" id="fname" class="rinputs" ><br>
-                            <b>Last name: </b><input type="text" name="lname" id="lname" class="rinputs" ><br>
-                            <b>E-Mail: </b><input type="email" name="email" id="email" class="rinputs" required >
+                            First name: <input type="text" name="fname" id="fname" class="rinputs" ><br>
+                            Last name: <input type="text" name="lname" id="lname" class="rinputs" ><br>
+                            E-Mail: <input type="email" name="email" id="email" class="rinputs" required >
                             <span class="required"></span><br>
-                            <b>Password: </b><input type="password" name="password" id="password" class="rinputs" required >
+                            Password: <input type="password" name="password" id="password" class="rinputs" required >
                             <span class="required"></span><br>
-                            <b>Address: </b><input type="text" name="address" id="address" class="rinputs" required >
+                            Address: <input type="text" name="address" id="address" class="rinputs" required >
                             <span class="required"></span><br>
-                            <b>Postal Code: </b><input type="text" name="postalcode" id="postalcode" class="rinputs" required >
+                            Postal Code: <input type="text" name="postalcode" id="postalcode" class="rinputs" required >
                             <span class="required"></span><br><br>
                             <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
                             <button type="submit" name="registerbutton" id="submit_button" class="btnregister s12 btn disabled btn-large waves-effect">Register</button>

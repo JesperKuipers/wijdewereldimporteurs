@@ -176,7 +176,7 @@ if (isset($_GET['tags'])) {
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                     <div class="card-image">
-                        <img src="../images/no-image.jpg"/>
+                        <img src="../images%20(temp)/no-image.jpg"/>
                     </div>
                     <div class="card-content card-action center">
                         <?= $item['StockItemName'] ?>
