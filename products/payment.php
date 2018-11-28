@@ -1,3 +1,7 @@
 <?php
+session_start();
 
-echo 'wat gaaf';
+if (isset($_SESSION['authorised']) && $_SESSION['authorised'] == true){
+    echo 'wat gaaf';
+}
+

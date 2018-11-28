@@ -26,7 +26,7 @@
         <b>Password:</b> <input type="password" name="password" id="password" class="logininput"
                                 placeholder="Enter your password" onfocus="this.placeholder=''"
                                 onblur="this.placeholder='Enter your password'" required style="margin-left:4px;"><br>
-        <label style="float: bottom;">
+        <label hidden style="float: bottom;">
             <a class="forgotpassword" href="passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
         <?php
@@ -41,12 +41,15 @@
                     session_regenerate_id();
                     $_SESSION["authorised"] = TRUE;
                     $_SESSION['loggedin'] = TRUE;
+                    $_SESSION['customerid'] = $row['customerid'];
                     $_SESSION["email"] = $row['email'];
                     $_SESSION["password"] = $row['password'];
                     $_SESSION["first_name"] = $row['first_name'];
                     $_SESSION["last_name"] = $row['last_name'];
+                    $_SESSION["address"] = $row['address'];
+                    $_SESSION["postal_code"] = $row['postal_code'];
                     session_write_close();
-                    header('location: account.php');
+                    header('location: /account.php');
                 } else {
                     ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                     <?php

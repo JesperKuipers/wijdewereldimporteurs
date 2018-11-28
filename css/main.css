@@ -81,11 +81,6 @@ body {
     height: auto;
 }
 
-#recaptcha {
-    width: 304px;
-    margin: 0 auto;
-}
-
 .container-login {
     margin: 0 auto;
     max-width: 1280px;
@@ -149,13 +144,13 @@ body {
     margin-left: 50px !important;
 }
 
-.required{
+.required {
     color: red;
 }
 
-#recaptcha{
+#recaptcha {
     width: 304px;
-    margin: 0 auto;
+    margin: auto;
 }
 
 .container-passwordforgot {
@@ -195,10 +190,59 @@ body {
 .logoutbtn{
     background-color: dodgerblue;
     width: 200px;
+    margin-top: 10px;
     text-align: center !important;
 }
 
 .logoutbtn:hover {
+    background-color: blue;
+}
+
+.container-accountinfo {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 640px;
+}
+
+.changeaccountbtn{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.changeaccountbtn:hover {
+    background-color: blue;
+}
+
+.container-changeaccount {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 700px;
+}
+
+.changeaccountinput{
+    width: 350px !important;
+    background-color: lightblue !important;
+    text-align: center !important;
+}
+
+.btnupdateaccount{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.btnupdateaccount:hover {
+    background-color: blue;
+}
+
+.btnreturnaccount{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.btnreturnaccount:hover {
     background-color: blue;
 }
 
