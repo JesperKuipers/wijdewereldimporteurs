@@ -14,23 +14,15 @@
 <body>
 <?php navbar() ?>
 <div class="center content">
-    <li class="collection-item avatar">
-        <img src="/images/no-image.jpg" alt="" class="circle">
-        <span class="title"><?= $item['StockItemName'] ?></span>
-        <p>Stock: <?= $date['Orderdate'] ?></p>
-        <p class="secondary-content">
-            Quantity: <input class="browser-default"
-                             onchange="changequantity(this.value, <?= $item['StockItemID'] ?>)"
-                             type="number" value="<?= $items['item_quantity'] ?>"/>
-        </p>
+    <li>
     </li>
     <p><b>insert </b></p>
     <?php $db = db_connect();
-    $stmt = $db->prepare("SELECT o.orderid, o.orderdate, o.customerid, ol.orderid, ol.description
-    FROM orders o Join orderlines ol
-    ON o.orderid = ol.orderid
-    GROUP BY ol.orderid
-    ORDER BY o.orderdate")
+    $stmt = $db->prepare("SELECT o.OrderID, SUM(ol.Quantity*ol.UnitPrice), OrderDate, Description, customerid
+FROM orders o JOIN orderlines ol
+ON o.orderid = ol.orderid
+GROUP BY OrderID
+HAVING customerID = 2")
     ?>
 
 
