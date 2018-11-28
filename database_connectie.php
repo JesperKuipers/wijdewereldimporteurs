@@ -14,15 +14,15 @@ function db_connect()
     aanroepen van de connectie kan op de volgende manier:
     $db = db_connect();
     --------------------------------------------------
-    select
+
+    ------------------------------------------------select
     $stmt = $db->query("SELECT ID,mail FROM user");
                                 while($rij = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                                   $id = $rij['ID'];
                                   $mail = $rij['mail'];
                                   echo ("<tr><td>$id</td><td>$mail</td></tr>");
-                                }
-    --------------------------------------------------
+                                }--
     --------------------------------------------------
     insert
     $statement = $db->prepare("INSERT INTO tabel(item1,item2)

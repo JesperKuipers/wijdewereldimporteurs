@@ -16,7 +16,7 @@ function getByCategoryName(string $category)
 {
     $pdo = db_connect();
     $stmt = $pdo->prepare
-    ('SELECT i.StockItemID, StockItemName, StockGroupName, tags
+    ('SELECT i.StockItemID, StockItemName, StockGroupName, tags, i.photo
 FROM stockitems i
 JOIN stockitemstockgroups ig
 ON i.Stockitemid = ig.StockitemID

@@ -3,7 +3,7 @@
 <head>
     <!--Include functions.php for lay-out-->
     <?php require "../functions.php" ?>
-
+    <?php include '../query.php';?>
     <!--Import basic imports-->
     <?php imports() ?>
 
@@ -30,9 +30,8 @@
     |-----------------------------------------------|-->
 
 <div class="container content">
-    <?php
-    require '../query.php';
 
+<?php
     $result = getByItemId($_GET['itemId']);
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
     $cart_data = json_decode($cookie_data, true);
@@ -46,9 +45,95 @@
         $CountryOfManufacture = explode(',', $customFields)[0];
     }
     ?>
+    <?php
+    $db = db_connect();
+    $img = $db->prepare("SELECT photo FROM stockitems WHERE StockItemId = :StockItemId;");
+    $img->bindParam('StockItemId', $result['StockItemID']);
+
+    $img->execute();
+    $data = $img->fetch();
+    ?>
     <div class="row">
         <div class="col s14 m6">
-            <img src="/images/no-image.jpg" width="500"/>
+            <!-- Slideshow container -->
+            <div class="slideshow-container">
+
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <?= '<img src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:100%">'; ?>
+                    <div class="text">frontal view</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <?= '<img src="/images/mokk.png" style="width:100%">'; ?>
+                    <div class="text">back view</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <?= '<img src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:100%">'; ?>
+                    <div class="text">side view</div>
+                </div>
+
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+
+            <!-- The pics ( ͡° ͜ʖ ͡°)-->
+            <div class="w3-row-padding w3-section">
+                <div class="col s14 m6">
+                    <div class="pic_small">
+                        <?= '<img class="picture_small" src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:20%;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
+                        <?= '<img class="picture_small" src="/images/mokk.png" style="width:20%;cursor:pointer;text-align: center" onclick="currentSlide(2)">'; ?>
+                        <?= '<img class="picture_small" src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:20%;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                var images = document.querySelectorAll(".picture_small");
+
+                images.forEach(function(i) {i.addEventListener("click", function(event) {
+                    i.classList.toggle("selected");
+                })});
+            </script>
+            <?php
+// if statement???
+            ?>
+            <script>
+                var slideIndex = 1;
+                showSlides(slideIndex);
+
+                // Next/previous controls
+                function plusSlides(n) {
+                    showSlides(slideIndex += n);
+                }
+
+                // Thumbnail image controls
+                function currentSlide(n) {
+                    showSlides(slideIndex = n);
+                }
+
+                function showSlides(n) {
+                    var i;
+                    var slides = document.getElementsByClassName("mySlides");
+                    var dots = document.getElementsByClassName("dot");
+                    if (n > slides.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = slides.length}
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                    }
+                    for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                    }
+                    slides[slideIndex-1].style.display = "block";
+                    dots[slideIndex-1].className += " active";
+                }
+            </script>
         </div>
         <div class="col s14 m6">
             <form method="POST" action="shoppingbasketcookie.php">

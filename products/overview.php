@@ -154,7 +154,9 @@ if (isset($_GET['tags'])) {
     $i = 0;
 
     $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
+
     foreach ($result as $item) {
+        $image = isset($item['photo']) ? '<img src="data:image/jpeg;base64,'.base64_encode($item['photo']).'" alt="photo" style="width:100%">': '<img src="../images/no-image.jpg" alt="photo" style="width:100%">';
     if ($i == 0) {
     ?>
     <div class="row products">
@@ -175,7 +177,7 @@ if (isset($_GET['tags'])) {
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                     <div class="card-image">
-                        <img src="../images/no-image.jpg"/>
+                       <?= $image ?>
                     </div>
                     <div class="card-content card-action center">
                         <?= $item['StockItemName'] ?>
