@@ -48,7 +48,7 @@
     ?>
     <div class="row">
         <div class="col s14 m6">
-            <img src="/images/no-image.jpg" width="500"/>
+            <img src="/images%20(temp)/no-image.jpg" width="500"/>
         </div>
         <div class="col s14 m6">
             <form method="POST" action="shoppingbasketcookie.php">
