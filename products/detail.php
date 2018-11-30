@@ -2,8 +2,8 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ?>
-    <?php include '../query.php';?>
+    <?php include "../functions.php" ?>
+    <?php include '../query.php'; ?>
     <!--Import basic imports-->
     <?php imports() ?>
 
@@ -12,34 +12,35 @@
             $(function () {
                 //initialize all modals
                 $('.modal').modal();
-
                 //now you can open modal from code
                 $('.modal').modal('open');
             })
         </script>
     <?php } ?>
+
 </head>
 
 <body>
 
-    <!--Import navbar-->
-    <?php navbar() ?>
+<!--Import navbar-->
+<?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
 <div class="container content">
-
-<?php
+    <?php
     $result = getByItemId($_GET['itemId']);
-    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cart_data = json_decode($cookie_data, true);
-    $cookieResults = array();
-    foreach ($cart_data as $value) {
-        array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
-    }
 
+    if (isset($_COOKIE['shopping_cart'])) {
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        $cookieResults = array();
+        foreach ($cart_data as $value) {
+            array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+        }
+    }
     if (isset($result['CustomFields'])) {
         $customFields = explode(':', $result['CustomFields'])[1];
         $CountryOfManufacture = explode(',', $customFields)[0];
@@ -57,23 +58,25 @@
         <div class="col s14 m6">
             <!-- Slideshow container -->
             <div class="slideshow-container">
-
+                <?php
+                if()
+                    ?>
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 3</div>
-                    <?= '<img src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">frontal view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">2 / 3</div>
-                    <?= '<img src="/images/mokk.png" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">back view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">3 / 3</div>
-                    <?= '<img src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">side view</div>
                 </div>
 
@@ -83,27 +86,6 @@
             </div>
             <br>
 
-            <!-- The pics ( ͡° ͜ʖ ͡°)-->
-            <div class="w3-row-padding w3-section">
-                <div class="col s14 m6">
-                    <div class="pic_small">
-                        <?= '<img class="picture_small" src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:20%;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
-                        <?= '<img class="picture_small" src="/images/mokk.png" style="width:20%;cursor:pointer;text-align: center" onclick="currentSlide(2)">'; ?>
-                        <?= '<img class="picture_small" src="data:image/jpeg;base64,'.base64_encode($data['photo']).'" alt="photo" style="width:20%;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                var images = document.querySelectorAll(".picture_small");
-
-                images.forEach(function(i) {i.addEventListener("click", function(event) {
-                    i.classList.toggle("selected");
-                })});
-            </script>
-            <?php
-// if statement???
-            ?>
             <script>
                 var slideIndex = 1;
                 showSlides(slideIndex);
@@ -121,17 +103,22 @@
                 function showSlides(n) {
                     var i;
                     var slides = document.getElementsByClassName("mySlides");
-                    var dots = document.getElementsByClassName("dot");
-                    if (n > slides.length) {slideIndex = 1}
-                    if (n < 1) {slideIndex = slides.length}
+                    var prepic = document.getElementsByClassName("picture_small");
+                    if (n > slides.length) {
+                        slideIndex = 1
+                    }
+                    if (n < 1) {
+                        slideIndex = slides.length
+                    }
                     for (i = 0; i < slides.length; i++) {
                         slides[i].style.display = "none";
                     }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
+                    for (i = 0; i < prepic.length; i++) {
+                        prepic[i].className = prepic[i].className.replace(" active", "");
                     }
-                    slides[slideIndex-1].style.display = "block";
-                    dots[slideIndex-1].className += " active";
+                    slides[slideIndex - 1].style.display = "block";
+                    console.log(prepic[slideIndex - 1]);
+                    prepic[slideIndex - 1].className += " active";
                 }
             </script>
         </div>
@@ -180,7 +167,7 @@
                     </tr>
                 </table>
                 <br/>
-                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">In
+                <button class="btn-small waves-effect waves-light blue darken-1"  type="submit">In
                     winkelmandje plaatsen
                 </button>
                 <div class="modal modal-fixed-footer">
@@ -216,20 +203,34 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/winkelmandje.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
+                           class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga
+                            naar
+                            winkelwagentje</a>
                     </div>
                 </div>
         </div>
     </div>
+    <!-- The pics ( ͡° ͜ʖ ͡°)-->
+    <div class="center row">
+        <div class="visible_pic">
+            <div class="pic_small_div">
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">'; ?>
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|
     |-----------------------------------------------|-->
 
-    <!--Import footer-->
-    <?php footer() ?>
+<!--Import footer-->
+<?php footer() ?>
 
 </body>
 </html>

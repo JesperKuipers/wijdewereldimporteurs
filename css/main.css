@@ -81,11 +81,6 @@ body {
     height: auto;
 }
 
-#recaptcha {
-    width: 304px;
-    margin: 0 auto;
-}
-
 .container-login {
     margin: 0 auto;
     max-width: 1280px;
@@ -115,13 +110,17 @@ body {
 .container-register {
     margin: 0 auto;
     max-width: 1280px;
+    width: 800px;
+}
+
+.createwwi{
+    font-size: 16pt;
 }
 
 .rinputs{
-    width: 230px !important;
+    width: 350px !important;
     background-color: lightblue !important;
-    text-align: center;
-
+    text-align: center !important;
 }
 
 .registerinput{
@@ -131,23 +130,55 @@ body {
 .btnregister{
     background-color: dodgerblue;
     width: 200px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center !important;
 }
 
 .btnregister:hover{
     background-color: blue;
 }
 
-.e-mail{
-    width: 600px !important;
-    background-color: lightblue !important;
-    text-align: center;
-}
-
 .alreadyaccount{
     font-size: 12pt;
-    float: bottom;
+    margin-left: 50px !important;
+}
+
+.required {
+    color: red;
+}
+
+#recaptcha {
+    width: 304px;
+    margin: auto;
+}
+
+.container-passwordforgot {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 800px;
+}
+
+.resetpass{
+    font-size: 30px;
+}
+
+.btnpassreset{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center !important;
+}
+
+.btnpassreset:hover{
+    background-color: blue;
+}
+
+.loginerror{
+    font-size: 10pt;
+    text-align: center;
+    color: red;
 }
 
 {box-sizing:border-box}
@@ -213,7 +244,6 @@ body {
     transition: background-color 0.6s ease;
 }
 
-}
 .active, .dot:hover {
     background-color: #717171;
 }
@@ -240,17 +270,12 @@ body {
 
 }
 
-.pic_small {
+.pic_small_div {
     color: rgba(0, 0, 0, 0.8);
     font-size: 15px;
     padding: 8px 12px;
-    position: absolute;
-    left: 100px;
-    top: 500px;
-    bottom: -20px;
-    width: 750px;
-    text-align: center;
-
+    text-align: left;
+    width: 775px;
 }
 
 .picture_small {
@@ -258,6 +283,10 @@ body {
     margin: 10px;
 }
 
-.picture_small.selected {
-    border: solid 1px blue;
+.visible_pic{
+    text-align: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 160px;
+    width: 500px
 }

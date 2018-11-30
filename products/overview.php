@@ -1,5 +1,5 @@
 <?php
-require '../query.php';
+include '../query.php';
 
 $result = getByCategoryName($_GET['category']);
 ?>
@@ -7,7 +7,7 @@ $result = getByCategoryName($_GET['category']);
 <head>
 
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ?>
+    <?php include "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -114,7 +114,7 @@ if (isset($_GET['tags'])) {
     <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
-    |----------Producten--------------------------|
+    |------------Products---------------------------|
     |-----------------------------------------------|-->
 
 <div class="container content">
@@ -126,6 +126,7 @@ if (isset($_GET['tags'])) {
                 <option value="16" selected>16</option>
                 <option value="32">32</option>
                 <option value="64">64</option>
+                <option value="128">128</option>
             </select>
             <label>Aantal producten weergeven</label>
         </div>
@@ -190,7 +191,7 @@ if (isset($_GET['tags'])) {
 </div>
 
 <!--|--------------END------------------------------|
-    |-----------Producten-------------------------|
+    |------------Products---------------------------|
     |-----------------------------------------------|-->
 
     <!--Import footer-->
