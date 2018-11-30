@@ -53,17 +53,15 @@ if (isset($_POST['submit'])) {
         <div class="col s22 m11">
             <div class="card">
                 <div class="card-image">
-                    <img src="images/wwi-logo.png">
+                    <img src="images (temp)/wwi-logo.png">
                 </div>
                 <div class="card-action center text card_tekst">
                     <a class="dark_grey_color"><b>About WWI</b></a><br>
                 </div>
                 <div class="card-action card_line_remover">
-                    <a class="light_grey_color text">Wijde wereld Importeurs oftewel Wide World Importers is een bedrijf dat een rijk diversiteit aan
-                        producten levert.
-                        WWI levert hun producten aan grote warenhuizen en groothandels in de Veregeningde Staten en nu ook
-                        aan consumenten in Nederland.</a>
-                <!--todo: Tekst veranderen -->
+                    <a class="light_grey_color text">Wide World Importers is a company that offers a rich diversity of products.
+                        The company offers its products to big department stores and wholesalers across the United States and now also consumers in the Netherlands.
+                    </a>
                 </div>
             </div>
         </div>
