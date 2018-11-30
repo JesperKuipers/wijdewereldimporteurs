@@ -116,7 +116,10 @@ if(isset($_POST['registerbutton'])) {
     
     //If the signup process is successful.
     if($result) {
-        echo "<script type='text/javascript'>alert('Successfully registered!')</script>";
+        echo "<script type='text/javascript'>alert('You have succesfully registered');
+    window.location.href = \"/inlog.php\";
+    </script>";
+    
     }
     
 }

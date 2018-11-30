@@ -39,15 +39,8 @@
             if($stmt->rowCount() > 0) {
                 if(password_verify($password, $row['password'])) {
                     session_regenerate_id();
-                    $_SESSION["authorised"] = TRUE;
                     $_SESSION['loggedin'] = TRUE;
                     $_SESSION['customerid'] = $row['customerid'];
-                    $_SESSION["email"] = $row['email'];
-                    $_SESSION["password"] = $row['password'];
-                    $_SESSION["first_name"] = $row['first_name'];
-                    $_SESSION["last_name"] = $row['last_name'];
-                    $_SESSION["address"] = $row['address'];
-                    $_SESSION["postal_code"] = $row['postal_code'];
                     session_write_close();
                     header('location: /account.php');
                 } else {
