@@ -15,10 +15,6 @@
     <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
-    |--------insert-code-here-----------------------|
-    |-----------------------------------------------|-->
-
-<!--|-----------BEGINNING---------------------------|
     |----------Catergories--------------------------|
     |-----------------------------------------------|-->
 
@@ -90,7 +86,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="images/haaislippers.png" height="213">
+                    <img href="#" src="/images/haaislippers.png" height="213">
                 </div>
                 <div class="card-content card-action center">
                     <a class="light_grey_color" href="/products/overview.php?category=Furry Footwear">Furry Footwear</a>
@@ -102,7 +98,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="images/sushi.png" height="213">
+                    <img href="#" src="/images/sushi.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=USB Novelties">USB Novelties</a>
@@ -114,7 +110,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="images/periscope-office-nov.png" height="213">
+                    <img href="#" src="/images/periscope-office-nov.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=Computing Novelties">Computing Novelties</a>
@@ -129,7 +125,7 @@
         <div class="col s10 m3">
             <div class="card">
                 <div class="card-image">
-                    <img href="#" src="images/toys-cat.png" height="213">
+                    <img href="#" src="/images/toys-cat.png" height="213">
                 </div>
                 <div class="card-content card-action center ">
                     <a class="light_grey_color" href="/products/overview.php?category=Toys">Toys</a>
@@ -145,9 +141,6 @@
     |-----------Catergories-------------------------|
     |-----------------------------------------------|-->
 
-<!--|-----------BEGINNING---------------------------|
-    |------------Footer-----------------------------|
-    |-----------------------------------------------|-->
 
     <!--Import footer-->
     <?php footer() ?>
