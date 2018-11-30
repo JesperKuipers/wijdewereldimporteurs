@@ -1,8 +1,8 @@
 <?php
 session_start();
-include '.php/functions.php';
-include '.php/database_connectie.php';
-include '/index.html';
+//include '../functions.php';
+include '../database_connectie.php';
+include '../index.php';
 
 $db = db_connect();
 $stmt = $db->prepare('SELECT * FROM registered_users WHERE email=:email');

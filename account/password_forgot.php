@@ -24,7 +24,7 @@
         <button type="submit" name="passresetbutton" id="passResetBtn" class="btnpassreset s12 btn btn-large waves-effect">Send</button>
     </form>
     <label style="font-size: 16px">
-        <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
+        <a class="loginhere" href="login.php"><b><u>Log in here</u></b></a>
     </label>
 </div>
 

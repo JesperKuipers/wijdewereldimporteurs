@@ -7,7 +7,7 @@
     <!--Include database_connectie-->
     <?php include '../database_connectie.php'; ?>
     <!--Import basic imports-->
-    <?php imports() ?>?>
+    <?php imports() ?>
 </head>
 
 <body>

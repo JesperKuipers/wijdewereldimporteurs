@@ -1,0 +1,12 @@
+{
+    "name": "xander/weidewereldimporteurs",
+    "authors": [
+        {
+            "name": "Xander Beijeman",
+            "email": "x.beijeman@gmail.com"
+        }
+    ],
+    "require": {
+        "mollie/mollie-api-php": "2.0"
+    }
+}

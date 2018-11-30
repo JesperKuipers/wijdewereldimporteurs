@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
     <div>
         <label class="alreadyaccount" >
             <br>Already have an account?<br>
-            <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
+            <a class="loginhere" href="login.php"><b><u>Log in here</u></b></a>
         </label>
     </div>
 </div>
