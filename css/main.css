@@ -180,3 +180,69 @@ body {
     text-align: center;
     color: red;
 }
+
+.container-account {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 800px;
+}
+
+.logoutbtn{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 10px;
+    text-align: center !important;
+}
+
+.logoutbtn:hover {
+    background-color: blue;
+}
+
+.container-accountinfo {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 640px;
+}
+
+.changeaccountbtn{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.changeaccountbtn:hover {
+    background-color: blue;
+}
+
+.container-changeaccount {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 700px;
+}
+
+.changeaccountinput{
+    width: 350px !important;
+    background-color: lightblue !important;
+    text-align: center !important;
+}
+
+.btnupdateaccount{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.btnupdateaccount:hover {
+    background-color: blue;
+}
+
+.btnreturnaccount{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.btnreturnaccount:hover {
+    background-color: blue;
+}
+
