@@ -9,7 +9,8 @@
         if(isset($_POST['fname']) && isset($_POST['lname'])){
             session_start();
             $_SESSION['unregistered_user'] = $_POST['email'];
-            $_SESSION['authorised'] = true;
+            $_SESSION['loggedin'] = true;
+            db_connect();
             header('Location: /products/payment.php');
         }
     ?>
