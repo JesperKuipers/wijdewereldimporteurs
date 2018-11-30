@@ -11,7 +11,7 @@ function email($name, $subject, $mailfrom, $message)
 
 $fname=filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
 $lname=filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
-$email=filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+$email=filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 $address=filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
 $postalcode=filter_input(INPUT_POST, 'postalcode', FILTER_SANITIZE_STRING);
@@ -33,6 +33,8 @@ function imports () {
     <link type="text/css" rel="stylesheet" href="/css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Start session, temp saves stuff-->
+    <?php session_start()?>
 
     <?php
 }
@@ -51,7 +53,11 @@ function navbar()
                                                                    alt="Image"></i></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
+                    <li><a href="/account.php"><i class="material-icons">person</i></a></li>
+                <?php } else { ?>
+                    <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+                <?php } ?>
                 <li><a href="/products/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
             </ul>
 
