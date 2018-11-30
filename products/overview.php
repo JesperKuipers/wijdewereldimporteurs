@@ -1,25 +1,16 @@
+<?php
+require '../query.php';
+
+$result = getByCategoryName($_GET['category']);
+?>
 <html>
 <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-          integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous"/>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
 
-    <!--Import main.css-->
-    <link type="text/css" rel="stylesheet" href="/css/main.css"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        body {
-            background-color: rgb(173, 222, 248);
-        }
+    <!--Include functions.php for lay-out-->
+    <?php require "../functions.php" ?>
 
-    </style>
+    <!--Import basic imports-->
+    <?php imports() ?>
 
     <!-- pagination wordt hieronder geconfigureerd -->
     <script>
@@ -27,10 +18,6 @@
             $('select').formSelect();
             init();
         });
-
-        function setInit() {
-            init();
-        }
 
         function init() {
             $('.pagination').remove();
@@ -90,48 +77,41 @@
             }
 
         }
+
+        function setFilter() {
+            var url = window.location.toString();
+            if (url.indexOf("&tags[]") > 0) {
+                console.log('klopt');
+                url = url.substring(0, url.indexOf("&tags[]"));
+            }
+            var tags = $("#selectFilter").val();
+            url = url.replace('#!', '');
+            $(tags).each(function (val, key) {
+                url += "&tags[]=" + key;
+            });
+            document.location = url;
+        }
     </script>
 </head>
-
-
 <body>
-
-<!--|-----------BEGINNING---------------------------|
-    |--------navigation---bar-----------------------|
-    |-----------------------------------------------|-->
+<?php
 
 
-<!--|-------Nav-bar-en-rechter-icons----------------|-->
-<nav>
-    <div class="nav-wrapper blue-grey darken-3">
-        <a href="/index.html" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%" alt="Image"></i></a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="/inlog.html"><i class="material-icons">person</i></a></li>
-            <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-        </ul>
+if (isset($_GET['tags'])) {
+    $resultWithTags = [];
+    foreach ($result as $key => $value) {
+        foreach ($_GET['tags'] as $urlTags) {
+            if (in_array($urlTags, json_decode($value['tags']))) {
+                $resultWithTags[] = $value;
+            }
+        }
 
-<!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
-            <div class="input-field center searchDiv">
-                <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
-                <label class="label-icon material-icons" for="search"><i>search</i></label>
-                <i class="material-icons">close</i>
-            </div>
-        </form>
+    }
+}
+?>
 
-<!--|--------------Mobile-menu----------------------|-->
-    </div>
-</nav>
-<ul class="sidenav" id="mobile-demo">
-    <li><a href="/inlog.html"><i class="material-icons">person</i></a></li>
-    <li><a href="/shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-    <!--todo: search balk hierin -->
-</ul>
-
-<!--|--------------END------------------------------|
-    |--------navigation---bar-----------------------|
-    |-----------------------------------------------|-->
+<!--Import navbar-->
+<?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
     |----------Producten--------------------------|
@@ -141,7 +121,7 @@
     <br/>
     <div class="row">
         <div class="input-field col s3">
-            <select onchange="setInit()" id="productsPerPage">
+            <select onchange="init()" id="productsPerPage">
                 <option value="8">8</option>
                 <option value="16" selected>16</option>
                 <option value="32">32</option>
@@ -149,24 +129,34 @@
             </select>
             <label>Aantal producten weergeven</label>
         </div>
+        <div class="input-field col s5 offset-s4">
+            <select id="selectFilter" multiple>
+                <?php
+                $list = array();
+                foreach ($result as $value) {
+                    foreach (json_decode($value['tags']) as $tags) {
+                        if (!in_array($tags, $list)) {
+                            ?>
+                            <option <?= isset($_GET['tags']) && in_array($tags, $_GET['tags']) ? 'selected' : '' ?>><?= $tags ?></option>
+                            <?php
+                        }
+                        array_push($list, $tags);
+                    }
+
+                } ?>
+            </select>
+            <label>Producten filteren</label>
+            <a class="waves-effect waves-light btn-small blue darken-1" onclick="setFilter()">Filteren</a>
+        </div>
     </div>
     <?php
-    include '../database_connectie.php';
 
-    $db = db_connect();
-    $stmt = $db->prepare
-    ('SELECT i.StockItemID, StockItemName, StockGroupName
-FROM stockitems i
-JOIN stockitemstockgroups ig
-ON i.Stockitemid = ig.StockitemID
-JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
-    $category = '%' . $_GET['category'] . '%';
-    $stmt->bindParam('StockGroupName', $category);
-    $stmt->execute();
     $i = 0;
 
-    foreach ($stmt->fetchAll() as $item) {
+    $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
+    foreach ($result
+
+    as $item) {
     if ($i == 0) {
     ?>
     <div class="row products">
@@ -193,44 +183,48 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
                         <?= $item['StockItemName'] ?>
                     </div>
                 </a>
+                <div>
+                    <?php
+                    $pdo = db_connect();
+                    $product_id = $item['StockItemID'];
+                    $stmt = $pdo->prepare("SELECT ROUND(AVG(rating),0) FROM rating WHERE product_id = :product_id");
+                    $stmt->bindParam(':product_id', $product_id);
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    foreach ($result as $k) {
+                        if ($k == 0) {
+                            $k = 0;
+                            while ($k < 5) {
+                                echo '<i class="tiny material-icons colorstars">star_border</i>';
+                                $k++;
+                            }
+                            echo '     No reviews found';
+                        } else {
+                            $stars = round($k * 2, 0, PHP_ROUND_HALF_UP);
+                            $x = 1;
+                            while ($x <= $stars - 1) {
+                                echo '<i class="tiny material-icons colorstars">star</i>';
+                                $x += 2;
+                            }
+
+                        }
+                    }
+                    ?>
+                </div>
             </div>
         </div>
         <?php } ?>
     </div>
 </div>
 
+
 <!--|--------------END------------------------------|
     |-----------Producten-------------------------|
     |-----------------------------------------------|-->
 
-<!--|-----------BEGINNING---------------------------|
-    |------------Footer-----------------------------|
-    |-----------------------------------------------|-->
+<!--Import footer-->
+<?php footer() ?>
 
-
-<footer class="page-footer blue-grey darken-3 sticky-footer">
-    <div class="container">
-        <div class="row center">
-
-            <a class="blue_color" href="/Over WWI.html">Over WWI</a>
-            <a class="blue_color dubbele_spatie" href="/index.html">Home page</a>
-
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container center">
-            <a class="blue_color">&copy; 2018. Wide World Importers. All Rights Reserverd. <br> Designed by ICTM1l Groep
-                3</p></a>
-        </div>
-    </div>
-</footer>
-
-<!--|--------------END------------------------------|
-    |-------------Footer----------------------------|
-    |-----------------------------------------------|-->
-
-    <!--JavaScript at end of body for optimized loading-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-            integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
 </body>
 </html>

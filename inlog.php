@@ -11,8 +11,8 @@
 
 <body>
 
-<!--Import navbar-->
-<?php navbar() ?>
+    <!--Import navbar-->
+    <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
     |--------insert-code-here-----------------------|
@@ -28,8 +28,8 @@
     |-------insert-code-here------------------------|
     |-----------------------------------------------|-->
 
-<!--Import footer-->
-<?php footer() ?>
+    <!--Import footer-->
+    <?php footer() ?>
 
 </body>
 </html>

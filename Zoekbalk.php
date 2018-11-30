@@ -30,9 +30,9 @@
         </ul>
 
         <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar">
-            <div class="input-field center">
-                <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
+        <form id="spatieSearchBar" method="post" action="zoekbalk.php">
+            <div class="input-field center searchDiv">
+                <input id="search" name="search" type="search" placeholder="Search for products" class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>
@@ -51,35 +51,84 @@
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
 
-<div class="row">
-    <div class="col s12 m7">
-        <div class="card">
-            <div class="card-image">
-                <img src="images/wwi-logo.png">
-            </div>
+<!-- class="content" is nodig voor sticky footer -->
+<div class="center content">
+    <?php
+    require 'Database_Connectie.php';
 
-            <div class="card-action">
-                <a class="light_grey_color text">Wijde wereld Importeurs oftewel Wide World Importers is een bedrijf dat een rijk diversiteit aan
-                    producten levert.
-                    WWI levert hun producten aan grote warenhuizen en groothandels in de Veregeningde Staten en nu ook
-                    aan consumenten in Nederland.</a>
-                <!--todo: Tekst veranderen -->
+    try {
+    $db = db_connect();
+
+    $productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+    $sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+    $tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+
+    $searchbar = "%" . $_POST['search'] . "%";
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+    $stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
+FROM stockitems i
+JOIN stockitemstockgroups ig
+ON i.Stockitemid = ig.StockitemID
+JOIN stockgroups g
+ON ig.stockgroupid = g.stockgroupid
+WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LIKE :search");
+    $stmt->bindParam('search', $searchbar);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+
+    ?>
+    <?php
+    $i = 0;
+    foreach ($result as $item) {
+    if ($i == 0) {
+    ?>
+    <div class="row products">
+        <?php
+        }
+        if ($i == 4) {
+        $i = 0;
+        ?>
+    </div>
+    <div class="row products">
+        <?php
+        }
+        $i++;
+        ?>
+
+        <div class="col s10 m3 product">
+            <div class="card">
+                <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
+                        <div class="card-image">
+                        <img src="images/no-image.jpg"/>
+                    </div>
+                    <div class="card-content card-action center">
+                        <?= $item['StockItemName'] ?>
+                    </div>
+                </a>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
+
+<?php
+} catch (PDOException $e) {
+    echo 'Connection Failed ' . $e->getMessage();
+}
+?>
+
+
 
 
 <!--|-----------BEGINNING---------------------------|
     |------------Footer-----------------------------|
     |-----------------------------------------------|-->
 
-
 <footer class="page-footer blue-grey darken-3 sticky-footer">
     <div class="container">
         <div class="row center">
 
-            <a class="blue_color" href="over wwi.html">Over WWI</a>
+            <a class="blue_color" href="Over WWI.html">Over WWI</a>
             <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
 
         </div>

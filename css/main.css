@@ -1,3 +1,5 @@
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
 body {
     background-color: rgb(173, 222, 248);
     display: flex;
@@ -13,16 +15,36 @@ body {
     margin-left: 10em;
 }
 
-.blue_color {
+.light_blue_color {
     color: #ACDEF5 !important;
+}
+
+.dark_blue_color {
+    color: #1e88e5 !important;
+}
+
+.dark_blue_color_backround {
+    background-color: #1e88e5 !important;
+}
+
+.outline_color_dark_blue {
+    border-color: #1e88e5 !important;
 }
 
 .light_grey_color {
     color: #797979 !important;
 }
-.searchDiv{
-    width: 400px;
+.input-field{
+     width: 500px;
  }
+
+.dark_grey_color {
+    color: #37474f !important;
+}
+
+.searchDiv{
+    width: 500px;
+}
 
 .searchDiv:hover{
     background-color: black;
@@ -44,7 +66,26 @@ body {
 }
 
 .text {
-    transform: unset !important;
+    text-transform: unset !important;
+}
+
+.card_tekst {
+    padding: 5px 24px !important;
+}
+
+.card_line_remover {
+    padding: 1px 24px !important;
+    border-top: none !important;
+}
+
+.expandable_textbox {
+    resize: vertical;
+    height: auto;
+}
+
+#recaptcha {
+    width: 304px;
+    margin: 0 auto;
 }
 
 .container-login {
@@ -106,7 +147,59 @@ body {
     text-align: center;
 }
 
-.alreadyaccount{
+.alreadyaccount {
     font-size: 12pt;
     float: bottom;
+}
+
+.rating > input { display: none; }
+.rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > label {
+    color: #5a5a5a;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+.box {
+    text-align: center;
+    direction: rtl;
+}
+
+.review {
+    text-align: center;
+}
+
+i.colorstars{
+    color: #f2b01e;
+}
+
+.reviewedit{
+    display: flex;
+    margin-left: 6%;
+}
+
+.personalreview{
+    background-color: rgb(173, 222, 248);
+    text-align: center;
 }
