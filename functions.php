@@ -47,14 +47,14 @@ function imports () {
 function navbar()
 {
     ?>
-    <!--|-----------BEGINNING---------------------------|
-        |--------navigation---bar-----------------------|
-        |-----------------------------------------------|-->
+<!--|-----------BEGINNING---------------------------|
+    |--------navigation---bar-----------------------|
+    |-----------------------------------------------|-->
 
     <!--|-------Nav-bar-en-rechter-icons----------------|-->
     <nav>
         <div class="nav-wrapper blue-grey darken-3">
-            <a href="/index.php" class="brand-logo center"><i><img src="/images/wwi-logo.png" width="70%"
+            <a href="/index.php" class="brand-logo center"><i><img src="/images%20(temp)/wwi-logo.png" width="70%"
                                                                    alt="Image"></i></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -83,18 +83,18 @@ function navbar()
         <li><a href="/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
     </ul>
 
-    <!--|--------------END------------------------------|
-        |--------navigation---bar-----------------------|
-        |-----------------------------------------------|-->
+<!--|--------------END------------------------------|
+    |--------navigation---bar-----------------------|
+    |-----------------------------------------------|-->
     <?php
 }
 
 function footer()
 {
     ?>
-    <!--|-----------BEGINNING---------------------------|
-        |------------Footer-----------------------------|
-        |-----------------------------------------------|-->
+<!--|-----------BEGINNING---------------------------|
+    |------------Footer-----------------------------|
+    |-----------------------------------------------|-->
 
 
     <footer class="page-footer blue-grey darken-3 sticky-footer">
@@ -115,13 +115,18 @@ function footer()
         </div>
     </footer>
 
-    <!--|--------------END------------------------------|
-        |-------------Footer----------------------------|
-        |-----------------------------------------------|-->
+<!--|--------------END------------------------------|
+    |-------------Footer----------------------------|
+    |-----------------------------------------------|-->
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
             integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <?php
 
 }

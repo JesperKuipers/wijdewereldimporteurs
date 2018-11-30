@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
         <div class="col s22 m11">
             <div class="card">
                 <div class="card-image">
-                    <img src="images/wwi-logo.png">
+                    <img src="images (temp)/wwi-logo.png">
                 </div>
                 <div class="card-action center text card_tekst">
                     <a class="dark_grey_color"><b>About WWI</b></a><br>
