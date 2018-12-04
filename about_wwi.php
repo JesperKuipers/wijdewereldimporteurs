@@ -18,7 +18,9 @@ if (isset($_POST['submit'])) {
             $txt = "Contact form from ". $name . ". \n\n" . $message;
 
             mail($mailto, $subject, $txt, $headers);
-
+            echo "<script type='text/javascript'>alert('You have succesfully sent an email');
+            window.location.href = \"/index.php\";
+            </script>";
         } else {
 
         }

@@ -59,15 +59,15 @@ function navbar()
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
-                    <li><a href="/account.php"><i class="material-icons">person</i></a></li>
+                    <li><a href="/account/account.php"><i class="material-icons">person</i></a></li>
                 <?php } else { ?>
-                    <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+                    <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
                 <?php } ?>
                 <li><a href="/products/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
             </ul>
 
             <!--|---------------Search-bar----------------------|-->
-            <form id="spatieSearchBar" method="POST" action="/Zoekbalk.php">
+            <form id="spatieSearchBar" method="POST" action="/searchbar.php">
                 <div class="input-field center searchDiv">
                     <input id="search" name="search" type="search" placeholder="Search..." class="searchbar" required>
                     <label class="label-icon material-icons" for="search"><i>search</i></label>
@@ -79,7 +79,7 @@ function navbar()
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+        <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
         <li><a href="/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
     </ul>
 

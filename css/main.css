@@ -148,10 +148,6 @@ body {
     margin-left: 50px !important;
 }
 
-.required {
-    color: red;
-}
-
 #recaptcha {
     width: 304px;
     margin: auto;

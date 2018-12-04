@@ -2,8 +2,8 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "functions.php";
-    include 'database_connectie.php';
+    <?php require '../functions.php';
+    include '../database_connectie.php';
     imports() ?>
 
 </head>
@@ -32,8 +32,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     $customerinfo = $stmt->fetch(); ?>
 
     <div class="container-account center content">
-        <p><h5>You are currently logged in
-            as <?php print $customerinfo['first_name'] . " " . $customerinfo['last_name'] ?></h5></p>
+        <p><h5>You are currently logged in as <?php print $customerinfo['first_name'] . " " . $customerinfo['last_name'] ?></h5></p>
         <form method="post">
             <button type="submit" name="logoutbtn" class="logoutbtn s12 btn btn-large waves-effect">Log Out</button>
         </form>
@@ -41,19 +40,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     <div class="container-accountinfo left content">
         <b>First name</b><br>
         <?php echo $customerinfo['first_name']; ?><br>
-
         <b>Last name</b><br>
         <?php echo $customerinfo['last_name']; ?><br>
-
         <b>E-mail</b><br>
         <?php echo $customerinfo['email']; ?><br>
-
         <b>Address</b><br>
         <?php echo $customerinfo['address']; ?><br>
-
         <b>Postal Code</b><br>
         <?php echo $customerinfo['postal_code']; ?><br>
-
         <form action="accountchange.php">
             <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Change account settings
             </button>
@@ -68,7 +62,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         header('refresh : 0; url=../index.php');
     }
 } else{
-    print("<h3 align='center'>You need to be logged in to see this page.</h3>");
+    ?>
+    <div class="notloggedin center content">
+        <h3>You need to be logged in to see this page.</h3>
+    </div>
+    <?php
 }
 ?>
 

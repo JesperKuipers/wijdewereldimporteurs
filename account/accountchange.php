@@ -2,8 +2,8 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "functions.php";
-    include 'database_connectie.php';?>
+    <?php require "../functions.php";
+    include '../database_connectie.php';?>
     
     <!--Import basic imports-->
     <?php imports() ?>
@@ -114,13 +114,17 @@ if(isset($_POST['updateaccountbtn'])){
     $result = $stmt->execute();
     ?>
     <script type='text/javascript'>alert('You have updated your account information');
-    window.location.href = "/account.php";
+    window.location.href = "/account/account.php";
     </script>
     <?php
 }
 
 }else{
-    print("<h3 align='center'>You need to be logged in to see this page.</h3>");
+    ?>
+    <div class="notloggedin center content">
+    <h3>You need to be logged in to see this page.</h3>
+    </div>
+<?php
 }
 ?>
 
