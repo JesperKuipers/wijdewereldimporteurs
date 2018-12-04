@@ -62,13 +62,18 @@ function database_read($orderId)
     }
 }
 
-function database_write($orderId, $status)
+function database_write($orderId, $paymentId, $status)
 {
     $db = db_connect();
     $orderId = intval($orderId);
-    $query = "INSERT INTO orderbycustomers(orderId, status, customerid) VALUES (:orderId, :status, :customerid)";
+    if (empty(database_read($orderId))) {
+        $query = "INSERT INTO orderbycustomers(orderId, paymentid, status, customerid) VALUES (:orderId, :paymentid, :status, :customerid)";
+    } else {
+        $query = "UPDATE orderbycustomers SET paymentid = :paymentid, status = :status, customerid = :customerid WHERE orderId = :orderId";
+    }
     $stmt = $db->prepare($query);
     $stmt->bindParam('orderId', $orderId);
+    $stmt->bindParam('paymentid', $paymentId);
     $stmt->bindParam('status', $status);
     $stmt->bindParam('customerid', $_SESSION['customerid']);
 

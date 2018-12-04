@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require "functions.php";
-    include 'database_connectie.php';
+    <?php require "../functions.php";
+    require '../database_connectie.php';
     ob_start();
     imports() ?>
 </head>
@@ -27,7 +27,7 @@
                                 placeholder="Enter your password" onfocus="this.placeholder=''"
                                 onblur="this.placeholder='Enter your password'" required style="margin-left:4px;"><br>
         <label hidden style="float: bottom;">
-            <a class="forgotpassword" href="passwordforgot.php"><b><u>Forgot Password</u></b></a>
+            <a class="forgotpassword" href="../passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
         <?php
         
@@ -42,7 +42,7 @@
                     $_SESSION['loggedin'] = TRUE;
                     $_SESSION['customerid'] = $row['customerid'];
                     session_write_close();
-                    header('location: /account.php');
+                    header('location: /account/account.php');
                 } else {
                     ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                     <?php

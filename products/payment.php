@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<?php
-session_start();
-$hostname = $_SERVER['HTTP_HOST'];
+<html>
+<head>
+    <!--Include functions.php for lay-out-->
+    <?php require "../functions.php" ?>
 
-if (isset($_SESSION['authorised']) && $_SESSION['authorised'] == true) {
+    <!--Import basic imports-->
+    <?php imports() ?>
+</head>
+<?php
+$hostname = $_SERVER['HTTP_HOST'];
+$protocol = isset($_SERVER['HTTPS']) && strcasecmp('off', $_SERVER['HTTPS']) !== 0 ? "https" : "http";
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     require_once '../vendor/autoload.php';
     require_once '../query.php';
     try {
         $mollie = new \Mollie\Api\MollieApiClient();
         $mollie->setApiKey("test_3NDNxnAAgMNzHTv4u9BQkdpR5udhh8");
-//        if ($_SERVER["REQUEST_METHOD"] != "POST") {
-//            $method = $mollie->methods->get(\Mollie\Api\Types\PaymentMethod::IDEAL, ["include" => "issuers"]);
-//            echo '<form method="post">Select your bank: <select name="issuer">';
-//            foreach ($method->issuers() as $issuer) {
-//                echo '<option value=' . htmlspecialchars($issuer->id) . '>' . htmlspecialchars($issuer->name) . '</option>';
-//            }
-//            echo '<option value="">or select later</option>';
-//            echo '</select><button>OK</button></form>';
-//            exit;
-//        }
+
         if (isset($_POST['pay'])) {
             $orderId = time();
             $payment = $mollie->payments->create([
@@ -27,13 +25,12 @@ if (isset($_SESSION['authorised']) && $_SESSION['authorised'] == true) {
                     "value" => $_POST['amount']
                 ],
                 "description" => "Payment customer",
-                "redirectUrl" => "https://{$hostname}/paymentreturn.php?order_id={$orderId}",
+                "redirectUrl" => "{$protocol}://{$hostname}/paymentreturn.php?order_id={$orderId}",
                 "metadata" => [
                     "order_id" => $orderId,
                 ]
             ]);
-
-            database_write($orderId, $payment->status);
+            database_write($orderId, $payment->id, $payment->status);
             header("Location: " . $payment->getCheckoutUrl(), true, 303);
 
         }
@@ -41,14 +38,6 @@ if (isset($_SESSION['authorised']) && $_SESSION['authorised'] == true) {
         throw new Exception("API call failed: " . htmlspecialchars($e->getMessage()), $e->getCode(), $e->getPrevious());
     }
     ?>
-    <html>
-    <head>
-        <!--Include functions.php for lay-out-->
-        <?php require "../functions.php" ?>
-
-        <!--Import basic imports-->
-        <?php imports() ?>
-    </head>
 
     <body>
 
@@ -59,7 +48,6 @@ if (isset($_SESSION['authorised']) && $_SESSION['authorised'] == true) {
         |----------Catergories--------------------------|
         |-----------------------------------------------|-->
     <?php
-    include '../query.php';
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
     $cart_data = json_decode($cookie_data, true);
     $cookieResults = array();
@@ -98,7 +86,7 @@ if (isset($_SESSION['authorised']) && $_SESSION['authorised'] == true) {
                             <div class="secondary-content">
                                 <?= $totalquantity ?><br/>
                                 &euro; <?= $totalprice ?>
-                                <input type="hidden" name="amount" value="<?=$totalprice?>">
+                                <input type="hidden" name="amount" value="<?= round($totalprice, 2)?>">
                             </div>
                         </li>
                     <?php } ?>
