@@ -19,7 +19,6 @@
     <?php } ?>
 
 </head>
-
 <body>
 
 <!--Import navbar-->
@@ -28,6 +27,7 @@
 <!--|-----------BEGINNING---------------------------|
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
+
 
 <div class="container content">
     <?php
@@ -198,10 +198,91 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
+                           class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga
+                            naar winkelwagentje</a>
                     </div>
                 </div>
+            </form>
+            <?php
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+            ?>
+            <div class="box">
+                <form action="../review.php" method="post" class="rating">
+
+                    <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
+
+
+                    <input type="radio" onchange="this.form.submit();" id="star5" name="rating" value="5"/><label
+                            class="full" for="star5"
+                            title="Awesome - 5 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star4" name="rating" value="4"/><label
+                            class="full" for="star4"
+                            title="Pretty good - 4 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star3" name="rating" value="3"/><label
+                            class="full" for="star3"
+                            title="Meh - 3 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star2" name="rating" value="2"/><label
+                            class="full" for="star2"
+                            title="Kinda bad - 2 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star1" name="rating" value="1"/><label
+                            class="full" for="star1"
+                            title="Sucks big time - 1 star"></label>
+
+                    <?php
+                    $pdo = db_connect();
+                    $queryratecustomer = "SELECT customerid FROM rating";
+                    $customerratereview = $pdo->prepare($queryratecustomer);
+                    $customerratereview->execute();
+                    $rate = $customerratereview->fetch();
+
+
+                    ?>
+                </form>
+
+                <?php
+                } else {
+                    echo 'First login to review this product';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container content">
+    <div class="row personalreview">
+        <div class="col s12 m6 ">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text  personalreview">
+                    <span class="card-title"><?php
+                        $pdo = db_connect();
+                        $reviewquery = "SELECT R.first_name, RA.rating, RA.product_id
+                                      FROM registered_users R
+                                      LEFT JOIN rating RA
+                                      ON R.customerid = RA.customerid
+                                      WHERE RA.product_id = :product_id
+                                      ORDER BY RAND()
+                                      LIMIT 1";
+                        $stmtreviews = $pdo->prepare($reviewquery);
+                        $stmtreviews->bindParam(':product_id', $result['StockItemID']);
+                        $stmtreviews->execute();
+                        $resultreviews = $stmtreviews->fetch(PDO::FETCH_ASSOC);
+                        echo $resultreviews['first_name']
+                        ?></span>
+                    <h7>
+                        <?php
+                        if (isset($resultreviews['rating'])) {
+                            for ($x = 1; $x <= $resultreviews['rating']; $x++) {
+                                ?><i class="material-icons colorstars">star</i><?php
+                            }
+                        } else {
+                            echo 'Be the first one to review this product';
+                        }
+                        ?>
+                    </h7>
+                </div>
+            </div>
         </div>
     </div>
     <!-- The pics ( ͡° ͜ʖ ͡°)-->
@@ -216,6 +297,7 @@
         </div>
     </div>
 </div>
+
 
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|

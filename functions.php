@@ -62,7 +62,7 @@ function navbar()
             </ul>
 
             <!--|---------------Search-bar----------------------|-->
-            <form id="spatieSearchBar" method="POST" action="/Zoekbalk.php">
+            <form id="spatieSearchBar" method="POST" action="/searchbar.php">
                 <div class="input-field center searchDiv">
                     <input id="search" name="search" type="search" placeholder="Search..." class="searchbar" required>
                     <label class="label-icon material-icons" for="search"><i>search</i></label>

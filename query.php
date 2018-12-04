@@ -1,6 +1,6 @@
 <?php
 
-include 'database_connectie.php';
+require 'database_connectie.php';
 
 function get(string $table, array $fields = [], string $where = null): array
 {
@@ -30,8 +30,7 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName = :StockGroupName');
 }
 
 function getByItemId(int $id)
-{
-    $db = db_connect();
+{$db = db_connect();
     $query = 'SELECT s.*, h.*, c.*
 FROM stockitems AS s
 JOIN stockitemholdings AS h

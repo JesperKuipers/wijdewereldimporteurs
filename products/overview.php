@@ -110,11 +110,11 @@ if (isset($_GET['tags'])) {
 }
 ?>
 
-    <!--Import navbar-->
-    <?php navbar() ?>
+<!--Import navbar-->
+<?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
-    |------------Products---------------------------|
+    |----------Producten--------------------------|
     |-----------------------------------------------|-->
 
 <div class="container content">
@@ -152,6 +152,17 @@ if (isset($_GET['tags'])) {
     </div>
     <?php
 
+    $db = db_connect();
+    $stmt = $db->prepare
+    ('SELECT i.StockItemID, StockItemName, StockGroupName
+FROM stockitems i
+JOIN stockitemstockgroups ig
+ON i.Stockitemid = ig.StockitemID
+JOIN stockgroups g
+ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
+    $category = '%' . $_GET['category'] . '%';
+    $stmt->bindParam('StockGroupName', $category);
+    $stmt->execute();
     $i = 0;
 
     $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
@@ -184,11 +195,41 @@ if (isset($_GET['tags'])) {
                         <?= $item['StockItemName'] ?>
                     </div>
                 </a>
+                <div>
+                    <?php
+                    $pdo = db_connect();
+                    $product_id = $item['StockItemID'];
+                    $stmt = $pdo->prepare("SELECT ROUND(AVG(rating),0) FROM rating WHERE product_id = :product_id");
+                    $stmt->bindParam(':product_id', $product_id);
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    foreach ($result as $k) {
+                        if ($k == 0) {
+                            $k = 0;
+                            while ($k < 5) {
+                                echo '<i class="tiny material-icons colorstars">star_border</i>';
+                                $k++;
+                            }
+                            echo '     No reviews found';
+                        } else {
+                            $stars = round($k * 2, 0, PHP_ROUND_HALF_UP);
+                            $x = 1;
+                            while ($x <= $stars - 1) {
+                                echo '<i class="tiny material-icons colorstars">star</i>';
+                                $x += 2;
+                            }
+
+                        }
+                    }
+                    ?>
+                </div>
             </div>
         </div>
         <?php } ?>
     </div>
 </div>
+
 
 <!--|--------------END------------------------------|
     |------------Products---------------------------|
