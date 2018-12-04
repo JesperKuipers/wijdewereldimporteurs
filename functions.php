@@ -56,7 +56,7 @@ function navbar()
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
                     <li><a href="/account.php"><i class="material-icons">person</i></a></li>
                 <?php } else { ?>
-                    <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+                    <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
                 <?php } ?>
                 <li><a href="/products/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
             </ul>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php session_start(); ?>
     <!--Include functions.php for lay-out-->
     <?php include "../functions.php" ?>
     <!--Include database_connectie-->
@@ -21,7 +20,6 @@
 
 <div class="container center content ">
     <div class="row" style="width: 320px;">
-
         <div class="card">
             <div class="card-action text center ">
                 <a class="dark_grey_color">Please log into your account</a><br>

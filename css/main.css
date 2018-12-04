@@ -157,6 +157,10 @@ body {
     margin: auto;
 }
 
+.g-recaptcha {
+    display: inline-block;
+}
+
 .container-passwordforgot {
     margin: 0 auto;
     max-width: 1280px;
