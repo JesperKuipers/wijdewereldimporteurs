@@ -21,30 +21,28 @@
 <!--|-------Nav-bar-en-rechter-icons----------------|-->
 <nav>
     <div class="nav-wrapper blue-grey darken-3">
-        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%"
-                                                               alt="Image"></i></a>
+        <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+            <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
             <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
-
+        
         <!--|---------------Search-bar----------------------|-->
-        <form id="spatieSearchBar" method="post" action="zoekbalk.php">
+        <form id="spatieSearchBar">
             <div class="input-field center searchDiv">
-                <input id="search" name="search" type="search" placeholder="Search for products" class="searchbar" required>
+                <input id="search" type="search" placeholder="Search for products" class="searchbar" required>
                 <label class="label-icon material-icons" for="search"><i>search</i></label>
                 <i class="material-icons">close</i>
             </div>
         </form>
-
+        
         <!--|--------------Mobile-menu----------------------|-->
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.html"><i class="material-icons">person</i></a></li>
+    <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
-    <!--todo: search balk hierin -->
 </ul>
 
 <!--|--------------END------------------------------|
@@ -52,85 +50,31 @@
     |-----------------------------------------------|-->
 
 <!-- class="content" is nodig voor sticky footer -->
-<div class="center content">
-    <?php
-    require 'Database_Connectie.php';
-
-    try {
-    $db = db_connect();
-
-    $productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-    $sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-    $tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-
-    $searchbar = "%" . $_POST['search'] . "%";
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-    $stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
-FROM stockitems i
-JOIN stockitemstockgroups ig
-ON i.Stockitemid = ig.StockitemID
-JOIN stockgroups g
-ON ig.stockgroupid = g.stockgroupid
-WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LIKE :search");
-    $stmt->bindParam('search', $searchbar);
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-
-    ?>
-    <?php
-    $i = 0;
-    foreach ($result as $item) {
-    if ($i == 0) {
-    ?>
-    <div class="row products">
-        <?php
-        }
-        if ($i == 4) {
-        $i = 0;
-        ?>
-    </div>
-    <div class="row products">
-        <?php
-        }
-        $i++;
-        ?>
-
-        <div class="col s10 m3 product">
-            <div class="card">
-                <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
-                        <div class="card-image">
-                        <img src="images/no-image.jpg"/>
-                    </div>
-                    <div class="card-content card-action center">
-                        <?= $item['StockItemName'] ?>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <?php } ?>
-    </div>
+<div class="container-passwordforgot center content">
+    <h1><b class="resetpass">Reset Password</b></h1>
+    <form method="POST" class="passforgotinput" action="">
+        <b>E-Mail: </b><input type="text" name="email" id="email" class="rinputs" required style="margin-left: 50px"><br>
+        <b>Old Password: </b><input type="password" name="password" id="password" class="rinputs" required><br>
+        <button type="submit" name="passresetbutton" id="passResetBtn" class="btnpassreset s12 btn btn-large waves-effect">Send</button>
+    </form>
+    <label style="font-size: 16px">
+        <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
+    </label>
 </div>
-
-<?php
-} catch (PDOException $e) {
-    echo 'Connection Failed ' . $e->getMessage();
-}
-?>
-
-
 
 
 <!--|-----------BEGINNING---------------------------|
     |------------Footer-----------------------------|
     |-----------------------------------------------|-->
 
+
 <footer class="page-footer blue-grey darken-3 sticky-footer">
     <div class="container">
         <div class="row center">
-
-            <a class="blue_color" href="Over WWI.html">Over WWI</a>
+            
+            <a class="blue_color" href="over%20wwi.html">Over WWI</a>
             <a class="blue_color dubbele_spatie" href="index.html">Home page</a>
-
+        
         </div>
     </div>
     <div class="footer-copyright">

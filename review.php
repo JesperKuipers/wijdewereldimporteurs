@@ -1,5 +1,6 @@
 <?php
 include 'database_connectie.php';
+session_start();
 
 $pdo = db_connect();
 
@@ -19,7 +20,7 @@ if (isset($_POST['rating'])) {
     $stmt->bindParam(':rate_id', $rate_id);
     $stmt->bindParam(':rating', $_POST['rating']);
     $stmt->bindParam(':product_id', $_POST['id']);
-    $stmt->bindParam('customerid', $customer_id);
+    $stmt->bindParam('customerid', $_SESSION['customerid']);
     $stmt->execute();
     ?>
     <script type="text/javascript">

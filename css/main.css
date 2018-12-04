@@ -83,11 +83,6 @@ body {
     height: auto;
 }
 
-#recaptcha {
-    width: 304px;
-    margin: 0 auto;
-}
-
 .container-login {
     margin: 0 auto;
     max-width: 1280px;
@@ -111,19 +106,23 @@ body {
 }
 
 .btnlogin:hover{
-    background-color: blue;
+     background-color: blue;
 }
 
 .container-register {
     margin: 0 auto;
     max-width: 1280px;
+    width: 800px;
+}
+
+.createwwi{
+    font-size: 16pt;
 }
 
 .rinputs{
-    width: 230px !important;
+    width: 350px !important;
     background-color: lightblue !important;
-    text-align: center;
-
+    text-align: center !important;
 }
 
 .registerinput{
@@ -133,23 +132,49 @@ body {
 .btnregister{
     background-color: dodgerblue;
     width: 200px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center !important;
 }
 
 .btnregister:hover{
     background-color: blue;
 }
 
-.e-mail{
-    width: 600px !important;
-    background-color: lightblue !important;
-    text-align: center;
+.alreadyaccount{
+    font-size: 12pt;
+    margin-left: 50px !important;
 }
 
-.alreadyaccount {
-    font-size: 12pt;
-    float: bottom;
+.required {
+    color: red;
+}
+
+#recaptcha {
+    width: 304px;
+    margin: auto;
+}
+
+.container-passwordforgot {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 800px;
+}
+
+.resetpass{
+    font-size: 30px;
+}
+
+.btnpassreset{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center !important;
+}
+
+.btnpassreset:hover{
+    background-color: blue;
 }
 
 .rating > input { display: none; }
@@ -203,3 +228,75 @@ i.colorstars{
     background-color: rgb(173, 222, 248);
     text-align: center;
 }
+
+.loginerror{
+    font-size: 10pt;
+    text-align: center;
+    color: red;
+}
+
+.container-account {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 800px;
+}
+
+.logoutbtn{
+    background-color: dodgerblue;
+    width: 200px;
+    margin-top: 10px;
+    text-align: center !important;
+}
+
+.logoutbtn:hover {
+    background-color: blue;
+}
+
+.container-accountinfo {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 640px;
+}
+
+.changeaccountbtn{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.changeaccountbtn:hover {
+    background-color: blue;
+}
+
+.container-changeaccount {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 700px;
+}
+
+.changeaccountinput{
+    width: 350px !important;
+    background-color: lightblue !important;
+    text-align: center !important;
+}
+
+.btnupdateaccount{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.btnupdateaccount:hover {
+    background-color: blue;
+}
+
+.btnreturnaccount{
+    background-color: dodgerblue;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.btnreturnaccount:hover {
+    background-color: blue;
+}
+

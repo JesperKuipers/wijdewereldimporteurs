@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ?>
+    <?php include "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -12,14 +12,13 @@
             $(function () {
                 //initialize all modals
                 $('.modal').modal();
-
                 //now you can open modal from code
                 $('.modal').modal('open');
             })
         </script>
     <?php } ?>
-</head>
 
+</head>
 <body>
 
 <!--Import navbar-->
@@ -32,7 +31,7 @@
 
 <div class="container content">
     <?php
-    require '../query.php';
+    include '../query.php';
 
     $result = getByItemId($_GET['itemId']);
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
@@ -52,7 +51,7 @@
             <img src="/images/no-image.jpg" width="500"/>
         </div>
         <div class="col s14 m6">
-            <form method="POST" action="addToShoppingBasket.php">
+            <form method="POST" action="shoppingbasketcookie.php">
                 <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
                 <h4>Product information</h4>
                 <table class="responsive-table">
@@ -107,11 +106,11 @@
                             $totalprice = 1;
                             foreach ($cookieResults as $values) {
                                 foreach ($values as $value) {
-                                    if ($value['StockItemName']) {
+                                    if (isset($value['StockItemName'])) {
                                         $totalprice = $totalprice + ($value['RecommendedRetailPrice'] * $values['item_quantity']);
                                         ?>
                                         <li class="collection-item avatar">
-                                            <img src="/images/no-image.jpg" alt="" class="circle">
+                                            <img src="/images%20(temp)/no-image.jpg" alt="" class="circle">
                                             <span class="title"><?= $value['StockItemName'] ?></span>
                                             <p>Stock: <?= $value['QuantityOnHand'] ?></p>
                                             <p class="secondary-content">
@@ -134,11 +133,14 @@
                     <div class="modal-footer">
                         <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
                            class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/winkelmandje.php" class="modal-close waves-effect waves-green btn-flat">Ga
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga
                             naar winkelwagentje</a>
                     </div>
                 </div>
             </form>
+            <?php
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+            ?>
             <div class="box">
                 <form action="../review.php" method="post" class="rating">
 
@@ -160,18 +162,23 @@
                     <input type="radio" onchange="this.form.submit();" id="star1" name="rating" value="1"/><label
                             class="full" for="star1"
                             title="Sucks big time - 1 star"></label>
+
                     <?php
-                    $pdo=db_connect();
-                    $queryratecustomer="SELECT customerid FROM rating";
+                    $pdo = db_connect();
+                    $queryratecustomer = "SELECT customerid FROM rating";
                     $customerratereview = $pdo->prepare($queryratecustomer);
                     $customerratereview->execute();
                     $rate = $customerratereview->fetch();
 
-                    if($rate['customerid'] == $result['StockItemID']){
-                        //Hier komen de gekleurde sterren aan de hand van de gegeven rate door de customer
-                    }
+
                     ?>
                 </form>
+
+                <?php
+                } else {
+                    echo 'First login to review this product';
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -182,7 +189,8 @@
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text  personalreview">
                     <span class="card-title"><?php
-                        $reviewquery="SELECT R.first_name, RA.rating, RA.product_id
+                        $pdo = db_connect();
+                        $reviewquery = "SELECT R.first_name, RA.rating, RA.product_id
                                       FROM registered_users R
                                       LEFT JOIN rating RA
                                       ON R.customerid = RA.customerid
@@ -197,12 +205,13 @@
                         ?></span>
                     <h7>
                         <?php
-                            if (isset($resultreviews['rating'])){
-                                for($x=1;$x<=$resultreviews['rating'];$x++){
+                        if (isset($resultreviews['rating'])) {
+                            for ($x = 1; $x <= $resultreviews['rating']; $x++) {
                                 ?><i class="material-icons colorstars">star</i><?php
-                            }} else{
-                        echo 'Be the first one to review this product';
-                                }
+                            }
+                        } else {
+                            echo 'Be the first one to review this product';
+                        }
                         ?>
                     </h7>
                 </div>
@@ -210,6 +219,7 @@
         </div>
     </div>
 </div>
+
 
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|

@@ -1,5 +1,5 @@
 <?php
-require '../query.php';
+include '../query.php';
 
 $result = getByCategoryName($_GET['category']);
 ?>
@@ -7,7 +7,7 @@ $result = getByCategoryName($_GET['category']);
 <head>
 
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ?>
+    <?php include "../functions.php" ?>
 
     <!--Import basic imports-->
     <?php imports() ?>
@@ -126,6 +126,7 @@ if (isset($_GET['tags'])) {
                 <option value="16" selected>16</option>
                 <option value="32">32</option>
                 <option value="64">64</option>
+                <option value="128">128</option>
             </select>
             <label>Aantal producten weergeven</label>
         </div>
@@ -151,12 +152,21 @@ if (isset($_GET['tags'])) {
     </div>
     <?php
 
+    $db = db_connect();
+    $stmt = $db->prepare
+    ('SELECT i.StockItemID, StockItemName, StockGroupName
+FROM stockitems i
+JOIN stockitemstockgroups ig
+ON i.Stockitemid = ig.StockitemID
+JOIN stockgroups g
+ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
+    $category = '%' . $_GET['category'] . '%';
+    $stmt->bindParam('StockGroupName', $category);
+    $stmt->execute();
     $i = 0;
 
     $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
-    foreach ($result
-
-    as $item) {
+    foreach ($result as $item) {
     if ($i == 0) {
     ?>
     <div class="row products">
@@ -220,11 +230,11 @@ if (isset($_GET['tags'])) {
 
 
 <!--|--------------END------------------------------|
-    |-----------Producten-------------------------|
+    |------------Products---------------------------|
     |-----------------------------------------------|-->
 
-<!--Import footer-->
-<?php footer() ?>
+    <!--Import footer-->
+    <?php footer() ?>
 
 </body>
 </html>
