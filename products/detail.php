@@ -3,7 +3,7 @@
 <head>
     <!--Include functions.php for lay-out-->
     <?php include "../functions.php" ?>
-
+    <?php include '../query.php'; ?>
     <!--Import basic imports-->
     <?php imports() ?>
 
@@ -19,7 +19,6 @@
     <?php } ?>
 
 </head>
-
 <body>
 
 <!--Import navbar-->
@@ -29,9 +28,9 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
+
 <div class="container content">
     <?php
-    include '../query.php';
     $result = getByItemId($_GET['itemId']);
     if (isset($_COOKIE['shopping_cart'])) {
 
@@ -42,6 +41,7 @@
             array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
         }
     }
+
     if (isset($result['CustomFields'])) {
         $customFields = explode(':', $result['CustomFields'])[1];
         $CountryOfManufacture = explode(',', $customFields)[0];
@@ -49,7 +49,76 @@
     ?>
     <div class="row">
         <div class="col s14 m6">
-            <img src="/images%20(temp)/no-image.jpg" width="500"/>
+            <!-- Slideshow container -->
+            <div class="slideshow-container">
+                <?php
+//                if()
+                    ?>
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 4</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text2">frontal view</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 4</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text2">back view</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 4</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text2">left view</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">4 / 4</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text2">right view</div>
+                </div>
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+
+            <script>
+                var slideIndex = 1;
+                showSlides(slideIndex);
+
+                // Next/previous controls
+                function plusSlides(n) {
+                    showSlides(slideIndex += n);
+                }
+
+                // Thumbnail image controls
+                function currentSlide(n) {
+                    showSlides(slideIndex = n);
+                }
+
+                function showSlides(n) {
+                    var i;
+                    var slides = document.getElementsByClassName("mySlides");
+                    var prepic = document.getElementsByClassName("picture_small");
+                    if (n > slides.length) {
+                        slideIndex = 1
+                    }
+                    if (n < 1) {
+                        slideIndex = slides.length
+                    }
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                    }
+                    for (i = 0; i < prepic.length; i++) {
+                        prepic[i].className = prepic[i].className.replace(" active", "");
+                    }
+                    slides[slideIndex - 1].style.display = "block";
+                    console.log(prepic[slideIndex - 1]);
+                    prepic[slideIndex - 1].className += " active";
+                }
+            </script>
         </div>
         <div class="col s14 m6">
             <form method="POST" action="shoppingbasketcookie.php">
@@ -132,12 +201,100 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
-                           class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga
-                            naar winkelwagentje</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
                     </div>
                 </div>
+            </form>
+            <?php
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+            ?>
+            <div class="box">
+                <form action="../review.php" method="post" class="rating">
+
+                    <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
+
+
+                    <input type="radio" onchange="this.form.submit();" id="star5" name="rating" value="5"/><label
+                            class="full" for="star5"
+                            title="Awesome - 5 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star4" name="rating" value="4"/><label
+                            class="full" for="star4"
+                            title="Pretty good - 4 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star3" name="rating" value="3"/><label
+                            class="full" for="star3"
+                            title="Meh - 3 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star2" name="rating" value="2"/><label
+                            class="full" for="star2"
+                            title="Kinda bad - 2 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star1" name="rating" value="1"/><label
+                            class="full" for="star1"
+                            title="Sucks big time - 1 star"></label>
+
+                    <?php
+                    $pdo = db_connect();
+                    $queryratecustomer = "SELECT customerid FROM rating";
+                    $customerratereview = $pdo->prepare($queryratecustomer);
+                    $customerratereview->execute();
+                    $rate = $customerratereview->fetch();
+
+
+                    ?>
+                </form>
+
+                <?php
+                } else {
+                    echo 'First login to review this product';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container content">
+    <div class="row personalreview">
+        <div class="col s12 m6 ">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text  personalreview">
+                    <span class="card-title"><?php
+                        $pdo = db_connect();
+                        $reviewquery = "SELECT R.first_name, RA.rating, RA.product_id
+                                      FROM registered_users R
+                                      LEFT JOIN rating RA
+                                      ON R.customerid = RA.customerid
+                                      WHERE RA.product_id = :product_id
+                                      ORDER BY RAND()
+                                      LIMIT 1";
+                        $stmtreviews = $pdo->prepare($reviewquery);
+                        $stmtreviews->bindParam(':product_id', $result['StockItemID']);
+                        $stmtreviews->execute();
+                        $resultreviews = $stmtreviews->fetch(PDO::FETCH_ASSOC);
+                        echo $resultreviews['first_name']
+                        ?></span>
+                    <h7>
+                        <?php
+                        if (isset($resultreviews['rating'])) {
+                            for ($x = 1; $x <= $resultreviews['rating']; $x++) {
+                                ?><i class="material-icons colorstars">star</i><?php
+                            }
+                        } else {
+                            echo 'Be the first one to review this product';
+                        }
+                        ?>
+                    </h7>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- The pics ( ͡° ͜ʖ ͡°)-->
+    <div class="center row">
+        <div class="visible_pic">
+            <div class="pic_small_div">
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">'; ?>
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
+                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">'; ?>
+            </div>
         </div>
     </div>
 </div>

@@ -30,7 +30,7 @@
             <a class="forgotpassword" href="../passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
         <?php
-        
+
         $db = db_connect();
         $stmt = $db->prepare('SELECT * FROM registered_users WHERE email=:email');
         $stmt->execute(array(":email" => $email));
@@ -71,12 +71,5 @@
 <!--Import footer-->
 <?php footer() ?>
 
-<!--|--------------END------------------------------|
-    |-------------Footer----------------------------|
-    |-----------------------------------------------|-->
-
-<!--JavaScript at end of body for optimized loading-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-        integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
 </body>
 </html>
