@@ -34,6 +34,10 @@ function imports () {
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Start session, temp saves stuff-->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <?php session_start()?>
 
     <?php
@@ -74,7 +78,7 @@ function navbar()
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+        <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
         <li><a href="/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
     </ul>
 
@@ -117,10 +121,6 @@ function footer()
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
             integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <?php
 

@@ -28,15 +28,17 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-
 <div class="container content">
     <?php
     $result = getByItemId($_GET['itemId']);
-    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cart_data = json_decode($cookie_data, true);
-    $cookieResults = array();
-    foreach ($cart_data as $value) {
-        array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+    if (isset($_COOKIE['shopping_cart'])) {
+
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        $cookieResults = array();
+        foreach ($cart_data as $value) {
+            array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+        }
     }
 
     if (isset($result['CustomFields'])) {
@@ -198,10 +200,8 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
-                           class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga
-                            naar winkelwagentje</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
                     </div>
                 </div>
             </form>
@@ -297,7 +297,6 @@
         </div>
     </div>
 </div>
-
 
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|
