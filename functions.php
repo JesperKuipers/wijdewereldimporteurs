@@ -54,7 +54,7 @@ function navbar()
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
-                    <li><a href="/account.php"><i class="material-icons">person</i></a></li>
+                    <li><a href="/account/account.php"><i class="material-icons">person</i></a></li>
                 <?php } else { ?>
                     <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
                 <?php } ?>
