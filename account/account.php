@@ -2,8 +2,8 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "functions.php";
-    include 'database_connectie.php';
+    <?php require "../functions.php";
+    include '../database_connectie.php';
     imports() ?>
 
 </head>

@@ -24,7 +24,7 @@
         <a href="index.html" class="brand-logo center"><i><img src="images/wwi-logo.png" width="70%" alt="Image"></i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
+            <li><a href="account/inlog.php"><i class="material-icons">person</i></a></li>
             <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
         </ul>
         
@@ -41,7 +41,7 @@
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="inlog.php"><i class="material-icons">person</i></a></li>
+    <li><a href="account/inlog.php"><i class="material-icons">person</i></a></li>
     <li><a href="shopping_basket.html"><i class="material-icons">shopping_basket</i></a></li>
 </ul>
 
@@ -58,7 +58,7 @@
         <button type="submit" name="passresetbutton" id="passResetBtn" class="btnpassreset s12 btn btn-large waves-effect">Send</button>
     </form>
     <label style="font-size: 16px">
-        <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
+        <a class="loginhere" href="account/inlog.php"><b><u>Log in here</u></b></a>
     </label>
 </div>
 

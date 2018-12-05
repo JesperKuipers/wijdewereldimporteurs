@@ -34,6 +34,10 @@ function imports () {
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Start session, temp saves stuff-->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <?php session_start()?>
 
     <?php
@@ -54,15 +58,15 @@ function navbar()
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
-                    <li><a href="/account.php"><i class="material-icons">person</i></a></li>
+                    <li><a href="/account/account.php"><i class="material-icons">person</i></a></li>
                 <?php } else { ?>
-                    <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+                    <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
                 <?php } ?>
                 <li><a href="/products/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
             </ul>
 
             <!--|---------------Search-bar----------------------|-->
-            <form id="spatieSearchBar" method="POST" action="/Zoekbalk.php">
+            <form id="spatieSearchBar" method="POST" action="/searchbar.php">
                 <div class="input-field center searchDiv">
                     <input id="search" name="search" type="search" placeholder="Search..." class="searchbar" required>
                     <label class="label-icon material-icons" for="search"><i>search</i></label>
@@ -74,7 +78,7 @@ function navbar()
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="/inlog.php"><i class="material-icons">person</i></a></li>
+        <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
         <li><a href="/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
     </ul>
 
@@ -117,10 +121,6 @@ function footer()
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
             integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <?php
 

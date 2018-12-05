@@ -47,3 +47,36 @@ WHERE s.StockItemId = :StockItemId;';
         return $data;
     }
 }
+
+function database_read($orderId)
+{
+    $db = db_connect();
+    $orderId = intval($orderId);
+    $query = "SELECT * FROM orderbycustomers WHERE orderId = :orderId";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam('orderId', $orderId);
+
+    $stmt->execute();
+    if ($data = $stmt->fetch()) {
+        return $data ? $data : "unknown order";
+    }
+}
+
+function database_write($orderId, $paymentId, $status)
+{
+    $db = db_connect();
+    $orderId = intval($orderId);
+    if (empty(database_read($orderId))) {
+        $query = "INSERT INTO orderbycustomers(orderId, paymentid, status, customerid) VALUES (:orderId, :paymentid, :status, :customerid)";
+    } else {
+        $query = "UPDATE orderbycustomers SET paymentid = :paymentid, status = :status, customerid = :customerid WHERE orderId = :orderId";
+    }
+    $stmt = $db->prepare($query);
+    $stmt->bindParam('orderId', $orderId);
+    $stmt->bindParam('paymentid', $paymentId);
+    $stmt->bindParam('status', $status);
+    $stmt->bindParam('customerid', $_SESSION['customerid']);
+
+    $stmt->execute();
+}
+
