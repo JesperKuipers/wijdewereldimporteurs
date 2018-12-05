@@ -37,10 +37,12 @@ if (isset($_POST['id'])) {
 
 if (isset($_POST['changequantity']) && isset($_POST['changequantityid']) && in_array($_POST['changequantityid'], $item_id_list)) {
     foreach ($cart_data as $keys => $values) {
-        if ($cart_data[$keys]["item_id"] == $_POST['changequantityid'] && getByItemId($_POST['changequantityid'])['QuantityOnHand'] >= $_POST['changequantity'] && intval($_POST['changequantity']) > 0) {
-            $cart_data[$keys]["item_quantity"] = $_POST['changequantity'];
-        } else {
+        if (intval($_POST['changequantity']) <= 0 || getByItemId($_POST['changequantityid'])['QuantityOnHand'] < $_POST['changequantity']) {
             echo 'false';
+            return;
+        }
+        if ($cart_data[$keys]["item_id"] == $_POST['changequantityid']) {
+            $cart_data[$keys]["item_quantity"] = $_POST['changequantity'];
         }
     }
     $item_data = json_encode($cart_data);

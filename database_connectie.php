@@ -13,15 +13,15 @@ function db_connect()
     This file is included in making the database connection in the following way:
     $db = db_connect();
     --------------------------------------------------
-    select
+
+    ------------------------------------------------select
     $stmt = $db->query("SELECT ID,mail FROM user");
                                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                                   $id = $row['ID'];
                                   $mail = $row['mail'];
                                   echo ("<tr><td>$id</td><td>$mail</td></tr>");
-                                }
-    --------------------------------------------------
+                                }--
     --------------------------------------------------
     insert
     $statement = $db->prepare("INSERT INTO table(item1,item2)

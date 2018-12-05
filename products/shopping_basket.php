@@ -16,12 +16,14 @@
                     changequantityid: id
                 },
                 success: function (response) {
+                    console.log(response);
                     if (response == 'true') {
                         setTimeout(function () {// wait for 5 secs(2)
                             location.reload(); // then reload the page.(3)
                         }, 500);
                     } else {
                         alert('We don\'t have that in stock or you entered a negative number');
+                        location.reload();
                     }
 
                 }
@@ -86,6 +88,7 @@
                             $totalquantity = $totalquantity + $items['item_quantity'];
                             ?>
                             <li class="collection-item avatar">
+                                <input type="hidden" name="ids[]" value="<?= $item['StockItemID'] ?>"/>
                                 <img src="/images%20(temp)/no-image.jpg" alt="" class="circle">
                                 <span class="title"><?= $item['StockItemName'] ?></span>
                                 <p>Stock: <?= $item['QuantityOnHand'] ?></p>

@@ -50,7 +50,7 @@ function navbar()
     |--------navigation---bar-----------------------|
     |-----------------------------------------------|-->
 
-    <!--|-------Nav-bar-en-rechter-icons----------------|-->
+<!--|-------Nav-bar-en-rechter-icons----------------|-->
     <nav>
         <div class="nav-wrapper blue-grey darken-3">
             <a href="/index.php" class="brand-logo center"><i><img src="/images%20(temp)/wwi-logo.png" width="70%"
@@ -79,7 +79,7 @@ function navbar()
     </nav>
     <ul class="sidenav" id="mobile-demo">
         <li><a href="/account/inlog.php"><i class="material-icons">person</i></a></li>
-        <li><a href="/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
+        <li><a href="/products/shopping_basket.php"><i class="material-icons">shopping_basket</i></a></li>
     </ul>
 
 <!--|--------------END------------------------------|

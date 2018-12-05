@@ -17,7 +17,7 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-<!-- class="content" is nodig voor sticky footer -->
+
 
 <?php
 
