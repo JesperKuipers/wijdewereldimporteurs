@@ -114,7 +114,7 @@ if (isset($_GET['tags'])) {
 <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
-    |----------Producten--------------------------|
+    |--------++--Producten--------------------------|
     |-----------------------------------------------|-->
 
 <div class="container content">
@@ -168,7 +168,7 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
     $result = isset($_GET['tags']) && isset($resultWithTags) ? $resultWithTags : $result;
 
     foreach ($result as $item) {
-        $image = isset($item['photo']) ? '<img src="data:image/jpeg;base64,'.base64_encode($item['photo']).'" alt="photo" style="width:100%">': '<img src="../images/no-image.jpg" alt="photo" style="width:100%">';
+        $image = isset($item['photo']) ? '<img src="data:image/jpeg;base64,'.base64_encode($item['photo']).'" alt="photo" style="width:100%">': '<img src="../images%20(temp)/no-image.jpg" alt="photo" style="width:100%">';
     if ($i == 0) {
     ?>
     <div class="row products">

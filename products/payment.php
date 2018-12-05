@@ -6,6 +6,11 @@
 
     <!--Import basic imports-->
     <?php imports() ?>
+    <script>
+        $(document).ready(function(){
+            $('.datepicker').datepicker();
+        });
+    </script>
 </head>
 <?php
 $hostname = $_SERVER['HTTP_HOST'];
@@ -25,12 +30,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                     "value" => $_POST['amount']
                 ],
                 "description" => "Payment customer",
-                "redirectUrl" => "{$protocol}://{$hostname}/paymentreturn.php?order_id={$orderId}",
+                "redirectUrl" => "{$protocol}://{$hostname}/products/paymentreturn.php?order_id={$orderId}",
                 "metadata" => [
                     "order_id" => $orderId,
+                    "receivedate" => $_POST['date'],
+                    "stockitemids" => $_POST['ids']
                 ]
             ]);
-            database_write($orderId, $payment->id, $payment->status);
+            database_write($orderId, $payment->id, $payment->status, $_POST['date'], $_POST['ids']);
             header("Location: " . $payment->getCheckoutUrl(), true, 303);
 
         }
@@ -70,7 +77,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                                 $totalquantity = $totalquantity + $items['item_quantity'];
                                 ?>
                                 <li class="collection-item avatar">
-                                    <img src="/images/no-image.jpg" alt="" class="circle">
+                                    <img src="/images%20(temp)/no-image.jpg" alt="" class="circle">
                                     <span class="title"><?= $item['StockItemName'] ?></span>
                                     <p class="secondary-content" style="text-align: left">
                                         Price: &euro; <?= $item['RecommendedRetailPrice'] ?><br/>
@@ -91,8 +98,18 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                         </li>
                     <?php } ?>
                 </ul>
+                <ul class="collection with-header">
+                    <li class="collection-header"><h5>Bezorgdatum kiezen</h5></li>
+                    <li class="collection-item">
+                        <input type="text" name="date" class="datepicker" required>
+                    </li>
+                </ul>
             </div>
             <div class="row">
+                <?php foreach ($_POST['ids'] as $ids) {
+                    echo '<input type="hidden" name="ids[]" value="' . $ids . '"/>';
+                }?>
+
                 <button class="btn waves-effect waves-light blue darken-1" style="float: right;" name="pay" type="submit">Afrekenen
                 </button>
             </div>
