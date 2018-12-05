@@ -21,13 +21,8 @@ if (isset($_POST['submit'])) {
             echo "<script type='text/javascript'>alert('You have succesfully sent an email');
             window.location.href = \"/index.php\";
             </script>";
-        } else {
-
         }
-    } else {
-
     }
-
 }
 ?>
 
