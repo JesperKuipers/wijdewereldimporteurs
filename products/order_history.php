@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php require "../functions.php" ;
+    <?php require "../functions.php";
     require '../database_connectie.php'; ?>
 
     <!--Import basic imports-->
@@ -17,42 +16,69 @@
     <li>
     </li>
     <p><b> </b></p>
+
     <?php
-    //$customerid = $_SESSION["customerID"];
-    $db = db_connect();
-    $stmt = $db->prepare("SELECT o.OrderID, SUM(ol.Quantity*s.RecommendedRetailPrice) total, OrderDate, Description, customerid
-FROM orders o 
-JOIN orderlines ol
-ON o.orderid = ol.orderid
-JOIN stockitems s
-ON s.stockitemid = ol.stockitemid
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+        $pdo = db_connect();
+        $customerid = $_SESSION['customerid'];
+        $stmt = $pdo->prepare("SELECT oc.orderId, SUM(ol.Quantity*si.RecommendedRetailPrice) total, oc.receivedate, si.stockitemname, ru.customerid
+FROM orderbycustomers oc 
+JOIN registered_users ru 
+ON oc.customerid = ru.customerid 
+JOIN stockitemorders so 
+ON oc.orderId = so.orderId 
+JOIN stockitems si 
+ON so.StockItemID = si.StockItemID
+JOIN orderlines ol 
+ON ol.orderid = oc.orderid
+WHERE oc.customerid = $customerid
+GROUP BY oc.orderId
+ORDER BY oc.receivedate");
+        $stmt->execute();
+        $customerinfo = $stmt->fetchAll();
+        foreach ($customerinfo as $info) {
 
-GROUP BY OrderID
-HAVING customerID = 2
-ORDER BY OrderDate");
-    $stmt->bindparam()
-    $totalprice = [total];
-    $totalquantity = 0;
-    foreach ($stmt as $orders) {
-    foreach ($orders as $order) {
-    $totalprice = $totalprice + ($order['RecommendedRetailPrice'] * $orders['Quantity']); ?>
-    <span class="title">
-   <p <?= $order['OrderID'] ?> <?= $item['QuantityOnHand'] ?> </p>
-    <p class="secondary-content" style="text-align: left">
-        Price: &euro; <?= $totalprice ?><br/>
-        Quantity: <input class="browser-default"
-                         onchange="changequantity(this.value, <?= $item['StockItemID'] ?>)"
-                         type="number" value="<?= $items['item_quantity'] ?>"/>
-    </p>
+           // $rowarray = $statement->fetchall();
+            //print "<tr>\n";
+            //foreach ($rowarray as $row) {
+               // foreach ($row as $col) {
+                 //   print "\t<td>$col</td>\n";
+             //   }
+                //print "</tr>\n";
+           // }
 
+            ?>
+            <div class="container-accountinfo left content">
+            <b>Order</b><br>
+            <?php echo $info['orderId']; ?><br>
+
+            <b>Total</b><br>
+            <?php echo $info['total']; ?><br>
+
+            <b>Order Date</b><br>
+            <?php echo $info['receivedate']; ?><br>
+
+            <b>Address</b><br>
+            <?php echo $info['address']; ?><br>
+
+            <b>Products</b><br>
+            <?php echo $info['Stockitemname']; ?><br>
+        <?php } ?>
+        <form action="../account/account.php">
+            <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Back to account
+            </button>
+        </form>
+        </div>
+    <?php } else {
+        print("<h3 align='center'>You need to be logged in to see this page.</h3>");
+    }
     ?>
-    <th>Order</th>
-    <td><?= $stmt['OrderID' . 'total' . 'OrderDate' . 'Description'] ?></td>
 
 </div>
 
 
-    <?php footer() ?>
+<?php footer() ?>
 
 </body>
 </html>
+

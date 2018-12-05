@@ -25,7 +25,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                     "value" => $_POST['amount']
                 ],
                 "description" => "Payment customer",
-                "redirectUrl" => "{$protocol}://{$hostname}/paymentreturn.php?order_id={$orderId}",
+                "redirectUrl" => "{$protocol}://{$hostname}/products/paymentreturn.php?order_id={$orderId}",
                 "metadata" => [
                     "order_id" => $orderId,
                 ]
