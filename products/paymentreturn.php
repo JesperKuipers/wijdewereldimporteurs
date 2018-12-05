@@ -36,10 +36,10 @@
         /*
          * Update the order in the database.
          */
-        database_write($orderId, $payment->id, $payment->status);
+        database_write($orderId, $payment->id, $payment->status, $payment->metadata->receivedate, $payment->metadata->stockitemids);
         if ($payment->isPaid()) {
+            setcookie('shopping_cart', "", time() - 3600, "/");
             echo "<p>Your payment was successfull</p>";
-            setcookie("shopping_cart", "", time() - 3600);
         } else {
             echo "<p>Your payment is failed! <br/>Your payment status is '" . htmlspecialchars($payment->status) . "'.</p>";
         }
