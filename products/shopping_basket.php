@@ -64,12 +64,14 @@
 <form class="center content" method="POST" action="payment.php">
     <?php
     include '../query.php';
-    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cart_data = json_decode($cookie_data, true);
-    $cookieResults = array();
-    foreach ($cart_data as $value) {
-        array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
-    }
+    if (isset($_COOKIE['shopping_cart'])) {
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        $cookieResults = array();
+        foreach ($cart_data as $value) {
+            array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+        }
+
     ?>
     <div class="container">
         <div class="row">
@@ -104,7 +106,7 @@
                     <p>Total quantity<br/>Subtotal</p>
                     <div class="secondary-content">
                         <?= $totalquantity ?><br/>
-                        &euro; <?= $totalprice ?>
+                        &euro; <?= number_format($totalprice, 2, ',', '.') ?>
                     </div>
                 </li>
                 <?php } else {
@@ -120,6 +122,9 @@
         <?php } ?>
 
     </div>
+    <?php } else {
+        echo '<h2>Shoppingbasket is empty</h2>';
+    }?>
 </form>
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|

@@ -3,13 +3,11 @@
 <head>
     <!--Include functions.php for lay-out-->
     <?php require "../functions.php";
-    include '../database_connectie.php';?>
-    
+    require '../database_connectie.php';?>
     <!--Import basic imports-->
     <?php imports() ?>
 
 </head>
-
 <body>
 
 <!--Import navbar-->
@@ -21,14 +19,16 @@
 
 <?php
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-//getting customer information
-$pdo = db_connect();
-$customerid = $_SESSION['customerid'];
-$stmt = $pdo->prepare("SELECT * FROM registered_users WHERE customerid = $customerid");
-$stmt->execute();
-$customerinfo = $stmt->fetch();?>
-
-<!-- class="content" is nodig voor sticky footer -->
+    
+    //getting customer information
+    $pdo = db_connect();
+    $customerid = $_SESSION['customerid'];
+    $stmt = $pdo->prepare("SELECT * FROM registered_users WHERE customerid = $customerid");
+    $stmt->execute();
+    $customerinfo = $stmt->fetch();
+    ?>
+    
+<!-- class="content" is needed for the sticky footer -->
 <div class="container-changeaccount center content">
     <form method="POST">
         <h4>Change your account settings</h4><br>
@@ -63,11 +63,10 @@ if(isset($_POST['updateaccountbtn'])){
     $fname = !empty($_POST['fname']) ? trim($_POST['fname']) : null;
     $lname = !empty($_POST['lname']) ? trim($_POST['lname']) : null;
     $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
-    //$password = !empty($_POST['password']) ? trim($_POST['password']) : null;
     $address = !empty($_POST['address']) ? trim($_POST['address']) : null;
     $postalcode = !empty($_POST['postalcode']) ? trim($_POST['postalcode']) : null;
     
-    //Now, we need to check if the supplied email already exists.
+    //Check if the supplied email already exists.
     
     if($email != $customerinfo['email']){
     
@@ -75,10 +74,8 @@ if(isset($_POST['updateaccountbtn'])){
         $sql = "SELECT COUNT(email) AS cus FROM registered_users WHERE email = :email";
         $stmt = $pdo->prepare($sql);
     
-        //Bind the provided email to our prepared statement.
+        //Bind the provided email to our prepared statement and execute it
         $stmt->bindValue(':email', $email);
-    
-        //Execute.
         $stmt->execute();
     
         //Fetch the row.
@@ -90,12 +87,7 @@ if(isset($_POST['updateaccountbtn'])){
         }
     }
     
-    //Hash the password as we do NOT want to store our passwords in plain text.
-    //$passwordHash = password_hash($password, PASSWORD_BCRYPT, array("cost" => 12));
-    
-    //Prepare our INSERT statement.
-    //Remember: We are inserting a new row into our users table.
-    
+    //Prepare the update statement.
     $sql = "UPDATE registered_users
     SET first_name = :fname, last_name = :lname, email = :email, address = :address, postal_code = :postalcode
     WHERE customerid = $customerid";
@@ -106,11 +98,10 @@ if(isset($_POST['updateaccountbtn'])){
     $stmt->bindValue(':fname', $fname);
     $stmt->bindValue(':lname', $lname);
     $stmt->bindValue(':email', $email);
-    //$stmt->bindValue(':password', $passwordHash);
     $stmt->bindValue(':address', $address);
     $stmt->bindValue(':postalcode', $postalcode);
     
-    //Execute the statement and insert the new account.
+    //Execute the statement and update the account.
     $result = $stmt->execute();
     ?>
     <script type='text/javascript'>alert('You have updated your account information');
@@ -127,10 +118,6 @@ if(isset($_POST['updateaccountbtn'])){
 <?php
 }
 ?>
-
-<!--|--------------END------------------------------|
-    |-------insert-code-here------------------------|
-    |-----------------------------------------------|-->
 
 <!--Import footer-->
 <?php footer() ?>

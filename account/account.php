@@ -3,7 +3,7 @@
 <head>
     <!--Include functions.php for lay-out-->
     <?php require '../functions.php';
-    include '../database_connectie.php';
+    require '../database_connectie.php';
     imports() ?>
 
 </head>
@@ -17,19 +17,17 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-<!-- class="content" is nodig voor sticky footer -->
-
 <?php
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-
-
+    
     //getting customer information
     $pdo = db_connect();
     $customerid = $_SESSION['customerid'];
     $stmt = $pdo->prepare("SELECT * FROM registered_users WHERE customerid = $customerid");
     $stmt->execute();
-    $customerinfo = $stmt->fetch(); ?>
+    $customerinfo = $stmt->fetch();
+    ?>
 
     <div class="container-account center content">
         <p><h5>You are currently logged in as <?php print $customerinfo['first_name'] . " " . $customerinfo['last_name'] ?></h5></p>

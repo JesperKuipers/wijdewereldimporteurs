@@ -16,7 +16,6 @@ $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 $address=filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
 $postalcode=filter_input(INPUT_POST, 'postalcode', FILTER_SANITIZE_STRING);
 
-
 function passwordcheck($password,$repassword){
     if($password != $repassword){
         Print("The password is not the same");
@@ -34,13 +33,13 @@ function imports () {
     <link type="text/css" rel="stylesheet" href="/css/main.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Start session, temp saves stuff-->
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
     <?php session_start()?>
+
     <?php
 }
 
@@ -122,11 +121,8 @@ function footer()
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
             integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <?php
 
 }
+

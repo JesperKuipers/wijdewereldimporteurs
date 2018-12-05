@@ -2,7 +2,7 @@
 <html>
 <head>
     <?php require "../functions.php";
-    include '../database_connectie.php';
+    require '../database_connectie.php';
     ob_start();
     imports() ?>
 </head>
@@ -27,7 +27,7 @@
                                 placeholder="Enter your password" onfocus="this.placeholder=''"
                                 onblur="this.placeholder='Enter your password'" required style="margin-left:4px;"><br>
         <label hidden style="float: bottom;">
-            <a class="forgotpassword" href="passwordforgot.php"><b><u>Forgot Password</u></b></a>
+            <a class="forgotpassword" href="../passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
         <?php
         
@@ -44,11 +44,11 @@
                     session_write_close();
                     header('location: /account/account.php');
                 } else {
-                    ?><p class="loginerror"><b>That email and/or password is incorrect</b></p>
+                    ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                     <?php
                 }
             } else {
-                ?><p class="loginerror"><b>That email and/or password is incorrect</b></p>
+                ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
                 <?php
             }
         }
@@ -58,12 +58,15 @@
     </form>
     <form>
         <label style="float:bottom;font-size: 12pt;">
-            <br><br>Don't have an account yet?<br>
-            <a class="createaccount" href="/account/register.php"><b><u>Create Account</u></b></a>
+            <br><br><a class="createaccount" href="register.php"><b><u>Create Account</u></b></a>
         </label>
     </form>
 </div>
 
+
+<!--|-----------BEGINNING---------------------------|
+    |------------Footer-----------------------------|
+    |-----------------------------------------------|-->
 
 <!--Import footer-->
 <?php footer() ?>
