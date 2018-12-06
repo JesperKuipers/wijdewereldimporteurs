@@ -30,50 +30,49 @@ ON oc.orderId = so.orderId
 JOIN stockitems si 
 ON so.StockItemID = si.StockItemID
 WHERE oc.customerid = $customerid
-GROUP BY si.stockitemname
+GROUP BY oc.orderId, si.stockitemname
 ORDER BY oc.receivedate");
     $stmt->execute();
     $customerinfo = $stmt->fetchAll();
-    $arrayIds = array();
-    var_dump(array($customerinfo));
-    foreach ($customerinfo
+    // New array using orderId as the key
+    $output = array();
 
-             as $info) {
+    foreach ($customerinfo as $values) {
+        // Define your key
+        $key = $values['orderId'];
+        // Assign to the new array using all of the actual values
+        $output[$key][] = $values;
+    }
 
-
-    // $rowarray = $statement->fetchall();
-    //print "<tr>\n";
-    //foreach ($rowarray as $row) {
-    // foreach ($row as $col) {
-    //   print "\t<td>$col</td>\n";
-    //   }
-    //print "</tr>\n";
-    // }
+    // Get all values inside the array, but without orderId in the keys:
+    $output = array_values($output);
 
     ?>
-    <div class="container-accountinfo left content">
-
-<?php if (!in_array($info['orderId'], $arrayIds)){ ?>
-
-        <b>Order</b><br>
-        <?php echo $info['orderId']; ?><br>
-
-        <b>Total</b><br>
-        <?php echo $info['total']; ?><br>
-
-        <b>Order Date</b><br>
-        <?php echo $info['receivedate']; ?><br>
-
-        <b>Products</b><br>
-        <?php echo $info['stockitemname']; ?>
-
-        <?php } else {
-            echo $info['stockitemname'];
-        }
-        array_push($arrayIds, $info['orderId']);
 
 
-        } ?>
+        <?php foreach ($output as $test) {  foreach ($test as $info) {?>
+            <div class="container-accountinfo left content">
+
+            <b>Order</b><br>
+            <?php echo $info['orderId']; ?><br>
+
+            <b>Total</b><br>
+            <?php echo $info['total']; ?><br>
+
+            <b>Order Date</b><br>
+            <?php echo $info['receivedate']; ?><br>
+
+            <b>Products</b><br>
+            <?php echo $info['stockitemname']; ?>
+            </div>
+<!--        --><?php }}//} else {
+//            echo $info['stockitemname'];
+//        }
+//        array_push($arrayIds, $info['orderId']);
+
+
+        ?>
+
         <form action="../account/account.php">
             <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Back to account
             </button>
