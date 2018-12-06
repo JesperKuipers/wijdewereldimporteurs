@@ -19,7 +19,6 @@
     <?php } ?>
 
 </head>
-
 <body>
 
 <!--Import navbar-->

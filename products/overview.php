@@ -178,7 +178,7 @@ if (isset($_GET['tags'])) {
                     <div class="card-image">
                         <img src="../images%20(temp)/no-image.jpg"/>
                     </div>
-                    <div class="card-content card-action center">
+                    <div class="card-content card-action center" style="height: 90px">
                         <?= $item['StockItemName'] ?>
                     </div>
                 </a>

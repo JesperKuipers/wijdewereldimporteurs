@@ -85,8 +85,9 @@ if (isset($_POST['submit'])) {
                             <input type="text" name="subject" required class="center outline_color_dark_blue" placeholder="Reason for ...">
                             Message:
                             <textarea rows="8" type="text" name="message" required class="center expandable_textbox outline_color_dark_blue" placeholder="Your message..." size="50"></textarea><br><br>
-                            <div class="g-recaptcha" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
-                            <br>
+                            <div id="capatcha">
+                                <div class="g-recaptcha center" data-callback="recaptchacallback" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
+                            </div><br>
                             <button class="btn disabled waves-effect waves-light dark_blue_color_backround btn" type="submit" id="submit_button" name="submit">Send</button>
                             <button class="btn waves-effect waves-light dark_blue_color_backround btn" type="reset">Reset</button>
                         </form>

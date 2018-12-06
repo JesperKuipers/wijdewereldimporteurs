@@ -27,7 +27,7 @@
             <div class="card">
                 <a class="light_grey_color center" href="/products/overview.php?category=Novelty Items">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Novelty" src="images (temp)/chog-frog.png" height="213">
+                    <img href="/products/overview.php?category=Novelty" src="images (temp)/chog-frog.png" height="318">
                 </div>
                 <div class="card-content card-action center">
                     Novelty Items
@@ -40,7 +40,7 @@
             <div class="card">
                 <a class="light_grey_color center" href="/products/overview.php?category=Clothing">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Clothing" src="images (temp)/alien-officer.png" width="140" height="213">
+                    <img href="/products/overview.php?category=Clothing" src="images (temp)/alien-officer.png" width="140" height="318">
                 </div>
                 <div class="card-content card-action center">
                     Clothes
@@ -53,7 +53,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=Packaging Materials">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Packaging Materials" src="images (temp)/bubblewarp.png" height="213">
+                    <img href="/products/overview.php?category=Packaging Materials" src="images (temp)/bubblewarp.png" height="318">
                 </div>
                 <div class="card-content card-action center ">
                     Packaging Materials
@@ -68,7 +68,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=Mugs">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=Mugs" src="images (temp)/mokk.png" height="213">
+                    <img href="/products/overview.php?category=Mugs" src="images (temp)/mokk.png" height="318">
                 </div>
                 <div class="card-content card-action center ">
                     Mugs
@@ -81,7 +81,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=T-Shirts">
                 <div class="card-image">
-                    <img href="/products/overview.php?category=T-Shirts" src="images (temp)/The-gu.png" height="213">
+                    <img href="/products/overview.php?category=T-Shirts" src="images (temp)/The-gu.png" height="318">
                 </div>
                 <div class="card-content card-action center ">
                     T-shirts
@@ -95,7 +95,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=Furry Footwear">
                 <div class="card-image">
-                    <img href="#" src="/images%20(temp)/haaislippers.png" height="213">
+                    <img href="#" src="/images%20(temp)/haaislippers.png" height="318">
                 </div>
                 <div class="card-content card-action center">
                     Furry Footwear
@@ -110,7 +110,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=USB Novelties">
                 <div class="card-image">
-                    <img href="#" src="/images%20(temp)/sushi.png" height="213">
+                    <img href="#" src="/images%20(temp)/sushi.png" height="318">
                 </div>
                 <div class="card-content card-action center ">
                     USB Novelties
@@ -123,7 +123,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=Computing Novelties">
                 <div class="card-image">
-                    <img href="#" src="/images%20(temp)/periscope-office-nov.png" height="213">
+                    <img href="#" src="/images%20(temp)/periscope-office-nov.png" height="318">
                 </div>
                 <div class="card-content card-action center ">
                     Computing Novelties
@@ -138,7 +138,7 @@
             <div class="card">
                 <a class="light_grey_color" href="/products/overview.php?category=Toys">
                 <div class="card-image">
-                    <img href="#" src="/images%20(temp)/toys-cat.png" height="213">
+                    <img href="#" src="/images%20(temp)/toys-cat.png" height="318">
                 </div>
                 <div class="card-content card-action center ">
                     Toys

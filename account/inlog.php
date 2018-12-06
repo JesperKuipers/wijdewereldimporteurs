@@ -9,7 +9,7 @@
 
 <body>
 
-<!--|-------Nav-bar----------------|-->
+<!--Import navbar-->
 <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
@@ -30,7 +30,7 @@
             <a class="forgotpassword" href="../passwordforgot.php"><b><u>Forgot Password</u></b></a>
         </label><br><br>
         <?php
-        
+
         $db = db_connect();
         $stmt = $db->prepare('SELECT * FROM registered_users WHERE email=:email');
         $stmt->execute(array(":email" => $email));

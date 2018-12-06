@@ -106,7 +106,7 @@ if (isset($_POST['registerbutton'])) {
             //Remember: We are inserting a new row into our users table.
 
             $sql = "INSERT INTO registered_users (customerid, first_name, last_name, email, password, address, postal_code, account)
-    VALUES (:customerid, :fname,:lname, :email, :password, :address, :postalcode, 1)";
+            VALUES (:customerid, :fname,:lname, :email, :password, :address, :postalcode, 1)";
             $stmt = $pdo->prepare($sql);
 
             //Bind our variables.
