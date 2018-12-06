@@ -28,7 +28,7 @@ $stmt = $pdo->prepare("SELECT * FROM registered_users WHERE customerid = $custom
 $stmt->execute();
 $customerinfo = $stmt->fetch();?>
 
-<!-- class="content" is nodig voor sticky footer -->
+<!-- class="content" is needed for sticky footer -->
 <div class="container-changeaccount center content">
     <form method="POST">
         <h4>Change your account settings</h4><br>

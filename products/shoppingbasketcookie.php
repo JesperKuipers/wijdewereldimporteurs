@@ -14,7 +14,7 @@ if (isset($_COOKIE["shopping_cart"])) {
 $item_id_list = array_column($cart_data, 'item_id');
 
 if (isset($_POST['id'])) {
-//Is the post ID in this array? Zo ja: zet dan de quantity 1tje hoger,
+//Is the post ID in this array? If yes, raise quantity by 1. If not, add to cart.
     if (in_array($_POST["id"], $item_id_list)) {
         foreach ($cart_data as $keys => $values) {
             if ($cart_data[$keys]["item_id"] == $_POST["id"]) {

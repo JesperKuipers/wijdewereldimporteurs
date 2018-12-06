@@ -52,7 +52,7 @@
             <!-- Slideshow container -->
             <div class="slideshow-container">
                 <?php
-//                if()
+
                     ?>
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
@@ -165,12 +165,11 @@
                     </tr>
                 </table>
                 <br/>
-                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">In
-                    winkelmandje plaatsen
+                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add to shopping cart
                 </button>
                 <div class="modal modal-fixed-footer">
                     <div class="modal-content">
-                        <h4>Winkelwagentje</h4>
+                        <h4>Shopping cart</h4>
                         <ul class="collection">
                             <?php
                             $totalprice = 0;
@@ -201,8 +200,8 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga naar winkelwagentje</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go to shopping cart</a>
                     </div>
                 </div>
             </form>

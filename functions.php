@@ -22,6 +22,7 @@ function passwordcheck($password,$repassword){
     }
 }
 
+
 function imports () {
     ?>
     <!--Import Google Icon Font-->

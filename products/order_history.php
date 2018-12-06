@@ -21,7 +21,7 @@
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         $pdo = db_connect();
         $customerid = $_SESSION['customerid'];
-        $stmt = $pdo->prepare("SELECT oc.orderId, SUM(ol.Quantity*si.RecommendedRetailPrice) total, oc.receivedate, si.stockitemname, ru.customerid
+        $stmt = $pdo->prepare("SELECT oc.orderId, SUM(oc.Quantity*si.RecommendedRetailPrice) total, oc.receivedate, si.stockitemname, ru.customerid
 FROM orderbycustomers oc 
 JOIN registered_users ru 
 ON oc.customerid = ru.customerid 
@@ -29,8 +29,6 @@ JOIN stockitemorders so
 ON oc.orderId = so.orderId 
 JOIN stockitems si 
 ON so.StockItemID = si.StockItemID
-JOIN orderlines ol 
-ON ol.orderid = oc.orderid
 WHERE oc.customerid = $customerid
 GROUP BY oc.orderId
 ORDER BY oc.receivedate");

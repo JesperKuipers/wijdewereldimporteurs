@@ -128,7 +128,7 @@ if (isset($_GET['tags'])) {
                 <option value="64">64</option>
                 <option value="128">128</option>
             </select>
-            <label>Aantal producten weergeven</label>
+            <label>Products per page</label>
         </div>
         <div class="input-field col s5 offset-s4">
             <select id="selectFilter" multiple>

@@ -43,7 +43,7 @@
                             location.reload(); // then reload the page.(3)
                         }, 500);
                     } else {
-                        alert('Removing the product is failed');
+                        alert('Removing the product has failed');
                     }
 
                 }
@@ -113,20 +113,20 @@
                     </div>
                 </li>
                 <?php } else {
-                    echo '<li class="collection-item"><h2>Shoppingbasket is empty</h2></li>';
+                    echo '<li class="collection-item"><h2>Shopping cart is empty</h2></li>';
                 }?>
             </ul>
         </div>
         <?php if (isset($totalquantity) && isset($totalprice) && $totalquantity != 0 && $totalprice != 0) { ?>
         <div class="row">
-            <button class="btn waves-effect waves-light blue darken-1" style="float: right;" type="submit">Bestellen
+            <button class="btn waves-effect waves-light blue darken-1" style="float: right;" type="submit">Order
             </button>
         </div>
         <?php } ?>
 
     </div>
     <?php } else {
-        echo '<h2>Shoppingbasket is empty</h2>';
+        echo '<h2>Shopping cart is empty</h2>';
     }?>
 </form>
 <!--|--------------END------------------------------|
