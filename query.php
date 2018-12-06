@@ -20,7 +20,8 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName = :StockGroupName');
 }
 
 function getByItemId(int $id)
-{$db = db_connect();
+{
+    $db = db_connect();
     $query = 'SELECT s.*, h.*, c.*
 FROM stockitems AS s
 JOIN stockitemholdings AS h
@@ -56,6 +57,16 @@ function database_write($orderId, $paymentId, $status, $receiveDate, $stockitemi
     $db = db_connect();
     $orderId = intval($orderId);
     $ifEmpty = empty(database_read($orderId));
+    $cookieResults = array();
+
+    if (isset($_COOKIE['shopping_cart'])) {
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        foreach ($cart_data as $value) {
+            array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+        }
+    }
+
     if ($ifEmpty) {
         $query = "INSERT INTO orderbycustomers(orderId, paymentid, status, customerid, receivedate) VALUES (:orderId, :paymentid, :status, :customerid, :receivedate)";
     } else {
@@ -70,12 +81,41 @@ function database_write($orderId, $paymentId, $status, $receiveDate, $stockitemi
 
     $stmt->execute();
     if ($ifEmpty) {
-        foreach ($stockitemids as $ids) {
-            $query2 = "INSERT INTO stockitemorders(orderId, StockItemId) VALUES (:orderId, :stockitemids)";
+        foreach ($cookieResults as $result) {
+            $stockitem = findkey($result, 'StockItemID');
+            $quantity = findkey($result, 'item_quantity');
+
+            $query2 = "INSERT INTO stockitemorders(orderId, StockItemId, quantity) VALUES (:orderId, :stockitemids, :quantity)";
             $statement = $db->prepare($query2);
             $statement->bindParam('orderId', $orderId);
-            $statement->bindParam('stockitemids', $ids);
+            $statement->bindParam('stockitemids', $stockitem['StockItemID']);
+            $statement->bindParam('quantity', $quantity['item_quantity']);
             $statement->execute();
+            $query3 = "UPDATE stockitemholdings SET QuantityOnHand = :QuantityOnHand WHERE StockItemID = :StockItemID";
+            $executement = $db->prepare($query3);
+            $executement->bindValue('QuantityOnHand', $stockitem['QuantityOnHand'] - $quantity['item_quantity']);
+            $executement->bindParam('StockItemID', $stockitem['StockItemID']);
+            $executement->execute();
         }
     }
+}
+
+function findkey($array, $keysearch)
+{
+    // is in base array?
+    if (array_key_exists($keysearch, $array)) {
+        return $array;
+    }
+
+    // check arrays contained in this array
+    foreach ($array as $element) {
+        if (is_array($element)) {
+            if (findkey($element, $keysearch)) {
+                return $element;
+            }
+        }
+
+    }
+
+    return false;
 }
