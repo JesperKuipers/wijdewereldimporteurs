@@ -58,6 +58,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Change account settings
             </button>
         </form>
+        <form action="../products/order_history.php">
+            <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Order history
+            </button>
+        </form>
     </div>
     <?php
     if(isset($_POST['logoutbtn'])) {

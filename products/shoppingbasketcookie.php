@@ -2,7 +2,7 @@
 
 require '../query.php';
 
-// Check if cookie allready exists, if true, fill array with cookie data, if false create a empty array
+// If cookie is set, fill the array with it, if not, make an empty array
 if (isset($_COOKIE["shopping_cart"])) {
     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
     $cart_data = json_decode($cookie_data, true);
@@ -10,12 +10,11 @@ if (isset($_COOKIE["shopping_cart"])) {
     $cart_data = array();
 }
 
-
-// All id's from products
+// All product id's are placed in this variable
 $item_id_list = array_column($cart_data, 'item_id');
 
 if (isset($_POST['id'])) {
-// if the cookie already has this id? If true set quantity + 1. if not, create a new array from the post values
+//Is the post ID in this array? If yes, raise quantity by 1. If not, add to cart.
     if (in_array($_POST["id"], $item_id_list)) {
         foreach ($cart_data as $keys => $values) {
             if ($cart_data[$keys]["item_id"] == $_POST["id"]) {

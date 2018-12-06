@@ -99,7 +99,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                     <?php } ?>
                 </ul>
                 <ul class="collection with-header">
-                    <li class="collection-header"><h5>Bezorgdatum kiezen</h5></li>
+                    <li class="collection-header"><h5>Choose delivery date</h5></li>
                     <li class="collection-item">
                         <input type="text" name="date" class="datepicker" required>
                     </li>
@@ -110,7 +110,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                     echo '<input type="hidden" name="ids[]" value="' . $ids . '"/>';
                 }?>
 
-                <button class="btn waves-effect waves-light blue darken-1" style="float: right;" name="pay" type="submit">Afrekenen
+                <button class="btn waves-effect waves-light blue darken-1" style="float: right;" name="pay" type="submit">Proceed to checkout
                 </button>
             </div>
         </form>

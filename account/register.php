@@ -75,7 +75,7 @@ if (isset($_POST['registerbutton'])) {
             $address = !empty($_POST['address']) ? trim($_POST['address']) : null;
             $postalcode = !empty($_POST['postalcode']) ? trim($_POST['postalcode']) : null;
 
-            //Now, we need to check if the supplied username already exists.
+            //Check if the supplied username already exists.
 
             //Construct the SQL statement and prepare it.
             $sql = "SELECT COUNT(email) AS cus FROM registered_users WHERE email = :email";
@@ -91,9 +91,7 @@ if (isset($_POST['registerbutton'])) {
             $row = $stmt->fetch();
 
             //If the provided username already exists - display error.
-            //TO ADD - Your own method of handling this error. For example purposes,
-            //I'm just going to kill the script completely, as error handling is outside
-            //the scope of this tutorial.
+
             if ($row['cus'] > 0) {
                 die("<script type='text/javascript'>alert('That E-mail already exists')</script>");
             }

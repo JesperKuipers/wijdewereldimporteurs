@@ -9,27 +9,26 @@ function db_connect()
 
 
     /*
-    uitleg
-    dit bestand include je in je
-    aanroepen van de connectie kan op de volgende manier:
+    Explanation:
+    This file is included in making the database connection in the following way:
     $db = db_connect();
     --------------------------------------------------
 
     ------------------------------------------------select
     $stmt = $db->query("SELECT ID,mail FROM user");
-                                while($rij = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
-                                  $id = $rij['ID'];
-                                  $mail = $rij['mail'];
+                                  $id = $row['ID'];
+                                  $mail = $row['mail'];
                                   echo ("<tr><td>$id</td><td>$mail</td></tr>");
                                 }--
     --------------------------------------------------
     insert
-    $statement = $db->prepare("INSERT INTO tabel(item1,item2)
-              VALUES(:item1variabele,:item2variabele)");
+    $statement = $db->prepare("INSERT INTO table(item1,item2)
+              VALUES(:item1variable,:item2variable)");
               $statement->execute(array(
-                "item1variabele" => "$var",
-                "item2variabele" => "$var2"
+                "item1variable" => "$var",
+                "item2variable" => "$var2"
                 ));
     --------------------------------------------------
     --------------------------------------------------
@@ -53,7 +52,7 @@ function db_connect()
     --------------------------------------------------
 
 
-    voor select update insert
+    for select update insert
 
     try{
     select update insert statement
