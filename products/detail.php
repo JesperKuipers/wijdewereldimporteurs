@@ -49,14 +49,20 @@
     $stmttemp = $db->prepare($tempquery);
     $stmttemp->execute();
     $temperature = $stmttemp->fetch();
-    ?>
-    <?php
-    $db = db_connect();
+
+
     $img = $db->prepare("SELECT photo FROM stockitems WHERE StockItemId = :StockItemId;");
     $img->bindParam('StockItemId', $result['StockItemID']);
 
     $img->execute();
     $data = $img->fetch();
+
+
+    $smallimg = $db->prepare("SELECT photo FROM images WHERE StockItemId = :StockItemId;");
+    $smallimg->bindParam('StockItemId', $result['StockItemID']);
+
+    $smallimg->execute();
+    $data1 = $smallimg->fetchAll();
     ?>
     <div class="row">
         <div class="col s14 m6">
@@ -71,19 +77,19 @@
 
                 <div class="mySlides fade">
                     <div class="numbertext">2 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">back view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">3 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">left view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">4 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">right view</div>
                 </div>
                 <!-- Next and previous buttons -->
@@ -270,9 +276,9 @@
     <div class="center row">
         <div class="visible_pic">
             <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4);
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4);
             ?>
             <div class="pic_small_div" style="<?php if (count($small_pictures) <= 4) {
                 echo "width: 504px";
