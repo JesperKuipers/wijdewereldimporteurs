@@ -31,8 +31,8 @@
 <div class="container content">
     <?php
     $result = getByItemId($_GET['itemId']);
-    if (isset($_COOKIE['shopping_cart'])) {
 
+    if (isset($_COOKIE['shopping_cart'])) {
         $cookie_data = stripslashes($_COOKIE['shopping_cart']);
         $cart_data = json_decode($cookie_data, true);
         $cookieResults = array();
@@ -50,6 +50,14 @@
     $stmttemp->execute();
     $temperature = $stmttemp->fetch();
     ?>
+    <?php
+    $db = db_connect();
+    $img = $db->prepare("SELECT photo FROM stockitems WHERE StockItemId = :StockItemId;");
+    $img->bindParam('StockItemId', $result['StockItemID']);
+
+    $img->execute();
+    $data = $img->fetch();
+    ?>
     <div class="row">
         <div class="col s14 m6">
             <!-- Slideshow container -->
@@ -57,26 +65,26 @@
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text2">frontal view</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text">frontal view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">2 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text2">back view</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text">back view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">3 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text2">left view</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text">left view</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">4 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text2">right view</div>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <div class="text">right view</div>
                 </div>
                 <!-- Next and previous buttons -->
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -112,11 +120,11 @@
                         slides[i].style.display = "none";
                     }
                     for (i = 0; i < prepic.length; i++) {
-                        prepic[i].className = prepic[i].className.replace(" active", "");
+                        prepic[i].className = prepic[i].className.replace(" active1", "");
                     }
                     slides[slideIndex - 1].style.display = "block";
                     console.log(prepic[slideIndex - 1]);
-                    prepic[slideIndex - 1].className += " active";
+                    prepic[slideIndex - 1].className += " active1";
                 }
             </script>
         </div>
@@ -162,15 +170,16 @@
                     <tr>
                         <th>Stock</th>
                         <td><?= $result['QuantityOnHand'] ?></td>
-                    </tr> <?php if (strpos($result['StockItemName'], 'chocolate') || substr($result['StockItemName'], 0, 9) === "Chocolate") {?>
+                    </tr> <?php if (strpos($result['StockItemName'], 'chocolate') || substr($result['StockItemName'], 0, 9) === "Chocolate") { ?>
                         <tr>
                             <th>Stocktemperature</th>
-                            <td><?= number_format($temperature['Temperature'], 2, ',', '.')?> &#8451;</td>
+                            <td><?= number_format($temperature['Temperature'], 2, ',', '.') ?> &#8451;</td>
                         </tr>
                     <?php } ?>
                 </table>
                 <br/>
-                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add to shopping cart
+                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add
+                    to shopping cart
                 </button>
                 <div class="modal modal-fixed-footer">
                     <div class="modal-content">
@@ -207,7 +216,8 @@
                     <div class="modal-footer">
                         <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
                            class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go to shopping cart</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go
+                            to shopping cart</a>
                     </div>
                 </div>
             </form>
@@ -265,7 +275,27 @@
         </div>
     </div>
 </div>
-<div class="container content">
+<div class="container content2">
+    <div class="center row">
+        <div class="visible_pic">
+            <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4);
+            ?>
+            <div class="pic_small_div" style="<?php if (count($small_pictures) <= 4) {
+                echo "width: 504px";
+            } else {
+                $amountsmallpictures = count($small_pictures);
+                echo "width: calc(($amountsmallpictures*120px) + 25px)";
+            } ?>">
+                <?php
+                foreach ($small_pictures as $key => $value) {
+                    echo $key;
+                } ?>
+            </div>
+        </div>
+    </div>
     <div class="row personalreview">
         <div class="col s12 m6 ">
             <div class="card blue-grey darken-1">
@@ -301,16 +331,7 @@
         </div>
     </div>
     <!-- The pics ( ͡° ͜ʖ ͡°)-->
-    <div class="center row">
-        <div class="visible_pic">
-            <div class="pic_small_div">
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">'; ?>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <!--|--------------END------------------------------|
