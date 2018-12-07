@@ -9,7 +9,7 @@
 
 <body>
 
-<!--|-------Nav-bar----------------|-->
+<!--Import navbar-->
 <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
@@ -71,5 +71,8 @@
 <!--Import footer-->
 <?php footer() ?>
 
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+        integrity="sha256-U/cHDMTIHCeMcvehBv1xQ052bPSbJtbuiw4QA9cTKz0=" crossorigin="anonymous"></script>
 </body>
 </html>
