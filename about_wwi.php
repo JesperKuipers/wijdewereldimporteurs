@@ -5,7 +5,6 @@ if (isset($_POST['submit'])) {
         $secret = '6LcBd3oUAAAAABzSR-I4wK4nXxLCM8QixPzt1pOz';
         $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
-
         if ($responseData->success) {
             # to send mail
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
@@ -17,11 +16,11 @@ if (isset($_POST['submit'])) {
             $txt = "Contact form from ". $name . ". \n\n" . $message;
 
             mail($mailto, $subject, $txt, $headers);
-
+            echo "<script type='text/javascript'>alert('You have succesfully sent an email');
+            window.location.href = \"/index.php\";
+            </script>";
         }
-
     }
-
 }
 ?>
 

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require "../functions.php";
-    require '../database_connectie.php';
-    imports() ?>
+    <!--Include functions.php for lay-out-->
+    <?php include "../functions.php";
+    include "../database_connectie.php"?>
+    <!--Import basic imports-->
+    <?php imports() ?>
 </head>
 
 <body>
@@ -15,41 +17,40 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-<div class="container-register center content">
-    <h1><b class="createwwi">Create your WWI account</b></h1>
-    <p class="required">* Required Field</p>
-    <form method="POST" class="registerinput">
-        <div class="required"><br></div>
-        <b>First name: </b><input type="text" name="fname" id="fname" class="rinputs" style="margin-left: 41px"><br>
-        <b>Last name: </b><input type="text" name="lname" id="lname" class="rinputs" style="margin-left: 43px"><br>
-        <b>E-Mail: </b><input type="email" name="email" id="email" class="rinputs" required style="margin-left: 75px">
-        <span class="required">*</span><br>
-        <b>Password: </b><input type="password" name="password" id="password" class="rinputs" required
-                                style="margin-left: 55px">
-        <span class="required">*</span><br>
-        <b>Address: </b><input type="text" name="address" id="address" class="rinputs" required
-                               style="margin-left: 63px">
-        <span class="required">*</span><br>
-        <b>Postal Code: </b><input type="text" name="postalcode" id="postalcode" class="rinputs"
-                                   pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="1234 AB" required
-                                   style="margin-left: 39px">
-        <span class="required">*</span><br><br>
-        <div id="recaptcha">
-            <div class="g-recaptcha" data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
+<div class="container center content ">
+    <div class="row" style="width: 400px;">
+
+        <div class="card">
+            <div class="card-action text center">
+                <a class="dark_grey_color">Create your WWI account</a><br>
+            </div>
+            <div class="card-action left text card_tekst">
+                <form method="POST" class="registerinput left">
+                    First name: <input type="text" name="fname" id="fname" class="rinputs"><br>
+                    Last name: <input type="text" name="lname" id="lname" class="rinputs"><br>
+                    E-Mail: <input type="email" name="email" id="email" class="rinputs" required>
+                    Password: <input type="password" name="password" id="password" class="rinputs" required>
+                    Address: <input type="text" name="address" id="address" class="rinputs" required>
+                    Postal Code: <input type="text" name="postalcode" id="postalcode" class="rinputs" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="1234 AB" required>
+                    <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback"
+                         data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
+                    <button type="submit" name="registerbutton" id="submit_button"
+                            class="btnregister s12 btn disabled btn-large waves-effect">Register
+                    </button>
+                </form>
+                <div>
+                    <label class="alreadyaccount">
+                        <br>Already have an account?<br>
+                        <a class="loginhere dark_blue_color" href="inlog.php"><u>Log in here</u></a>
+                    </label>
+                </div>
+            </div>
         </div>
-        <button type="submit" name="registerbutton" id="submitBtn" class="btnregister s12 btn btn-large waves-effect">
-            Register
-        </button>
-    </form>
-    <div>
-        <label class="alreadyaccount">
-            <br>Already have an account?<br>
-            <a class="loginhere" href="inlog.php"><b><u>Log in here</u></b></a>
-        </label>
     </div>
 </div>
 
 <?php
+
 $pdo = db_connect();
 $customerid = 1;
 $st = $pdo->prepare("SELECT MAX(customerid) as customerid FROM registered_users");
@@ -103,7 +104,7 @@ if (isset($_POST['registerbutton'])) {
             //Remember: We are inserting a new row into our users table.
 
             $sql = "INSERT INTO registered_users (customerid, first_name, last_name, email, password, address, postal_code, account)
-    VALUES (:customerid, :fname,:lname, :email, :password, :address, :postalcode, 1)";
+            VALUES (:customerid, :fname,:lname, :email, :password, :address, :postalcode, 1)";
             $stmt = $pdo->prepare($sql);
 
             //Bind our variables.
@@ -131,17 +132,17 @@ if (isset($_POST['registerbutton'])) {
     } else {
         die("<script type='text/javascript'>alert('Please select the reCAPTCHA field')</script>");
     }
-
+    
 }
 
 ?>
 
-<!--|-----------BEGINNING---------------------------|
-    |------------Footer-----------------------------|
-    |-----------------------------------------------|-->
-
 <!--Import footer-->
 <?php footer() ?>
+<!--Import reCaptha V2-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<!--Include functions.js-->
+<script type="text/javascript" src="/js/functions.js"></script>
 
 </body>
 </html>

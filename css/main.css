@@ -64,6 +64,13 @@ body {
     padding: 20px;
 }
 
+.container-index{
+    flex: 1 0 auto;
+    padding: 20px;
+    width: 70%;
+    margin: 0 auto;
+}
+
 .sticky-footer {
     flex-shrink: 0;
     padding: 20px;
@@ -148,10 +155,6 @@ body {
 .alreadyaccount{
     font-size: 12pt;
     margin-left: 50px !important;
-}
-
-.required {
-    color: red;
 }
 
 #recaptcha {
