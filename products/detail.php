@@ -59,8 +59,8 @@
             <!-- Slideshow container -->
             <div class="slideshow-container">
                 <?php
-//                if()
-                    ?>
+                //                if()
+                ?>
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
@@ -172,7 +172,7 @@
                     </tr>
                 </table>
                 <br/>
-                <button class="btn-small waves-effect waves-light blue darken-1"  type="submit">In
+                <button class="btn-small waves-effect waves-light blue darken-1" type="submit">In
                     winkelmandje plaatsen
                 </button>
                 <div class="modal modal-fixed-footer">
@@ -220,23 +220,31 @@
     <!-- The pics ( ͡° ͜ʖ ͡°)-->
     <div class="center row">
         <div class="visible_pic">
-            <div class="pic_small_div">
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">'; ?>
+            <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(5)">' => 5,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(6)">' => 6);
+            ?>
+            <div class="pic_small_div" style="<?php if(count($small_pictures)<= 4){
+                                                        echo "width:504px";}
+                                                    else{ $amountsmallpictures = count($small_pictures);
+                                                    echo "width: calc(($amountsmallpictures*120px) + 24px)";}?>">
+                <?php
+                foreach ($small_pictures as $key => $value) {
+                echo $key;}?>
             </div>
         </div>
     </div>
 </div>
 
+    <!--|--------------END------------------------------|
+        |-------insert-code-here------------------------|
+        |-----------------------------------------------|-->
 
-<!--|--------------END------------------------------|
-    |-------insert-code-here------------------------|
-    |-----------------------------------------------|-->
-
-<!--Import footer-->
-<?php footer() ?>
+    <!--Import footer-->
+    <?php footer() ?>
 
 </body>
 </html>
