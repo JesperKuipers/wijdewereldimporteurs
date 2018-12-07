@@ -28,7 +28,6 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-
 <div class="container content">
     <?php
     $result = getByItemId($_GET['itemId']);
@@ -56,9 +55,6 @@
         <div class="col s14 m6">
             <!-- Slideshow container -->
             <div class="slideshow-container">
-                <?php
-
-                    ?>
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
