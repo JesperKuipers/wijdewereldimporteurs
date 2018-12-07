@@ -61,9 +61,15 @@ body {
 
 .content {
     flex: 1 0 auto;
-    padding: 20px;
+    margin-bottom: 0px;
+    padding: 0px;
 }
 
+.content2 {
+    flex: 1 0 auto;
+    margin-top: 0px;
+    padding: 0px;
+}
 .sticky-footer {
     flex-shrink: 0;
     padding: 20px;

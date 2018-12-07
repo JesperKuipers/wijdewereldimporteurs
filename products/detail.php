@@ -254,7 +254,26 @@
         </div>
     </div>
 </div>
-<div class="container content">
+<div class="container content2">
+    <div class="center row">
+        <div class="visible_pic">
+            <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(5)">' => 5,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(6)">' => 6);
+            ?>
+            <div class="pic_small_div" style="<?php if(count($small_pictures)<= 4){
+                echo "width:503px";}
+            else{ $amountsmallpictures = count($small_pictures);
+                echo "width: calc(($amountsmallpictures*120px) + 24px)";}?>">
+                <?php
+                foreach ($small_pictures as $key => $value) {
+                    echo $key;}?>
+            </div>
+        </div>
+    </div>
     <div class="row personalreview">
         <div class="col s12 m6 ">
             <div class="card blue-grey darken-1">
@@ -290,25 +309,7 @@
         </div>
     </div>
     <!-- The pics ( ͡° ͜ʖ ͡°)-->
-    <div class="center row">
-        <div class="visible_pic">
-            <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(5)">' => 5,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(6)">' => 6);
-            ?>
-            <div class="pic_small_div" style="<?php if(count($small_pictures)<= 4){
-                                                        echo "width:504px";}
-                                                    else{ $amountsmallpictures = count($small_pictures);
-                                                    echo "width: calc(($amountsmallpictures*120px) + 24px)";}?>">
-                <?php
-                foreach ($small_pictures as $key => $value) {
-                echo $key;}?>
-            </div>
-        </div>
-    </div>
+
 </div>
 
     <!--|--------------END------------------------------|
