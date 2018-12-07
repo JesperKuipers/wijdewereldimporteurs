@@ -30,7 +30,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     ?>
 
     <div class="container-account center content">
-        <p><h5>You are currently logged in as <?php print $customerinfo['first_name'] . " " . $customerinfo['last_name'] ?></h5></p>
+        <p><h5>You are currently logged in
+            as <?php print $customerinfo['first_name'] . " " . $customerinfo['last_name'] ?></h5></p>
         <form method="post">
             <button type="submit" name="logoutbtn" class="logoutbtn s12 btn btn-large waves-effect">Log Out</button>
         </form>
@@ -56,14 +57,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         </form>
     </div>
     <?php
-    if(isset($_POST['logoutbtn'])) {
-        if(isset($_SESSION['loggedin'])) {
+    if (isset($_POST['logoutbtn'])) {
+        if (isset($_SESSION['loggedin'])) {
             unset($_SESSION['loggedin']);
         }
         session_destroy();
-        header('refresh : 0; url=../index.php');
+        echo '<script>window.location.href = "/index.php";</script>';
     }
-} else{
+} else {
     ?>
     <div class="notloggedin center content">
         <h3>You need to be logged in to see this page.</h3>
