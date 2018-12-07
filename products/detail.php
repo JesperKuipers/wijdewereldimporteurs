@@ -212,7 +212,16 @@
                 </div>
             </form>
             <?php
+            $pdo = db_connect();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+                $customerid=$_SESSION['customerid'];
+                $productid=$result['StockItemID'];
+            $stmtcheck = $pdo->prepare("SELECT * FROM rating WHERE customerid = $customerid AND product_id = $productid");
+            $stmtcheck->execute();
+                if($stmtcheck->rowCount()>0){
+                    echo 'You already reviewed this product.';
+                }else{
+
             ?>
             <div class="box">
                 <form action="../review.php" method="post" class="rating">
@@ -237,7 +246,7 @@
                             title="Sucks big time - 1 star"></label>
 
                     <?php
-                    $pdo = db_connect();
+                    }
                     $queryratecustomer = "SELECT customerid FROM rating";
                     $customerratereview = $pdo->prepare($queryratecustomer);
                     $customerratereview->execute();
