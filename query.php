@@ -81,7 +81,7 @@ function database_write($orderId, $paymentId, $status, $receiveDate, $stockitemi
     $stmt->bindParam('paymentid', $paymentId);
     $stmt->bindParam('status', $status);
     $stmt->bindParam('customerid', $_SESSION['customerid']);
-    $stmt->bindParam('receivedate', $receiveDate);
+    $stmt->bindValue('receivedate', date('Y-m-d', strtotime($receiveDate)));
 
     $stmt->execute();
     if ($ifEmpty) {

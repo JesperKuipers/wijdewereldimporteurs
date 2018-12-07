@@ -12,7 +12,7 @@
 
 <body>
 <?php navbar() ?>
-<div class="center content">
+<div class="container center content">
 
     <?php
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
@@ -33,29 +33,30 @@ ORDER BY oc.receivedate");
         $customerinfo = $stmt->fetchAll();
         ?>
 
-
+    <table style="width:100%">
+        <tr>
+            <th>Order</th>
+            <th>Total</th>
+            <th>Order Date</th>
+            <th>Products</th>
+        </tr>
         <?php foreach ($customerinfo as $info) { ?>
-            <div class="container-accountinfo left content">
 
-                <b>Order</b><br>
-                <?php echo $info['orderId']; ?><br>
-
-                <b>Total</b><br>
-                <?php echo $info['total']; ?><br>
-
-                <b>Order Date</b><br>
-                <?php echo $info['receivedate']; ?><br>
-
-                <b>Products</b><br>
-
-                <?php
+        <tr>
+            <td><?php echo $info['orderId']; ?></td>
+            <td><?php echo $info['total']; ?></td>
+            <td><?php echo $info['receivedate']; ?></td>
+            <td><?php
                 $array = explode(',', $info['stockitemname']);
                 foreach ($array as $var) {
                     echo $var . '<br/>';
                 }
-                ?>
-            </div>
+                ?></td>
+        </tr>
+
+
         <?php } ?>
+    </table>
         <form action="../account/account.php">
             <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Back to account
             </button>
