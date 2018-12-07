@@ -22,10 +22,14 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName = :StockGroupName');
 function getByItemId(int $id)
 {
     $db = db_connect();
-    $query = 'SELECT s.*, h.*, c.*
+    $query = 'SELECT s.*, h.*, c.*, g.*
 FROM stockitems AS s
 JOIN stockitemholdings AS h
 ON s.StockItemID = h.StockItemID
+JOIN stockitemstockgroups ig
+ON s.Stockitemid = ig.StockitemID
+JOIN stockgroups g
+ON ig.stockgroupid = g.stockgroupid
 LEFT JOIN colors AS c
 ON s.ColorID = c.ColorID
 WHERE s.StockItemId = :StockItemId;';

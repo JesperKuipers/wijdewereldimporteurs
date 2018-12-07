@@ -46,6 +46,11 @@
         $customFields = explode(':', $result['CustomFields'])[1];
         $CountryOfManufacture = explode(',', $customFields)[0];
     }
+    $db = db_connect();
+    $tempquery = "SELECT Temperature FROM coldroomtemperatures WHERE ColdRoomSensorNumber = 1";
+    $stmttemp = $db->prepare($tempquery);
+    $stmttemp->execute();
+    $temperature = $stmttemp->fetch();
     ?>
     <div class="row">
         <div class="col s14 m6">
@@ -162,7 +167,12 @@
                     <tr>
                         <th>Stock</th>
                         <td><?= $result['QuantityOnHand'] ?></td>
-                    </tr>
+                    </tr> <?php if (strpos($result['StockItemName'], 'chocolate') || substr($result['StockItemName'], 0, 9) === "Chocolate") {?>
+                        <tr>
+                            <th>Stocktemperature</th>
+                            <td><?= number_format($temperature['Temperature'], 2, ',', '.')?> &#8451;</td>
+                        </tr>
+                    <?php } ?>
                 </table>
                 <br/>
                 <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add to shopping cart
