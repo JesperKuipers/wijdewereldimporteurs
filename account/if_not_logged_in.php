@@ -86,7 +86,7 @@
                     <br><br><br><br><br>
                     <a class="waves-effect waves-light btn-large dark_blue_color_backround" href="register.php">Register
                         now</a>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
             </div>
         </div>
