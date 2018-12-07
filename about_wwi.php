@@ -18,10 +18,7 @@ if (isset($_POST['submit'])) {
 
             mail($mailto, $subject, $txt, $headers);
 
-        } else {
-
         }
-    } else {
 
     }
 
