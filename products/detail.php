@@ -40,7 +40,6 @@
             array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
         }
     }
-
     if (isset($result['CustomFields'])) {
         $customFields = explode(':', $result['CustomFields'])[1];
         $CountryOfManufacture = explode(',', $customFields)[0];
@@ -206,7 +205,8 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
+                           class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
                         <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go to shopping cart</a>
                     </div>
                 </div>

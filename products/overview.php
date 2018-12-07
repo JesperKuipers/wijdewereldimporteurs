@@ -110,11 +110,11 @@ if (isset($_GET['tags'])) {
 }
 ?>
 
-<!--Import navbar-->
-<?php navbar() ?>
+    <!--Import navbar-->
+    <?php navbar() ?>
 
 <!--|-----------BEGINNING---------------------------|
-    |--------++--Producten--------------------------|
+    |------------Products---------------------------|
     |-----------------------------------------------|-->
 
 <div class="container content">
@@ -191,7 +191,7 @@ ON ig.stockgroupid = g.stockgroupid WHERE StockGroupName LIKE :StockGroupName');
                     <div class="card-image">
                        <?= $image ?>
                     </div>
-                    <div class="card-content card-action center">
+                    <div class="card-content card-action center" style="height: 90px">
                         <?= $item['StockItemName'] ?>
                     </div>
                 </a>
