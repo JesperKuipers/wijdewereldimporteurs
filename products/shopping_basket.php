@@ -16,12 +16,14 @@
                     changequantityid: id
                 },
                 success: function (response) {
+                    console.log(response);
                     if (response == 'true') {
                         setTimeout(function () {// wait for 5 secs(2)
                             location.reload(); // then reload the page.(3)
                         }, 500);
                     } else {
                         alert('We don\'t have that in stock or you entered a negative number');
+                        location.reload();
                     }
 
                 }
@@ -41,7 +43,7 @@
                             location.reload(); // then reload the page.(3)
                         }, 500);
                     } else {
-                        alert('Removing the product is failed');
+                        alert('Removing the product has failed');
                     }
 
                 }
@@ -64,12 +66,14 @@
 <form class="center content" method="POST" action="payment.php">
     <?php
     include '../query.php';
-    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cart_data = json_decode($cookie_data, true);
-    $cookieResults = array();
-    foreach ($cart_data as $value) {
-        array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
-    }
+    if (isset($_COOKIE['shopping_cart'])) {
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        $cookieResults = array();
+        foreach ($cart_data as $value) {
+            array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
+        }
+
     ?>
     <div class="container">
         <div class="row">
@@ -84,7 +88,8 @@
                             $totalquantity = $totalquantity + $items['item_quantity'];
                             ?>
                             <li class="collection-item avatar">
-                                <img src="/images/no-image.jpg" alt="" class="circle">
+                                <input type="hidden" name="ids[]" value="<?= $item['StockItemID'] ?>"/>
+                                <img src="/images%20(temp)/no-image.jpg" alt="" class="circle">
                                 <span class="title"><?= $item['StockItemName'] ?></span>
                                 <p>Stock: <?= $item['QuantityOnHand'] ?></p>
                                 <p class="secondary-content" style="text-align: left">
@@ -104,22 +109,25 @@
                     <p>Total quantity<br/>Subtotal</p>
                     <div class="secondary-content">
                         <?= $totalquantity ?><br/>
-                        &euro; <?= $totalprice ?>
+                        &euro; <?= number_format($totalprice, 2, ',', '.') ?>
                     </div>
                 </li>
                 <?php } else {
-                    echo '<li class="collection-item"><h2>Shoppingbasket is empty</h2></li>';
+                    echo '<li class="collection-item"><h2>Shopping cart is empty</h2></li>';
                 }?>
             </ul>
         </div>
         <?php if (isset($totalquantity) && isset($totalprice) && $totalquantity != 0 && $totalprice != 0) { ?>
         <div class="row">
-            <button class="btn waves-effect waves-light blue darken-1" style="float: right;" type="submit">Bestellen
+            <button class="btn waves-effect waves-light blue darken-1" style="float: right;" type="submit">Order
             </button>
         </div>
         <?php } ?>
 
     </div>
+    <?php } else {
+        echo '<h2>Shopping cart is empty</h2>';
+    }?>
 </form>
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|

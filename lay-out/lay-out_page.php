@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--Include functions.php for lay-out-->
-    <?php include ".php/functions.php" ?>
+    <?php include "../functions.php" ?>
     <!--Import basic imports-->
     <?php imports() ?>
 </head>
@@ -18,7 +18,7 @@
 
 
 <!-- class="content" is nodig voor sticky footer -->
-<div class="center content">
+<div class="center content ">
     <p><b>insert here pls</b></p>
 </div>
 

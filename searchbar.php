@@ -24,11 +24,9 @@
     try {
     $db = db_connect();
 
-    $productname = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-    $sort = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
-    $tags = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
+    $searchinput = filter_input(INPUT_POST, "search", FILTER_SANITIZE_STRING);
 
-    $searchbar = "%" . $_POST['search'] . "%";
+    $searchbar = "%" . $searchinput . "%";
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
     $stmt = $db->prepare("SELECT i.StockItemID, i.StockItemName, g.StockGroupName, i.tags
 FROM stockitems i
@@ -64,7 +62,7 @@ WHERE i.StockItemName LIKE :search OR g.StockGroupName LIKE :search OR i.tags LI
             <div class="card">
                 <a href="/products/detail.php?itemId=<?= $item['StockItemID'] ?>">
                         <div class="card-image">
-                        <img src="images/no-image.jpg"/>
+                        <img src="images (temp)/no-image.jpg"/>
                     </div>
                     <div class="card-content card-action center">
                         <?= $item['StockItemName'] ?>

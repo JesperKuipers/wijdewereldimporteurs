@@ -19,7 +19,6 @@
     <?php } ?>
 
 </head>
-
 <body>
 
 <!--Import navbar-->
@@ -41,6 +40,7 @@
             array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
         }
     }
+
     if (isset($result['CustomFields'])) {
         $customFields = explode(':', $result['CustomFields'])[1];
         $CountryOfManufacture = explode(',', $customFields)[0];
@@ -58,9 +58,6 @@
         <div class="col s14 m6">
             <!-- Slideshow container -->
             <div class="slideshow-container">
-                <?php
-                //                if()
-                ?>
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
@@ -172,22 +169,21 @@
                     </tr>
                 </table>
                 <br/>
-                <button class="btn-small waves-effect waves-light blue darken-1" type="submit">In
-                    winkelmandje plaatsen
+                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add to shopping cart
                 </button>
                 <div class="modal modal-fixed-footer">
                     <div class="modal-content">
-                        <h4>Winkelwagentje</h4>
+                        <h4>Shopping cart</h4>
                         <ul class="collection">
                             <?php
-                            $totalprice = 1;
+                            $totalprice = 0;
                             foreach ($cookieResults as $values) {
                                 foreach ($values as $value) {
                                     if (isset($value['StockItemName'])) {
                                         $totalprice = $totalprice + ($value['RecommendedRetailPrice'] * $values['item_quantity']);
                                         ?>
                                         <li class="collection-item avatar">
-                                            <img src="/images/no-image.jpg" alt="" class="circle">
+                                            <img src="/images%20(temp)/no-image.jpg" alt="" class="circle">
                                             <span class="title"><?= $value['StockItemName'] ?></span>
                                             <p>Stock: <?= $value['QuantityOnHand'] ?></p>
                                             <p class="secondary-content">
@@ -208,13 +204,89 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
-                           class="modal-close waves-effect waves-green btn-flat">Verder winkelen</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Ga
-                            naar
-                            winkelwagentje</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go to shopping cart</a>
                     </div>
                 </div>
+            </form>
+            <?php
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+            ?>
+            <div class="box">
+                <form action="../review.php" method="post" class="rating">
+
+                    <input type="hidden" name="id" value="<?= $result['StockItemID'] ?>">
+
+
+                    <input type="radio" onchange="this.form.submit();" id="star5" name="rating" value="5"/><label
+                            class="full" for="star5"
+                            title="Awesome - 5 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star4" name="rating" value="4"/><label
+                            class="full" for="star4"
+                            title="Pretty good - 4 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star3" name="rating" value="3"/><label
+                            class="full" for="star3"
+                            title="Meh - 3 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star2" name="rating" value="2"/><label
+                            class="full" for="star2"
+                            title="Kinda bad - 2 stars"></label>
+                    <input type="radio" onchange="this.form.submit();" id="star1" name="rating" value="1"/><label
+                            class="full" for="star1"
+                            title="Sucks big time - 1 star"></label>
+
+                    <?php
+                    $pdo = db_connect();
+                    $queryratecustomer = "SELECT customerid FROM rating";
+                    $customerratereview = $pdo->prepare($queryratecustomer);
+                    $customerratereview->execute();
+                    $rate = $customerratereview->fetch();
+
+
+                    ?>
+                </form>
+
+                <?php
+                } else {
+                    echo 'First login to review this product';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container content">
+    <div class="row personalreview">
+        <div class="col s12 m6 ">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text  personalreview">
+                    <span class="card-title"><?php
+                        $pdo = db_connect();
+                        $reviewquery = "SELECT R.first_name, RA.rating, RA.product_id
+                                      FROM registered_users R
+                                      LEFT JOIN rating RA
+                                      ON R.customerid = RA.customerid
+                                      WHERE RA.product_id = :product_id
+                                      ORDER BY RAND()
+                                      LIMIT 1";
+                        $stmtreviews = $pdo->prepare($reviewquery);
+                        $stmtreviews->bindParam(':product_id', $result['StockItemID']);
+                        $stmtreviews->execute();
+                        $resultreviews = $stmtreviews->fetch(PDO::FETCH_ASSOC);
+                        echo $resultreviews['first_name']
+                        ?></span>
+                    <h7>
+                        <?php
+                        if (isset($resultreviews['rating'])) {
+                            for ($x = 1; $x <= $resultreviews['rating']; $x++) {
+                                ?><i class="material-icons colorstars">star</i><?php
+                            }
+                        } else {
+                            echo 'Be the first one to review this product';
+                        }
+                        ?>
+                    </h7>
+                </div>
+            </div>
         </div>
     </div>
     <!-- The pics ( ͡° ͜ʖ ͡°)-->
@@ -243,8 +315,8 @@
         |-------insert-code-here------------------------|
         |-----------------------------------------------|-->
 
-    <!--Import footer-->
-    <?php footer() ?>
+<!--Import footer-->
+<?php footer() ?>
 
 </body>
 </html>
