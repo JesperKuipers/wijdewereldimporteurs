@@ -1,10 +1,10 @@
 <?php
 
 if (isset($_POST['submit'])) {
-    require 'functions.php';
     if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
         $secret = '6LcBd3oUAAAAABzSR-I4wK4nXxLCM8QixPzt1pOz';
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret
+                          . '&response=' . $_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
 
         if ($responseData->success) {
@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
                     <a class="dark_grey_color center"><b> Contact WWI</b></a><br>
                 </div>
                 <div class="card-action center text card_tekst">
-                    <p class="light_grey_color text">If you would like to contact Wide World Importers, fill the form below in.</p><br/>
+                    <p class="light_grey_color text">If you would like to contact Wide World Importers, fill in the form below.</p><br/>
 
                         <form method="post">
                             Name:

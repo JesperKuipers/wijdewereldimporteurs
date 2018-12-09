@@ -19,7 +19,7 @@
     |-----------------------------------------------|-->
 
 
-<!-- class="content" is nodig voor sticky footer -->
+<!-- class="content" is needed for sticky footer -->
 <div class="center content">
 
     <?php
@@ -36,12 +36,12 @@
         /*
          * Update the order in the database.
          */
-        database_write($orderId, $payment->id, $payment->status);
+        database_write($orderId, $payment->id, $payment->status, $payment->metadata->receivedate, $payment->metadata->stockitemids);
         if ($payment->isPaid()) {
+            setcookie('shopping_cart', "", time() - 3600, "/");
             echo "<p>Your payment was successfull</p>";
-            setcookie("shopping_cart", "", time() - 3600);
         } else {
-            echo "<p>Your payment is failed! <br/>Your payment status is '" . htmlspecialchars($payment->status) . "'.</p>";
+            echo "<p>Your payment has failed! <br/>Your payment status is '" . htmlspecialchars($payment->status) . "'.</p>";
         }
     } catch (\Mollie\Api\Exceptions\ApiException $e) {
         throw new Exception("API call failed: " . htmlspecialchars($e->getMessage()), $e->getCode(), $e->getPrevious());

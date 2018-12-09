@@ -28,7 +28,7 @@ $stmt = $pdo->prepare("SELECT * FROM registered_users WHERE customerid = $custom
 $stmt->execute();
 $customerinfo = $stmt->fetch();?>
 
-<!-- class="content" is nodig voor sticky footer -->
+<!-- class="content" is needed for sticky footer -->
 <div class="container-changeaccount center content">
     <form method="POST">
         <h4>Change your account settings</h4><br>
@@ -67,7 +67,7 @@ if(isset($_POST['updateaccountbtn'])){
     $address = !empty($_POST['address']) ? trim($_POST['address']) : null;
     $postalcode = !empty($_POST['postalcode']) ? trim($_POST['postalcode']) : null;
     
-    //Now, we need to check if the supplied email already exists.
+    //Check if the supplied email already exists.
     
     if($email != $customerinfo['email']){
     
@@ -82,7 +82,7 @@ if(isset($_POST['updateaccountbtn'])){
         $stmt->execute();
     
         //Fetch the row.
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
     
         //If the provided email already exists - display error.
         if($row['cus'] > 0){
@@ -106,7 +106,6 @@ if(isset($_POST['updateaccountbtn'])){
     $stmt->bindValue(':fname', $fname);
     $stmt->bindValue(':lname', $lname);
     $stmt->bindValue(':email', $email);
-    //$stmt->bindValue(':password', $passwordHash);
     $stmt->bindValue(':address', $address);
     $stmt->bindValue(':postalcode', $postalcode);
     

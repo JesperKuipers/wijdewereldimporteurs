@@ -17,7 +17,7 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-<!-- class="content" is nodig voor sticky footer -->
+
 
 <?php
 
@@ -56,6 +56,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
         <form action="accountchange.php">
             <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Change account settings
+            </button>
+        </form>
+        <form action="../products/order_history.php">
+            <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Order history
             </button>
         </form>
     </div>

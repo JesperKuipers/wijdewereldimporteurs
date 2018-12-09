@@ -16,7 +16,6 @@
     |--------insert-code-here-----------------------|
     |-----------------------------------------------|-->
 
-<!-- class="content" is nodig voor sticky footer -->
 <div class="container-login center content">
     <p><b>Please log into your account</b></p>
     <form method="POST" name="login" id="login">
@@ -44,11 +43,11 @@
                     session_write_close();
                     header('location: /account/account.php');
                 } else {
-                    ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
+                    ?><p class="loginerror"><b>Username and/or password is incorrect</b></p>
                     <?php
                 }
             } else {
-                ?><p class="loginerror"><b>Uw gebruikersnaam en/of wachtwoord is onjuist</b></p>
+                ?><p class="loginerror"><b>Username and/or password is incorrect</b></p>
                 <?php
             }
         }
@@ -73,4 +72,3 @@
 
 </body>
 </html>
-

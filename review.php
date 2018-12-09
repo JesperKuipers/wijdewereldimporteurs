@@ -50,7 +50,7 @@ if (isset($_POST['rating'])) {
     |-----------------------------------------------|-->
 
 
-<!-- class="content" is nodig voor sticky footer -->
+<!-- class="content" is needed for sticky footer -->
 
 </body>
 
