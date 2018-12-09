@@ -12,18 +12,18 @@ if (isset($_COOKIE["shopping_cart"])) {
 
 // All product id's are placed in this variable
 $item_id_list = array_column($cart_data, 'item_id');
-
-if (isset($_POST['id'])) {
+$item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+if (isset($item_id)) {
 //Is the post ID in this array? If yes, raise quantity by 1. If not, add to cart.
-    if (in_array($_POST["id"], $item_id_list)) {
+    if (in_array($item_id, $item_id_list)) {
         foreach ($cart_data as $keys => $values) {
-            if ($cart_data[$keys]["item_id"] == $_POST["id"]) {
+            if ($cart_data[$keys]["item_id"] == $item_id) {
                 $cart_data[$keys]["item_quantity"] = $cart_data[$keys]["item_quantity"] + 1;
             }
         }
     } else {
         $item_array = array(
-            'item_id' => $_POST["id"],
+            'item_id' => $item_id,
             'item_quantity' => 1
         );
         $cart_data[] = $item_array;
@@ -32,7 +32,7 @@ if (isset($_POST['id'])) {
     $item_data = json_encode($cart_data);
     setcookie('shopping_cart', $item_data, time() + (86400 * 7), "/");
 
-    header('Location: /products/detail.php?itemId=' . $_POST['id'] . '&cookie=set');
+    header('Location: /products/detail.php?itemId=' . $item_id . '&cookie=set');
 }
 
 if (isset($_POST['changequantity']) && isset($_POST['changequantityid']) && in_array($_POST['changequantityid'], $item_id_list)) {

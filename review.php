@@ -1,6 +1,5 @@
 <?php
 include 'database_connectie.php';
-session_start();
 
 $pdo = db_connect();
 
