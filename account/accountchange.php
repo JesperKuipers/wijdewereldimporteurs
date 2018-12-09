@@ -58,11 +58,11 @@ if(isset($_POST['updateaccountbtn'])){
     }
     
     $customerid = $_SESSION['customerid'];
-    $fname = !empty($_POST['fname']) ? trim($_POST['fname']) : null;
-    $lname = !empty($_POST['lname']) ? trim($_POST['lname']) : null;
-    $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
-    $address = !empty($_POST['address']) ? trim($_POST['address']) : null;
-    $postalcode = !empty($_POST['postalcode']) ? trim($_POST['postalcode']) : null;
+    $fname = !empty($_POST['fname']) ? filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING) : null;
+    $lname = !empty($_POST['lname']) ? filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING) : null;
+    $email = !empty($_POST['email']) ? filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) : null;
+    $address = !empty($_POST['address']) ? filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING) : null;
+    $postalcode = !empty($_POST['postalcode']) ? filter_input(INPUT_POST, 'postalcode', FILTER_SANITIZE_STRING) : null;
     
     //Check if the supplied email already exists.
     
