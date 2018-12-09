@@ -13,15 +13,12 @@
 <body>
 <?php navbar() ?>
 <div class="center content">
-    <li>
-    </li>
-    <p><b> </b></p>
 
     <?php
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         $pdo = db_connect();
         $customerid = $_SESSION['customerid'];
-        $stmt = $pdo->prepare("SELECT oc.orderId, SUM(oc.Quantity*si.RecommendedRetailPrice) total, oc.receivedate, si.stockitemname, ru.customerid
+        $stmt = $pdo->prepare("SELECT oc.orderId, SUM(so.quantity*si.RecommendedRetailPrice) total, oc.receivedate, GROUP_CONCAT(si.stockitemname SEPARATOR ',') as stockitemname, ru.customerid
 FROM orderbycustomers oc 
 JOIN registered_users ru 
 ON oc.customerid = ru.customerid 
@@ -34,39 +31,35 @@ GROUP BY oc.orderId
 ORDER BY oc.receivedate");
         $stmt->execute();
         $customerinfo = $stmt->fetchAll();
-        foreach ($customerinfo as $info) {
+        ?>
 
-           // $rowarray = $statement->fetchall();
-            //print "<tr>\n";
-            //foreach ($rowarray as $row) {
-               // foreach ($row as $col) {
-                 //   print "\t<td>$col</td>\n";
-             //   }
-                //print "</tr>\n";
-           // }
 
-            ?>
+        <?php foreach ($customerinfo as $info) { ?>
             <div class="container-accountinfo left content">
-            <b>Order</b><br>
-            <?php echo $info['orderId']; ?><br>
 
-            <b>Total</b><br>
-            <?php echo $info['total']; ?><br>
+                <b>Order</b><br>
+                <?php echo $info['orderId']; ?><br>
 
-            <b>Order Date</b><br>
-            <?php echo $info['receivedate']; ?><br>
+                <b>Total</b><br>
+                <?php echo $info['total']; ?><br>
 
-            <b>Address</b><br>
-            <?php echo $info['address']; ?><br>
+                <b>Order Date</b><br>
+                <?php echo $info['receivedate']; ?><br>
 
-            <b>Products</b><br>
-            <?php echo $info['Stockitemname']; ?><br>
+                <b>Products</b><br>
+
+                <?php
+                $array = explode(',', $info['stockitemname']);
+                foreach ($array as $var) {
+                    echo $var . '<br/>';
+                }
+                ?>
+            </div>
         <?php } ?>
         <form action="../account/account.php">
             <button type="submit" class="changeaccountbtn s12 btn btn-small waves-effect">Back to account
             </button>
         </form>
-        </div>
     <?php } else {
         print("<h3 align='center'>You need to be logged in to see this page.</h3>");
     }

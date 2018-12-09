@@ -68,6 +68,7 @@ function db_connect()
     } else {
         $db = new PDO('mysql:host=5.189.176.248;dbname=jesper_wwi;charset=utf8', 'jesper_website', 'r6KnZEQrWA', $options);
     }
+//    $db = new PDO('mysql:host=5.189.176.248;dbname=jesper_wwi;charset=utf8', 'jesper_website', 'r6KnZEQrWA', $options);
     return $db;
 }
 

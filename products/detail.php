@@ -32,7 +32,6 @@
     <?php
     $result = getByItemId($_GET['itemId']);
     if (isset($_COOKIE['shopping_cart'])) {
-
         $cookie_data = stripslashes($_COOKIE['shopping_cart']);
         $cart_data = json_decode($cookie_data, true);
         $cookieResults = array();
@@ -40,19 +39,28 @@
             array_push($cookieResults, [getByItemId($value['item_id']), 'item_quantity' => $value['item_quantity']]);
         }
     }
-
     if (isset($result['CustomFields'])) {
         $customFields = explode(':', $result['CustomFields'])[1];
         $CountryOfManufacture = explode(',', $customFields)[0];
     }
+    $db = db_connect();
+    $tempquery = "SELECT Temperature FROM coldroomtemperatures WHERE ColdRoomSensorNumber = 1";
+    $stmttemp = $db->prepare($tempquery);
+    $stmttemp->execute();
+    $temperature = $stmttemp->fetch();
+    ?>
+    <?php
+    $db = db_connect();
+    $img = $db->prepare("SELECT photo FROM stockitems WHERE StockItemId = :StockItemId;");
+    $img->bindParam('StockItemId', $result['StockItemID']);
+
+    $img->execute();
+    $data = $img->fetch();
     ?>
     <div class="row">
         <div class="col s14 m6">
             <!-- Slideshow container -->
             <div class="slideshow-container">
-                <?php
-
-                    ?>
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
@@ -111,11 +119,11 @@
                         slides[i].style.display = "none";
                     }
                     for (i = 0; i < prepic.length; i++) {
-                        prepic[i].className = prepic[i].className.replace(" active", "");
+                        prepic[i].className = prepic[i].className.replace(" active1", "");
                     }
                     slides[slideIndex - 1].style.display = "block";
                     console.log(prepic[slideIndex - 1]);
-                    prepic[slideIndex - 1].className += " active";
+                    prepic[slideIndex - 1].className += " active1";
                 }
             </script>
         </div>
@@ -161,10 +169,16 @@
                     <tr>
                         <th>Stock</th>
                         <td><?= $result['QuantityOnHand'] ?></td>
-                    </tr>
+                    </tr> <?php if (strpos($result['StockItemName'], 'chocolate') || substr($result['StockItemName'], 0, 9) === "Chocolate") { ?>
+                        <tr>
+                            <th>Stocktemperature</th>
+                            <td><?= number_format($temperature['Temperature'], 2, ',', '.') ?> &#8451;</td>
+                        </tr>
+                    <?php } ?>
                 </table>
                 <br/>
-                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add to shopping cart
+                <button class="btn-small waves-effect waves-light blue darken-1" style="float: right" type="submit">Add
+                    to shopping cart
                 </button>
                 <div class="modal modal-fixed-footer">
                     <div class="modal-content">
@@ -199,13 +213,24 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>" class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
-                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go to shopping cart</a>
+                        <a href="/products/detail.php?itemId=<?= $_GET['itemId'] ?>"
+                           class="modal-close waves-effect waves-green btn-flat">Continue shopping</a>
+                        <a href="/products/shopping_basket.php" class="modal-close waves-effect waves-green btn-flat">Go
+                            to shopping cart</a>
                     </div>
                 </div>
             </form>
             <?php
+            $pdo = db_connect();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+                $customerid=$_SESSION['customerid'];
+                $productid=$result['StockItemID'];
+            $stmtcheck = $pdo->prepare("SELECT * FROM rating WHERE customerid = $customerid AND product_id = $productid");
+            $stmtcheck->execute();
+                if($stmtcheck->rowCount()>0){
+                    echo 'You already reviewed this product.';
+                }else{
+
             ?>
             <div class="box">
                 <form action="../review.php" method="post" class="rating">
@@ -230,7 +255,7 @@
                             title="Sucks big time - 1 star"></label>
 
                     <?php
-                    $pdo = db_connect();
+                    }
                     $queryratecustomer = "SELECT customerid FROM rating";
                     $customerratereview = $pdo->prepare($queryratecustomer);
                     $customerratereview->execute();
@@ -249,7 +274,27 @@
         </div>
     </div>
 </div>
-<div class="container content">
+<div class="container content2">
+    <div class="center row">
+        <div class="visible_pic">
+            <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
+                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4);
+            ?>
+            <div class="pic_small_div" style="<?php if (count($small_pictures) <= 4) {
+                echo "width: 504px";
+            } else {
+                $amountsmallpictures = count($small_pictures);
+                echo "width: calc(($amountsmallpictures*120px) + 25px)";
+            } ?>">
+                <?php
+                foreach ($small_pictures as $key => $value) {
+                    echo $key;
+                } ?>
+            </div>
+        </div>
+    </div>
     <div class="row personalreview">
         <div class="col s12 m6 ">
             <div class="card blue-grey darken-1">
@@ -284,19 +329,8 @@
             </div>
         </div>
     </div>
-    <!-- The pics ( ͡° ͜ʖ ͡°)-->
-    <div class="center row">
-        <div class="visible_pic">
-            <div class="pic_small_div">
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">'; ?>
-                <?= '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($result['Photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">'; ?>
-            </div>
-        </div>
-    </div>
-</div>
 
+</div>
 
 <!--|--------------END------------------------------|
     |-------insert-code-here------------------------|

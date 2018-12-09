@@ -3,13 +3,11 @@
 <head>
     <!--Include functions.php for lay-out-->
     <?php require "../functions.php";
-    include '../database_connectie.php';?>
-    
+    require '../database_connectie.php';?>
     <!--Import basic imports-->
     <?php imports() ?>
 
 </head>
-
 <body>
 
 <!--Import navbar-->
@@ -63,7 +61,6 @@ if(isset($_POST['updateaccountbtn'])){
     $fname = !empty($_POST['fname']) ? trim($_POST['fname']) : null;
     $lname = !empty($_POST['lname']) ? trim($_POST['lname']) : null;
     $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
-    //$password = !empty($_POST['password']) ? trim($_POST['password']) : null;
     $address = !empty($_POST['address']) ? trim($_POST['address']) : null;
     $postalcode = !empty($_POST['postalcode']) ? trim($_POST['postalcode']) : null;
     
@@ -75,10 +72,8 @@ if(isset($_POST['updateaccountbtn'])){
         $sql = "SELECT COUNT(email) AS cus FROM registered_users WHERE email = :email";
         $stmt = $pdo->prepare($sql);
     
-        //Bind the provided email to our prepared statement.
+        //Bind the provided email to our prepared statement and execute it
         $stmt->bindValue(':email', $email);
-    
-        //Execute.
         $stmt->execute();
     
         //Fetch the row.
@@ -90,12 +85,7 @@ if(isset($_POST['updateaccountbtn'])){
         }
     }
     
-    //Hash the password as we do NOT want to store our passwords in plain text.
-    //$passwordHash = password_hash($password, PASSWORD_BCRYPT, array("cost" => 12));
-    
-    //Prepare our INSERT statement.
-    //Remember: We are inserting a new row into our users table.
-    
+    //Prepare the update statement.
     $sql = "UPDATE registered_users
     SET first_name = :fname, last_name = :lname, email = :email, address = :address, postal_code = :postalcode
     WHERE customerid = $customerid";
@@ -109,7 +99,7 @@ if(isset($_POST['updateaccountbtn'])){
     $stmt->bindValue(':address', $address);
     $stmt->bindValue(':postalcode', $postalcode);
     
-    //Execute the statement and insert the new account.
+    //Execute the statement and update the account.
     $result = $stmt->execute();
     ?>
     <script type='text/javascript'>alert('You have updated your account information');
@@ -119,13 +109,13 @@ if(isset($_POST['updateaccountbtn'])){
 }
 
 }else{
-    print("<h3 align='center'>You need to be logged in to see this page.</h3>");
+    ?>
+    <div class="notloggedin center content">
+    <h3>You need to be logged in to see this page.</h3>
+    </div>
+<?php
 }
 ?>
-
-<!--|--------------END------------------------------|
-    |-------insert-code-here------------------------|
-    |-----------------------------------------------|-->
 
 <!--Import footer-->
 <?php footer() ?>
