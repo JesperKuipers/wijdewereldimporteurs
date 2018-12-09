@@ -51,16 +51,14 @@
     $temperature = $stmttemp->fetch();
 
 
-    $img = $db->prepare("SELECT photo FROM stockitems WHERE StockItemId = :StockItemId;");
+    $img = $db->prepare("SELECT Photo FROM stockitems WHERE StockItemId = :StockItemId;");
     $img->bindParam('StockItemId', $result['StockItemID']);
-
     $img->execute();
     $data = $img->fetch();
 
 
     $smallimg = $db->prepare("SELECT photo FROM images WHERE StockItemId = :StockItemId;");
     $smallimg->bindParam('StockItemId', $result['StockItemID']);
-
     $smallimg->execute();
     $data1 = $smallimg->fetchAll();
     ?>
@@ -71,7 +69,7 @@
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['Photo']) . '" alt="photo" style="width:100%">'; ?>
                     <div class="text">frontal view</div>
                 </div>
 
