@@ -31,7 +31,6 @@
 <div class="container content">
     <?php
     $result = getByItemId($_GET['itemId']);
-
     if (isset($_COOKIE['shopping_cart'])) {
         $cookie_data = stripslashes($_COOKIE['shopping_cart']);
         $cart_data = json_decode($cookie_data, true);
@@ -321,7 +320,6 @@
             </div>
         </div>
     </div>
-    <!-- The pics ( ͡° ͜ʖ ͡°)-->
 
 </div>
 
