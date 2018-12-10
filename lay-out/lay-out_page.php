@@ -17,7 +17,7 @@
     |-----------------------------------------------|-->
 
 
-<!-- class="content" is nodig voor sticky footer -->
+<!-- class="content" is needed for sticky footer -->
 <div class="center content ">
     <p><b>insert here pls</b></p>
 </div>

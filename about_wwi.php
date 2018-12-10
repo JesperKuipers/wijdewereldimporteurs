@@ -3,7 +3,8 @@
 if (isset($_POST['submit'])) {
     if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
         $secret = '6LcBd3oUAAAAABzSR-I4wK4nXxLCM8QixPzt1pOz';
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret
+                          . '&response=' . $_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
         if ($responseData->success) {
             # to send mail
