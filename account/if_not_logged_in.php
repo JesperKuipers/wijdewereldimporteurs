@@ -28,6 +28,7 @@
 
         $_SESSION['customerid'] = $customerid;
         $_SESSION['loggedin'] = true;
+        $_SESSION['ids'] = $_POST['ids'];
 
         header('Location: /products/payment.php');
     }

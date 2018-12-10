@@ -106,8 +106,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 </ul>
             </div>
             <div class="row">
-                <?php foreach ($_POST['ids'] as $ids) {
-                    echo '<input type="hidden" name="ids[]" value="' . $ids . '"/>';
+                <?php if (isset($_POST['ids'])) {
+                    foreach ($_POST['ids'] as $ids) {
+                        echo '<input type="hidden" name="ids[]" value="' . $ids . '"/>';
+                    }
+                } elseif (isset($_SESSION['ids'])) {
+                    echo '<input type="hidden" name="ids[]" value="' . $_SESSION['ids'] . '"/>';
+
                 }?>
 
                 <button class="btn waves-effect waves-light blue darken-1" style="float: right;" name="pay" type="submit">Proceed to checkout
