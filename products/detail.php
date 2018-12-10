@@ -68,31 +68,19 @@
             <div class="slideshow-container">
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
-                    <div class="numbertext">1 / 4</div>
                     <?= '<img src="data:image/jpeg;base64,' . base64_encode($data['Photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text">frontal view</div>
                 </div>
-
-                <div class="mySlides fade">
-                    <div class="numbertext">2 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text">back view</div>
-                </div>
-
-                <div class="mySlides fade">
-                    <div class="numbertext">3 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text">left view</div>
-                </div>
-
-                <div class="mySlides fade">
-                    <div class="numbertext">4 / 4</div>
-                    <?= '<img src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100%">'; ?>
-                    <div class="text">right view</div>
-                </div>
+                <?php
+                foreach ($data1 as $foto) { ?>
+                    <div class="mySlides fade">
+                        <?= '<img src="data:image/jpeg;base64,' . base64_encode($foto['photo']) . '" alt="photo" style="width:100%">'; ?>
+                    </div>
+                <?php } ?>
                 <!-- Next and previous buttons -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <?php if (count($data1) > 0) { ?>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <?php } ?>
             </div>
             <br>
 
@@ -228,13 +216,13 @@
             <?php
             $pdo = db_connect();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-                $customerid=$_SESSION['customerid'];
-                $productid=$result['StockItemID'];
+            $customerid = $_SESSION['customerid'];
+            $productid = $result['StockItemID'];
             $stmtcheck = $pdo->prepare("SELECT * FROM rating WHERE customerid = $customerid AND product_id = $productid");
             $stmtcheck->execute();
-                if($stmtcheck->rowCount()>0){
-                    echo 'You already reviewed this product.';
-                }else{
+            if ($stmtcheck->rowCount() > 0){
+                echo 'You already reviewed this product.';
+            }else{
 
             ?>
             <div class="box">
@@ -280,26 +268,25 @@
     </div>
 </div>
 <div class="container content2">
-    <div class="center row">
-        <div class="visible_pic">
-            <?php $small_pictures = array('<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(1)">' => 1,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(2)">' => 2,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(3)">' => 3,
-                '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($data1['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(4)">' => 4);
-            ?>
-            <div class="pic_small_div" style="<?php if (count($small_pictures) <= 4) {
-                echo "width: 504px";
-            } else {
-                $amountsmallpictures = count($small_pictures);
-                echo "width: calc(($amountsmallpictures*120px) + 25px)";
-            } ?>">
-                <?php
-                foreach ($small_pictures as $key => $value) {
-                    echo $key;
-                } ?>
+    <?php if (count($data1) > 0) { ?>
+        <div class="center row">
+            <div class="visible_pic">
+                <div class="pic_small_div" style="<?php if (count($data1) <= 4) {
+                    echo "width: 504px";
+                } else {
+                    $amountsmallpictures = count($data1);
+                    echo "width: calc(($amountsmallpictures*120px) + 25px)";
+                } ?>">
+                    <?php
+                    $i = 1;
+                    foreach ($data1 as $value) {
+                        echo '<img class="picture_small" src="data:image/jpeg;base64,' . base64_encode($value['photo']) . '" alt="photo" style="width:100px;text-align: center;cursor:pointer" onclick="currentSlide(' . $i . ')">';
+                        $i++;
+                    } ?>
+                </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
     <div class="row personalreview">
         <div class="col s12 m6 ">
             <div class="card blue-grey darken-1">
