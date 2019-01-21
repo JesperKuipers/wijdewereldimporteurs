@@ -25,24 +25,28 @@ $dtmreview->execute();
 $reviews = $dtmreview->fetchall();
 
 ?>
-<div class="container content">
-    <div class="review-input">
-        <div class="card" style="padding: 2%">
-        <form method="post">
-            <b>name:</b><input type="text" name="name" class="name-input">
-            <br><b>type your review here:</b>
-            <textarea name="review" rows="8" cols="128" style=" background-color: lightgray"></textarea>
-            <br>
-            <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback"
+<div class="container center content ">
+    <div class="row" style="width: 400px;">
+        <div class="card">
+            <div class="card-action text center">
+                <a class="dark_grey_color">Enter your review into the guestbook</a><br>
+            </div>
+            <div class="card-action left text card_tekst">
+                <form method="POST" class="registerinput left">
+                    Name: <input type="text" name="name" class="rinputs">
+                    Review:<textarea name="review" class="rinputs" placeholder="Your review ..."></textarea><br><br>
+                    <div id="recaptcha" class="g-recaptcha" data-callback="recaptchacallback"
                      data-sitekey="6LcBd3oUAAAAAG7IDOJi1qyXSbJ7vOZiZA6AXvk5"></div>
-            <br>
-            <input type="submit" value="Submit" name="reviewsubmit">
-        </form>
+                    <br>
+                    <button type="submit" name="reviewbutton" id="submit_button"
+                    class="btnregister s12 btn disabled btn-large waves-effect">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 <?php
-if (isset($_POST['reviewsubmit'])) {
+if (isset($_POST['reviewbutton'])) {
     if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
         $secret = '6LcBd3oUAAAAABzSR-I4wK4nXxLCM8QixPzt1pOz';
         $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
@@ -53,8 +57,7 @@ if (isset($_POST['reviewsubmit'])) {
             $date = date("Y-m-d H:i:s");
 
 
-            $sql = "INSERT INTO guestbook (name, review, date,)
-            VALUES (:name, :message,:date)";
+            $sql = "INSERT INTO guestbook (name, review, date) VALUES (:name, :message,:date)";
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':name', $name);
@@ -62,8 +65,8 @@ if (isset($_POST['reviewsubmit'])) {
             $stmt->bindValue(':date', $date);
             $result = $stmt->execute();}}}
 ?>
-<div class="container content">
-    <div class="row">
+<div class="container center content">
+    <div class="row" style="width: 400px;">
         <div class="collumn" style="float: left"> <?php foreach($reviews as $review ){?>
              <table>
                  <tr>

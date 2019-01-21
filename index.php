@@ -20,19 +20,7 @@
 <!--|-----------BEGINNING---------------------------|
     |----------Catergories--------------------------|
     |-----------------------------------------------|-->
-    <div class="guestbook-button">
-        <div class="row">
-            <div class="col s4">
-                <div class="card">
-                    <a class="light_grey_color center" href="/products/guestbook.php">
-                        <div class="card-content card-action center">
-                            Guestbook
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 <div class="container-index content">
     <div class="row">
         <div class="col s4">

@@ -58,6 +58,7 @@ function navbar()
                                                                    alt="Image"></i></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
+                <li><a href="/products/guestbook.php"><i class="material-icons">comment</i></a></li>
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
                     <li><a href="/account/account.php"><i class="material-icons">person</i></a></li>
                 <?php } else { ?>
@@ -104,6 +105,7 @@ function footer()
             <a class="light_blue_color" href="/about_wwi.php">About WWI</a>
             <a class="light_blue_color dubbele_spatie" href="/index.php">Home page</a>
             <a class="light_blue_color dubbele_spatie smooth-goto" href="/about_wwi.php#scroll">Contact WWI</a>
+            <a class="light_blue_color dubbele_spatie" href="/products/guestbook.php">Guestbook</a>
 
             </div>
         </div>

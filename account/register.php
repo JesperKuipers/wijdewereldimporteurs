@@ -19,7 +19,6 @@
 
 <div class="container center content ">
     <div class="row" style="width: 400px;">
-
         <div class="card">
             <div class="card-action text center">
                 <a class="dark_grey_color">Create your WWI account</a><br>
@@ -105,6 +104,9 @@ if (isset($_POST['registerbutton'])) {
 
             $sql = "INSERT INTO registered_users (customerid, first_name, last_name, email, password, address, postal_code, account)
             VALUES (:customerid, :fname,:lname, :email, :password, :address, :postalcode, 1)";
+
+            $sql = "INSERT INTO guestbook (name, review, date,) VALUES (:name, :message,:date)";
+
             $stmt = $pdo->prepare($sql);
 
             //Bind our variables.
