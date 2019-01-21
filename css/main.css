@@ -433,3 +433,36 @@ i.colorstars{
     height: 160px;
     width: 500px
 }
+
+.guestbook-button{
+    border: none;
+    cursor: pointer;
+    padding: 0px 16.2%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 15px;
+    width: 235%;
+    margin-top: 15px;
+}
+
+.review-content{
+    text-align: center;
+
+}
+
+.review-input{
+    padding-left: 2%;
+    padding-top: 1%;
+    width: 400px;
+    position: center;
+}
+
+.name-input{
+    text-align: center;
+    background-color: lightgray !important;
+    width: 100% !important;
+}
+
+.column{
+    width: 50%
+}
